@@ -1,35 +1,35 @@
-### ✅ PR 타입 (하나 이상 선택해주세요)
+### ✅ PR type (please select at least one)
 
-- [ ]  기능 추가
-- [ ]  기능 삭제
-- [ ]  리팩토링 / 코드 개선
-- [ ]  의존성 / 환경 설정 변경
-- [ ]  버그 수정
-- [ ]  기타 (하단에 설명)
+- [ ]  Add feature
+- [ ] Delete feature
+- [ ] Refactoring / code improvements
+- [ ] Change dependencies / preferences
+- [ ] Bug fixes
+- [ ] Other (described below)
 
 &nbsp;
-### ✨ 어떤 내용인가요?
+### ✨ What's in it?
 
-> 변경된 기능 혹은 주요 작업 내용을 한두 문장으로 요약해주세요.
+> Summarize the feature change or major work in one or two sentences.
 > 
 
 &nbsp;
-### 🔍 작업 상세 내용
+### 🔍 Task details
 
-- [ ]  작업1
-    - 무엇을 했는지 간단하게 설명
-- [ ]  작업2
-- [ ]  작업3
+- [ ]  Task1
+    - Briefly describe what you did
+- [ ]  Task2
+- [ ]  Task3
 
 &nbsp;
-### 💬 리뷰어에게 전달할 내용 (선택)
+### 💬 What to tell the reviewer (optional)
 
-> 테스트 방법, 주의 깊게 봐줬으면 하는 부분 등
+> How you tested, what you want them to look for, etc.
 > 
 
 &nbsp;
-### 🔗 관련 이슈 (선택)
+### 🔗 Related issues (select)
 
-- Resolves: #이슈번호
-- Ref: #참고이슈
-- Related to: #연관이슈
+- Resolves: #issue number
+- Ref: #referenced issue
+- Related to: #Related to
