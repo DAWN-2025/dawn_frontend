@@ -9,7 +9,7 @@ class AppRouter {
     routes: [
       // 홈 화면
       GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
-      // 프로필 화면
+      // 환경 설정 화면
       GoRoute(
         path: '/setting',
         builder: (context, state) => const SettingScreen(),
