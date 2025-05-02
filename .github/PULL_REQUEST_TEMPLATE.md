@@ -1,6 +1,6 @@
 ### ✅ PR type (please select at least one)
 
-- [ ]  Add feature
+- [ ] Add feature
 - [ ] Delete feature
 - [ ] Refactoring / code improvements
 - [ ] Change dependencies / preferences
