@@ -15,12 +15,13 @@ class AppRouter {
       // 홈 화면
       GoRoute(
         path: AppRoutes.home,
-        builder: (context, state) => const HomeScreen(),
+        pageBuilder: (context, state) => NoTransitionPage(child: HomeScreen()),
       ),
       // 환경 설정 화면
       GoRoute(
         path: AppRoutes.setting,
-        builder: (context, state) => const SettingScreen(),
+        pageBuilder:
+            (context, state) => NoTransitionPage(child: SettingScreen()),
       ),
     ],
   );
