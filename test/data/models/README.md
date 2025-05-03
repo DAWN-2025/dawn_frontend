@@ -1,1 +1,1 @@
-테스트를 추가할 예정입니다.
+We'll be adding tests.
