@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../presentation/views/home/home.dart';
-import '../../presentation/views/setting/setting.dart';
+import '../../presentation/views/home/home_screen.dart';
+import '../../presentation/views/setting/setting_screen.dart';
 
 class AppRoutes {
   static const String home = '/';
