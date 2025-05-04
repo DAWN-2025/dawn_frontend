@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
-import 'package:dawn_frontend/src/core/router/router.dart';
+import 'package:dawn_frontend/src/presentation/widgets/custom_bottom_app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,16 +9,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
       body: Center(
-        child: InkWell(
-          onTap: () {
-            context.go(AppRoutes.setting);
-          },
+        child: Center(
           child: const Text(
-            '환경 설정 화면으로 전환',
+            '홈 화면입니다.',
             style: TextStyle(color: Colors.white, fontSize: 24),
           ),
         ),
       ),
+      bottomNavigationBar: CustomBottomAppBar(),
     );
   }
 }
