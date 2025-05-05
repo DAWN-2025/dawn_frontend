@@ -53,6 +53,7 @@ class SignUpCard extends StatelessWidget {
               width: 24,
               height: 24,
             ),
+            obscure: true,
           ),
           const SizedBox(height: 10),
           Text(
@@ -66,6 +67,7 @@ class SignUpCard extends StatelessWidget {
               width: 24,
               height: 24,
             ),
+            obscure: true,
           ),
           const SizedBox(height: 25),
           Center(

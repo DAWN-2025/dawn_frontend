@@ -53,6 +53,7 @@ class SignInCard extends StatelessWidget {
               width: 24,
               height: 24,
             ),
+            obscure: true,
           ),
           const SizedBox(height: 25),
           Center(
