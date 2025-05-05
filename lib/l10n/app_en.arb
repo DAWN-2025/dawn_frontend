@@ -1,4 +1,11 @@
 {
     "@@locale": "en",
-    "example": "Hello!"
+    "example": "Hello!",
+    "sign_in": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "login_btn": "Continue",
+    "or": "OR",
+    "sign_up_description": "Don't have an account?",
+    "sign_up_btn": "Sign Up"
 }
