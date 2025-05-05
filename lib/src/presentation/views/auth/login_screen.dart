@@ -1,4 +1,6 @@
+import 'package:dawn_frontend/src/presentation/view_models/language_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/language_dropdown.dart';
 import '../../widgets/custom_scaffold.dart';
 
@@ -10,10 +12,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<LoginScreen> {
-  String _selectedLang = '한국어';
 
   @override
   Widget build(BuildContext context) {
+    final langVm = context.watch<LanguageViewModel>();
+
     return CustomScaffold(
       body: Stack(
         children: [
@@ -24,8 +27,12 @@ class _SettingScreenState extends State<LoginScreen> {
               width: 86,
               height: 35,
               child: LanguageDropdown(
-                value: _selectedLang,
-                onChanged: (v) => setState(() => _selectedLang = v),
+                value: langVm.display,
+                onChanged: (v) {
+                  setState(() {
+                    langVm.changeLanguage(v);
+                  });
+                },
               ),
             ),
           ),
