@@ -13,7 +13,7 @@ class AppRoutes {
   static const String setting = '/setting';
   static const String map = '/map';
   static const String album = '/album';
-  static const String eventDetail = '/event-detail';
+  static const String eventDetail = '/event-detail/:id';
 }
 
 class AppRouter {
@@ -49,8 +49,10 @@ class AppRouter {
       // 사건 상세 화면
       GoRoute(
         path: AppRoutes.eventDetail,
-        pageBuilder:
-            (context, state) => NoTransitionPage(child: EventDetailScreen()),
+        pageBuilder: (context, state) {
+          final eventId = state.pathParameters['id'];
+          return NoTransitionPage(child: EventDetailScreen(eventId: eventId!));
+        },
       ),
     ],
   );
