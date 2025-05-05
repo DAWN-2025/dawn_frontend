@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/language_dropdown.dart';
 import '../../widgets/custom_scaffold.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,7 +13,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<LoginScreen> {
-
   @override
   Widget build(BuildContext context) {
     final langVm = context.watch<LanguageViewModel>();
@@ -35,6 +35,10 @@ class _SettingScreenState extends State<LoginScreen> {
                 },
               ),
             ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(AppLocalizations.of(context)!.example),
           ),
         ],
       ),
