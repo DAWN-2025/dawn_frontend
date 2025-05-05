@@ -8,6 +8,8 @@ import 'firebase_options.dart';
 import 'src/core/state/app_state.dart';
 import 'package:dawn_frontend/src/presentation/view_models/custom_bottom_app_bar_viewmodel.dart';
 import 'package:dawn_frontend/src/presentation/view_models/language_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/stamp_card_list_view_model.dart';
+import 'package:dawn_frontend/src/domain/repositories/stamp_card_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +24,10 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AppState()),
         ChangeNotifierProvider(create: (_) => BottomAppBarViewModel()),
         ChangeNotifierProvider(create: (_) => LanguageViewModel(appPrefs)),
+        ChangeNotifierProvider(
+          create:
+              (_) => StampCardListViewModel(repository: StampCardRepository()),
+        ),
       ],
       child: const MyApp(),
     ),
