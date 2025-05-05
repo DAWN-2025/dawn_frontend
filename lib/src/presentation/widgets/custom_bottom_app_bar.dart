@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
-import '../viewmodels/custom_bottom_app_bar_viewmodel.dart';
+import '../view_models/custom_bottom_app_bar_viewmodel.dart';
 import '../../core/theme/colors.dart';
 
 class CustomBottomAppBar extends StatelessWidget {

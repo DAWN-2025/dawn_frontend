@@ -40,8 +40,14 @@ dependencies:
   firebase_auth: ^5.5.3
 
   provider: ^6.1.5
+  shared_preferences: ^2.5.3
 
   flutter_svg: ^2.0.0
+  dropdown_button2: ^2.3.9
+
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
@@ -94,7 +100,7 @@ flutter:
           weight: 600
         - asset: assets/fonts/NotoSerif_Condensed-Bold.ttf
           weight: 700
-          
+
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Light.ttf
@@ -115,3 +121,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+  generate: true

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../presentation/views/auth/login_screen.dart';
 import '../../presentation/views/home/home_screen.dart';
 import '../../presentation/views/map/map_screen.dart';
 import '../../presentation/views/album/album_screen.dart';
 import '../../presentation/views/setting/setting_screen.dart';
 
 class AppRoutes {
+  static const String login = '/login';
   static const String home = '/';
   static const String setting = '/setting';
   static const String map = '/map';
@@ -14,8 +16,13 @@ class AppRoutes {
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.home,
+    initialLocation: AppRoutes.login,
     routes: [
+      // 로그인 화면
+      GoRoute(
+        path: AppRoutes.login,
+        pageBuilder: (context, state) => NoTransitionPage(child: LoginScreen(),),
+      ),
       // 홈 화면
       GoRoute(
         path: AppRoutes.home,
