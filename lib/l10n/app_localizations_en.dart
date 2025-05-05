@@ -15,10 +15,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sign_in => 'Sign In';
 
   @override
+  String get sign_up => 'Sign Up';
+
+  @override
   String get email => 'Email';
 
   @override
   String get password => 'Password';
+
+  @override
+  String get check_password => 'Confirm password';
 
   @override
   String get login_btn => 'Continue';
@@ -31,4 +37,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sign_up_btn => 'Sign Up';
+
+  @override
+  String get sign_in_description => 'Already have an account?';
+
+  @override
+  String get sign_in_btn => 'Sign In';
 }

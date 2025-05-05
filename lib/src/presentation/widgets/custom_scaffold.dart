@@ -5,6 +5,7 @@ class CustomScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
+  final bool resizeToAvoidBottomInset;
 
   const CustomScaffold({
     super.key,
@@ -12,6 +13,7 @@ class CustomScaffold extends StatelessWidget {
     this.appBar,
     this.floatingActionButton,
     this.bottomNavigationBar,
+    this.resizeToAvoidBottomInset = false,
   });
 
   @override
@@ -24,6 +26,7 @@ class CustomScaffold extends StatelessWidget {
 
         Scaffold(
           extendBodyBehindAppBar: true,
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           backgroundColor: Colors.transparent,
           appBar: appBar,
           body: body,

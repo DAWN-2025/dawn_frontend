@@ -2,10 +2,14 @@
     "@@locale": "ko",
     "example": "안녕하세요!",
     "sign_in": "로그인",
+    "sign_up": "회원가입",
     "email": "이메일",
     "password": "비밀번호",
+    "check_password": "비밀번호 확인",
     "login_btn": "로그인 하기",
     "or": "또는",
     "sign_up_description": "아직 계정이 없으신가요?",
-    "sign_up_btn": "회원가입"
+    "sign_up_btn": "회원가입",
+    "sign_in_description": "계정이 있으신가요?",
+    "sign_in_btn": "로그인 하기"
 }

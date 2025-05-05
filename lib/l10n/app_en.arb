@@ -2,10 +2,14 @@
     "@@locale": "en",
     "example": "Hello!",
     "sign_in": "Sign In",
+    "sign_up": "Sign Up",
     "email": "Email",
     "password": "Password",
+    "check_password": "Confirm password",
     "login_btn": "Continue",
     "or": "OR",
     "sign_up_description": "Don't have an account?",
-    "sign_up_btn": "Sign Up"
+    "sign_up_btn": "Sign Up",
+    "sign_in_description": "Already have an account?",
+    "sign_in_btn": "Sign In"
 }

@@ -15,10 +15,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sign_in => '로그인';
 
   @override
+  String get sign_up => '회원가입';
+
+  @override
   String get email => '이메일';
 
   @override
   String get password => '비밀번호';
+
+  @override
+  String get check_password => '비밀번호 확인';
 
   @override
   String get login_btn => '로그인 하기';
@@ -31,4 +37,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sign_up_btn => '회원가입';
+
+  @override
+  String get sign_in_description => '계정이 있으신가요?';
+
+  @override
+  String get sign_in_btn => '로그인 하기';
 }

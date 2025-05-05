@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/language_dropdown.dart';
 import '../../widgets/custom_scaffold.dart';
+import '../../widgets/auth/sign_in_card.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -53,7 +54,7 @@ class _SettingScreenState extends State<SignInScreen> {
                 ),
                 const SizedBox(height: 45),
                 // 3. 로그인 카드
-                //const SignInCard(),
+                const SignInCard(),
                 const SizedBox(height: 55),
                 // 4. 출처
                 Padding(

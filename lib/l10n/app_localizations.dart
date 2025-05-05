@@ -107,6 +107,12 @@ abstract class AppLocalizations {
   /// **'Sign In'**
   String get sign_in;
 
+  /// No description provided for @sign_up.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get sign_up;
+
   /// No description provided for @email.
   ///
   /// In en, this message translates to:
@@ -118,6 +124,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password'**
   String get password;
+
+  /// No description provided for @check_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get check_password;
 
   /// No description provided for @login_btn.
   ///
@@ -142,6 +154,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign Up'**
   String get sign_up_btn;
+
+  /// No description provided for @sign_in_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get sign_in_description;
+
+  /// No description provided for @sign_in_btn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get sign_in_btn;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
