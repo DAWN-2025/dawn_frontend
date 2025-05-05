@@ -42,5 +42,5 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sign_in_description => '계정이 있으신가요?';
 
   @override
-  String get sign_in_btn => '로그인 하기';
+  String get sign_in_btn => '로그인';
 }

@@ -3,8 +3,10 @@ import 'package:dawn_frontend/src/presentation/widgets/auth/continue_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../l10n/app_localizations.dart';
 import 'package:dawn_frontend/src/presentation/widgets/auth/divider_or.dart';
+import '../../../core/router/router.dart';
 import 'google_login_btn.dart';
 
 class SignUpCard extends StatelessWidget {
@@ -14,7 +16,7 @@ class SignUpCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 300,
-      height: 515,
+      height: 518,
       padding: const EdgeInsets.symmetric(horizontal: 30),
       //내부 여백
       decoration: BoxDecoration(
@@ -91,7 +93,7 @@ class SignUpCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/signUp');
+                        context.go(AppRoutes.signIn);
                       },
                       child: Text(
                         AppLocalizations.of(context)!.sign_in_btn,

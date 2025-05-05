@@ -20,7 +20,7 @@ class AppRoutes {
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.signUp, // 초기 경로
+    initialLocation: AppRoutes.signIn, // 초기 경로
     routes: [
       // 로그인 화면
       GoRoute(

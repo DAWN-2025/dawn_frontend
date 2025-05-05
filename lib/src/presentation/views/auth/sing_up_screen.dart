@@ -2,6 +2,8 @@ import 'package:dawn_frontend/src/presentation/widgets/auth/sign_up_card.dart';
 import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import '../../../core/router/router.dart';
 import '../../widgets/back_btn.dart';
 import '../../../core/theme/typography.dart';
 import '../../../core/utils/constants.dart';
@@ -31,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 alignment: Alignment.centerLeft,
                 child: BackBtn(
                   onPressed: () {
-                    Navigator.pop(context);
+                    context.go(AppRoutes.signIn);
                   },
                 ),
               ),
@@ -50,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // 3. 회원 가입 카드
               const SignUpCard(),
 
-              const SizedBox(height: 60),
+              const SizedBox(height: 48),
 
               // 4. 출처
               Text(Strings.source, style: AppTextStyle.sourceText),
