@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/router/router.dart';
-import '../../widgets/back_btn.dart';
+import '../../widgets/back_white_btn.dart';
 import '../../../core/theme/typography.dart';
 import '../../../core/utils/constants.dart';
 
@@ -31,7 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // 1. 뒤로 가기 버튼 (왼쪽 정렬만 따로 처리)
               Align(
                 alignment: Alignment.centerLeft,
-                child: BackBtn(
+                child: BackWhiteBtn(
                   onPressed: () {
                     context.go(AppRoutes.signIn);
                   },

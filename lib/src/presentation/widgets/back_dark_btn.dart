@@ -3,10 +3,10 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../core/theme/colors.dart';
 
-class BackBtn extends StatelessWidget {
+class BackDarkBtn extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const BackBtn({super.key, required this.onPressed});
+  const BackDarkBtn({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +20,10 @@ class BackBtn extends StatelessWidget {
           color: AppColors.backGray,
           shape: BoxShape.circle,
           border: Border.all(color: Colors.white, width: 1),
-          /*boxShadow: [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 2,
-              offset: Offset(0, 1),
-            ),
-          ],*/
         ),
         child: Center(
           child: SvgPicture.asset(
-            'assets/icons/back_white.svg', // 구글 아이콘 경로
+            'assets/icons/back_dark.svg',
             width: 24,
             height: 24,
           ),
