@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../presentation/views/auth/login_screen.dart';
+import '../../presentation/views/auth/sign_in_screen.dart';
 import '../../presentation/views/home/home_screen.dart';
 import '../../presentation/views/map/map_screen.dart';
 import '../../presentation/views/album/album_screen.dart';
@@ -18,12 +18,13 @@ class AppRoutes {
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.login,
+    initialLocation: AppRoutes.login, // 초기 경로
     routes: [
       // 로그인 화면
       GoRoute(
         path: AppRoutes.login,
-        pageBuilder: (context, state) => NoTransitionPage(child: LoginScreen()),
+        pageBuilder:
+            (context, state) => NoTransitionPage(child: SignInScreen()),
       ),
       // 홈 화면
       GoRoute(
