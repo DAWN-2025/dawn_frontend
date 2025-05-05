@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../widgets/language_dropdown.dart';
 import '../../widgets/custom_scaffold.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -38,7 +39,18 @@ class _SettingScreenState extends State<LoginScreen> {
           ),
           Align(
             alignment: Alignment.center,
-            child: Text(AppLocalizations.of(context)!.example),
+            child: GestureDetector(
+              onTap: () {
+                context.go('/'); // 👈 홈 화면으로 이동
+              },
+              child: Text(
+                AppLocalizations.of(context)!.example,
+                style: const TextStyle(
+                  decoration: TextDecoration.underline,
+                  color: Colors.blue,
+                ),
+              ),
+            ),
           ),
         ],
       ),
