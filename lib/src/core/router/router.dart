@@ -5,6 +5,7 @@ import '../../presentation/views/home/home_screen.dart';
 import '../../presentation/views/map/map_screen.dart';
 import '../../presentation/views/album/album_screen.dart';
 import '../../presentation/views/setting/setting_screen.dart';
+import '../../presentation/views/details/event_detail_screen.dart';
 
 class AppRoutes {
   static const String login = '/login';
@@ -12,6 +13,7 @@ class AppRoutes {
   static const String setting = '/setting';
   static const String map = '/map';
   static const String album = '/album';
+  static const String eventDetail = '/event-detail';
 }
 
 class AppRouter {
@@ -21,7 +23,7 @@ class AppRouter {
       // 로그인 화면
       GoRoute(
         path: AppRoutes.login,
-        pageBuilder: (context, state) => NoTransitionPage(child: LoginScreen(),),
+        pageBuilder: (context, state) => NoTransitionPage(child: LoginScreen()),
       ),
       // 홈 화면
       GoRoute(
@@ -31,10 +33,9 @@ class AppRouter {
       // 지도 화면
       GoRoute(
         path: AppRoutes.map,
-        pageBuilder:
-            (context, state) => NoTransitionPage(child: MapScreen()),
+        pageBuilder: (context, state) => NoTransitionPage(child: MapScreen()),
       ),
-      // 지도 화면
+      // 앨범 화면
       GoRoute(
         path: AppRoutes.album,
         pageBuilder: (context, state) => NoTransitionPage(child: AlbumScreen()),
@@ -44,6 +45,12 @@ class AppRouter {
         path: AppRoutes.setting,
         pageBuilder:
             (context, state) => NoTransitionPage(child: SettingScreen()),
+      ),
+      // 사건 상세 화면
+      GoRoute(
+        path: AppRoutes.eventDetail,
+        pageBuilder:
+            (context, state) => NoTransitionPage(child: EventDetailScreen()),
       ),
     ],
   );
