@@ -27,6 +27,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 30),
 
               // 1. 뒤로 가기 버튼 (왼쪽 정렬만 따로 처리)
+              // Align(
+              //   alignment: Alignment.centerLeft,
+              //   child: BackWhiteBtn(
+              //     onPressed: () {
+              //       context.go(AppRoutes.signIn);
+              //     },
+              //   ),
+              // ),
               const CustomTopAppBar(isDark: false),
 
               const SizedBox(height: 40),
