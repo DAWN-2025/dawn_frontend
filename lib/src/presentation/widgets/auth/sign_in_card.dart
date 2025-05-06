@@ -21,6 +21,7 @@ class SignInCard extends StatelessWidget {
     final viewModel = context.read<SignInViewModel>();
     final messenger = ScaffoldMessenger.of(context);
     final l10n = AppLocalizations.of(context)!;
+    final router = GoRouter.of(context);
 
     return Container(
       width: 300,
@@ -75,25 +76,38 @@ class SignInCard extends StatelessWidget {
           Center(
             child: Column(
               children: [
-                ContinueButton(onPressed: () async {
-                  final router = GoRouter.of(context);
-                  final result = await viewModel.signIn();
-                  if (kDebugMode) {
-                    print('Sign-in result: $result');
-                  }
-                  if (result != null) {
-                    messenger.showSnackBar(
-                      SnackBar(content: Text(l10n.getByKey(result))),
-                    );
-                  } else {
-                    router.go(AppRoutes.home);
-                  }
-                }),
+                ContinueButton(
+                  onPressed: () async {
+                    final result = await viewModel.signIn();
+                    if (kDebugMode) {
+                      print('Sign-in result: $result');
+                    }
+                    if (result != null) {
+                      messenger.showSnackBar(
+                        SnackBar(content: Text(l10n.getByKey(result))),
+                      );
+                    } else {
+                      router.go(AppRoutes.home);
+                    }
+                  },
+                ),
                 const SizedBox(height: 18),
                 const OrDivider(),
                 const SizedBox(height: 18),
                 GoogleLoginBtn(
-                  onPressed: () { },
+                  onPressed: () async {
+                    final result = await viewModel.signInButtonEnabled;
+                    if (kDebugMode) {
+                      print('Google sign-in result: $result');
+                    }
+                    if (result != null) {
+                      messenger.showSnackBar(
+                        SnackBar(content: Text(l10n.getByKey(result))),
+                      );
+                    } else {
+                      router.go(AppRoutes.home);
+                    }
+                  },
                 ),
                 const SizedBox(height: 18),
                 Row(

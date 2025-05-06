@@ -50,6 +50,10 @@ class _SignUpCardState extends State<SignUpCard> {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<SignUpViewModel>(context, listen: false);
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final router = GoRouter.of(context);
+
     return Container(
       width: 300,
       height: 518,
@@ -117,10 +121,6 @@ class _SignUpCardState extends State<SignUpCard> {
               children: [
                 ContinueButton(
                   onPressed: () async {
-                    final viewModel = context.read<SignUpViewModel>();
-                    final messenger = ScaffoldMessenger.of(context);
-                    final l10n = AppLocalizations.of(context)!;
-                    final router = GoRouter.of(context);
                     final result = await viewModel.signUp();
                     if (result != null) {
                       final message = l10n.getByKey(result);
@@ -145,7 +145,18 @@ class _SignUpCardState extends State<SignUpCard> {
                 const SizedBox(height: 18),
                 const OrDivider(),
                 const SizedBox(height: 18),
-                GoogleLoginBtn(onPressed: () {}),
+                GoogleLoginBtn(
+                  onPressed: () async {
+                    final result = await viewModel.signUpButtonEnabled();
+                    if (result != null) {
+                      messenger.showSnackBar(
+                        SnackBar(content: Text(l10n.getByKey(result))),
+                      );
+                    } else {
+                      router.go(AppRoutes.home);
+                    }
+                  },
+                ),
                 const SizedBox(height: 18),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

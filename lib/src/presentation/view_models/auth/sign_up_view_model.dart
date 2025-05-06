@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../domain/repositories/auth_repository.dart';
 
@@ -66,6 +65,10 @@ class SignUpViewModel extends ChangeNotifier {
         password == confirmPassword;
   }
 
+  Future<String?> get signUpButtonEnable async {
+    return await _authRepository.signInWithGoogle();
+  }
+
   Future<String?> signUp() async {
     if (email == null || email!.isEmpty) return 'error_empty_email';
     if (password == null || password!.isEmpty) return 'error_empty_password';
@@ -87,6 +90,8 @@ class SignUpViewModel extends ChangeNotifier {
       return 'error_signup_failed';
     }*/
   }
+
+  signUpButtonEnabled() {}
 
   /*String _firebaseErrorKey(FirebaseAuthException e) {
     switch (e.code) {

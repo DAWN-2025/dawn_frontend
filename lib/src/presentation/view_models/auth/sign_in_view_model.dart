@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
 import '../../../domain/repositories/auth_repository.dart';
 
 class SignInViewModel extends ChangeNotifier {
@@ -26,6 +25,10 @@ class SignInViewModel extends ChangeNotifier {
 
   bool isValid() {
     return email != null && password != null;
+  }
+
+  Future<String?> get signInButtonEnabled async {
+    return await _authRepository.signInWithGoogle();
   }
 
   Future<String?> signIn() async {

@@ -1,7 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  Future<String?> signInWithGoogle() async {
+    try {
+      // Google 로그인 로직
+      final googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) return 'auth_cancelled'; // 취소
+
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _firebaseAuth.signInWithCredential(credential);
+      return null; // 성공
+    } on FirebaseAuthException catch (e) {
+      return _firebaseErrorKey(e);
+    } catch (_) {
+      return 'auth_google_failed';
+    }
+  }
 
   Future<String?> signUpWithEmail(String email, String password) async {
     try {
@@ -29,6 +52,9 @@ class AuthRepository {
     } on FirebaseAuthException catch (e) {
       return 'auth_try_again';
     }
+
+    // await _googleSignIn.disconnect(); // 구글 계정 연결 해제
+    // await _firebaseAuth.signOut();    // Firebase 인증 로그아웃
   }
 
   String _firebaseErrorKey(FirebaseAuthException e) {

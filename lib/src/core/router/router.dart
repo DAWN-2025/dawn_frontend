@@ -1,4 +1,4 @@
-import 'package:dawn_frontend/src/presentation/views/auth/sing_up_screen.dart';
+import 'package:dawn_frontend/src/presentation/views/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../presentation/views/auth/sign_in_screen.dart';
