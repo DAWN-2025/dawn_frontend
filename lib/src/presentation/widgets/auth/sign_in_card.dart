@@ -43,6 +43,7 @@ class SignInCard extends StatelessWidget {
               width: 20,
               height: 20,
             ),
+            onChanged: (String? value) {},
           ),
           const SizedBox(height: 10),
           Text(
@@ -56,6 +57,7 @@ class SignInCard extends StatelessWidget {
               height: 24,
             ),
             obscure: true,
+            onChanged: (String? value) {},
           ),
           const SizedBox(height: 25),
           Center(

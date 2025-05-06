@@ -43,4 +43,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sign_in_btn => 'Sign In';
+
+  @override
+  String get error_empty_email => 'Email cannot be empty.';
+
+  @override
+  String get error_empty_password => 'Password cannot be empty.';
+
+  @override
+  String get error_empty_confirm_password => 'Please confirm your password.';
+
+  @override
+  String get error_weak_password => 'Password must be at least 6 characters.';
+
+  @override
+  String get error_password_mismatch => 'Passwords do not match.';
+
+  @override
+  String get error_invalid_input => 'Invalid input. Please try again.';
+
+  @override
+  String get error_email_already_in_use => 'This email is already in use.';
+
+  @override
+  String get error_invalid_email => 'Please enter a valid email address.';
+
+  @override
+  String get error_signup_failed => 'Sign-up failed. Please try again.';
+
+  @override
+  String get email_verification_sent => 'A verification link has been sent to your email. Please check your inbox.';
 }

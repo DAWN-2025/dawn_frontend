@@ -1,4 +1,6 @@
 import 'package:dawn_frontend/src/data/local/app_preferences.dart';
+import 'package:dawn_frontend/src/domain/repositories/auth_repository.dart';
+import 'package:dawn_frontend/src/presentation/view_models/sign_up_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +26,9 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AppState()),
         ChangeNotifierProvider(create: (_) => BottomAppBarViewModel()),
         ChangeNotifierProvider(create: (_) => LanguageViewModel(appPrefs)),
+        ChangeNotifierProvider(
+          create: (_) => SignUpViewModel(AuthRepository()),
+        ),
         ChangeNotifierProvider(
           create:
               (_) => StampCardListViewModel(repository: StampCardRepository()),
