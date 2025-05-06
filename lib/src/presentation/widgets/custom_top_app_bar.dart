@@ -16,7 +16,7 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: InkWell(
-          onTap: () => context.go('/signIn'),
+          onTap: () => context.pop(),
           borderRadius: BorderRadius.circular(30),
           child: Container(
             width: 45,
