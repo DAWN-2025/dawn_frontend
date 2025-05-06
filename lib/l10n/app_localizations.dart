@@ -226,6 +226,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A verification link has been sent to your email. Please check your inbox.'**
   String get email_verification_sent;
+
+  /// No description provided for @auth_try_again.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try again.'**
+  String get auth_try_again;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

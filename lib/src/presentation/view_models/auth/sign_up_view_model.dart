@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import '../../domain/repositories/auth_repository.dart';
+import '../../../domain/repositories/auth_repository.dart';
 
 class SignUpViewModel extends ChangeNotifier {
   final AuthRepository _authRepository;

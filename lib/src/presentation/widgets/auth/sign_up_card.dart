@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../../l10n/app_localizations.dart';
 import 'package:dawn_frontend/src/presentation/widgets/auth/divider_or.dart';
 import '../../../core/router/router.dart';
-import '../../view_models/sign_up_view_model.dart';
+import '../../view_models/auth/sign_up_view_model.dart';
 import 'google_login_btn.dart';
 
 class SignUpCard extends StatefulWidget {

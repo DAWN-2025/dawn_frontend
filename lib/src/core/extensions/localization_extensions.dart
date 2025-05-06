@@ -21,6 +21,8 @@ extension LocalizationKeyResolver on AppLocalizations {
         return error_signup_failed;
       case 'email_verification_sent':
         return email_verification_sent;
+      case 'auth_try_again':
+        return auth_try_again;
       default:
         return key; // 기본적으로 키를 반환
     }

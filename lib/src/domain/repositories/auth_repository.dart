@@ -19,6 +19,18 @@ class AuthRepository {
     }
   }
 
+  Future<String?> signInWithEmail(String email, String password) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return null;
+    } on FirebaseAuthException catch (e) {
+      return 'auth_try_again';
+    }
+  }
+
   String _firebaseErrorKey(FirebaseAuthException e) {
     switch (e.code) {
       case 'email-already-in-use':

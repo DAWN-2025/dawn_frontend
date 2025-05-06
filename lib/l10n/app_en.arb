@@ -21,5 +21,6 @@
     "error_email_already_in_use": "This email is already in use.",
     "error_invalid_email": "Please enter a valid email address.",
     "error_signup_failed": "Sign-up failed. Please try again.",
-    "email_verification_sent": "A verification link has been sent to your email. Please check your inbox."
+    "email_verification_sent": "A verification link has been sent to your email. Please check your inbox.",
+    "auth_try_again": "Please try again."
 }

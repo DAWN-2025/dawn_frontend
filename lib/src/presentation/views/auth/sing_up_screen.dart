@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../core/router/router.dart';
-import '../../view_models/sign_up_view_model.dart';
+import '../../view_models/auth/sign_up_view_model.dart';
 import '../../widgets/back_white_btn.dart';
 import '../../../core/theme/typography.dart';
 import '../../../core/utils/constants.dart';

@@ -73,4 +73,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get email_verification_sent => 'A verification link has been sent to your email. Please check your inbox.';
+
+  @override
+  String get auth_try_again => 'Please try again.';
 }
