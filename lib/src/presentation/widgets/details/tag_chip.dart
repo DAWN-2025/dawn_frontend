@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class TagChip extends StatelessWidget {
   final String label;
@@ -15,7 +16,7 @@ class TagChip extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: const TextStyle(fontSize: 11, color: Colors.white),
+        style: typography.AppTextStyle.tagText,
       ),
     );
   }

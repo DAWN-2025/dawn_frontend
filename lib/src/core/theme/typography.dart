@@ -37,10 +37,10 @@ class AppTextStyle {
   );
 
   static const TextStyle tagText = TextStyle(
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: FontWeight.w300,
     fontFamily: 'Source Code Pro',
-    color: Color(0xFF333333),
+    color: Colors.white,
   );
 
   static const TextStyle sourceText = TextStyle(
