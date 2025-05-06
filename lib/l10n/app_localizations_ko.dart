@@ -43,4 +43,37 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get sign_in_btn => '로그인';
+
+  @override
+  String get error_empty_email => '이메일을 입력해 주세요.';
+
+  @override
+  String get error_empty_password => '비밀번호를 입력해 주세요.';
+
+  @override
+  String get error_empty_confirm_password => '비밀번호 확인을 입력해 주세요.';
+
+  @override
+  String get error_weak_password => '비밀번호는 최소 6자 이상이어야 합니다.';
+
+  @override
+  String get error_password_mismatch => '비밀번호가 일치하지 않습니다.';
+
+  @override
+  String get error_invalid_input => '입력값이 올바르지 않습니다. 다시 시도해 주세요.';
+
+  @override
+  String get error_email_already_in_use => '이미 사용 중인 이메일입니다.';
+
+  @override
+  String get error_invalid_email => '유효하지 않은 이메일 형식입니다.';
+
+  @override
+  String get error_signup_failed => '회원가입 중 오류가 발생했습니다. 다시 시도해 주세요.';
+
+  @override
+  String get email_verification_sent => '이메일 확인 링크가 발송되었습니다. 이메일을 확인해 주세요.';
+
+  @override
+  String get auth_try_again => '다시 시도해 주세요.';
 }

@@ -11,5 +11,16 @@
     "sign_up_description": "Don't have an account?",
     "sign_up_btn": "Sign Up",
     "sign_in_description": "Already have an account?",
-    "sign_in_btn": "Sign In"
+    "sign_in_btn": "Sign In",
+    "error_empty_email": "Email cannot be empty.",
+    "error_empty_password": "Password cannot be empty.",
+    "error_empty_confirm_password": "Please confirm your password.",
+    "error_weak_password": "Password must be at least 6 characters.",
+    "error_password_mismatch": "Passwords do not match.",
+    "error_invalid_input": "Invalid input. Please try again.",
+    "error_email_already_in_use": "This email is already in use.",
+    "error_invalid_email": "Please enter a valid email address.",
+    "error_signup_failed": "Sign-up failed. Please try again.",
+    "email_verification_sent": "A verification link has been sent to your email. Please check your inbox.",
+    "auth_try_again": "Please try again."
 }

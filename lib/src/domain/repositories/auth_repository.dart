@@ -1,0 +1,72 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+class AuthRepository {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  Future<String?> signInWithGoogle() async {
+    try {
+      // Google 로그인 로직
+      final googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) return 'auth_cancelled'; // 취소
+
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _firebaseAuth.signInWithCredential(credential);
+      return null; // 성공
+    } on FirebaseAuthException catch (e) {
+      return _firebaseErrorKey(e);
+    } catch (_) {
+      return 'auth_google_failed';
+    }
+  }
+
+  Future<String?> signUpWithEmail(String email, String password) async {
+    try {
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      // 이메일 인증
+      await userCredential.user?.sendEmailVerification();
+      return null;
+      //return 'email_verification_sent';
+    } on FirebaseAuthException catch (e) {
+      //throw Exception(_firebaseErrorKey(e));
+      return _firebaseErrorKey(e);
+    }
+  }
+
+  Future<String?> signInWithEmail(String email, String password) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return null;
+    } on FirebaseAuthException catch (e) {
+      return 'auth_try_again';
+    }
+
+    // await _googleSignIn.disconnect(); // 구글 계정 연결 해제
+    // await _firebaseAuth.signOut();    // Firebase 인증 로그아웃
+  }
+
+  String _firebaseErrorKey(FirebaseAuthException e) {
+    switch (e.code) {
+      case 'email-already-in-use':
+        return 'error_email_already_in_use';
+      case 'invalid-email':
+        return 'error_invalid_email';
+      case 'weak-password':
+        return 'error_weak_password';
+      default:
+        return 'error_signup_failed';
+    }
+  }
+}

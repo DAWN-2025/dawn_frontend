@@ -166,6 +166,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign In'**
   String get sign_in_btn;
+
+  /// No description provided for @error_empty_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email cannot be empty.'**
+  String get error_empty_email;
+
+  /// No description provided for @error_empty_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password cannot be empty.'**
+  String get error_empty_password;
+
+  /// No description provided for @error_empty_confirm_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm your password.'**
+  String get error_empty_confirm_password;
+
+  /// No description provided for @error_weak_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters.'**
+  String get error_weak_password;
+
+  /// No description provided for @error_password_mismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match.'**
+  String get error_password_mismatch;
+
+  /// No description provided for @error_invalid_input.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid input. Please try again.'**
+  String get error_invalid_input;
+
+  /// No description provided for @error_email_already_in_use.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already in use.'**
+  String get error_email_already_in_use;
+
+  /// No description provided for @error_invalid_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address.'**
+  String get error_invalid_email;
+
+  /// No description provided for @error_signup_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-up failed. Please try again.'**
+  String get error_signup_failed;
+
+  /// No description provided for @email_verification_sent.
+  ///
+  /// In en, this message translates to:
+  /// **'A verification link has been sent to your email. Please check your inbox.'**
+  String get email_verification_sent;
+
+  /// No description provided for @auth_try_again.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try again.'**
+  String get auth_try_again;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

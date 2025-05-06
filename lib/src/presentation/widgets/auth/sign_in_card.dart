@@ -1,12 +1,16 @@
+import 'package:dawn_frontend/src/core/extensions/localization_extensions.dart';
 import 'package:dawn_frontend/src/presentation/widgets/auth/auth_input_field.dart';
 import 'package:dawn_frontend/src/presentation/widgets/auth/continue_btn.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../../../../l10n/app_localizations.dart';
 import 'package:dawn_frontend/src/presentation/widgets/auth/divider_or.dart';
 import '../../../core/router/router.dart';
+import '../../view_models/auth/sign_in_view_model.dart';
 import 'google_login_btn.dart';
 
 class SignInCard extends StatelessWidget {
@@ -14,6 +18,11 @@ class SignInCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.read<SignInViewModel>();
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final router = GoRouter.of(context);
+
     return Container(
       width: 300,
       height: 440,
@@ -43,6 +52,9 @@ class SignInCard extends StatelessWidget {
               width: 20,
               height: 20,
             ),
+            onChanged: (String? value) {
+              viewModel.setEmail(value);
+            },
           ),
           const SizedBox(height: 10),
           Text(
@@ -56,16 +68,47 @@ class SignInCard extends StatelessWidget {
               height: 24,
             ),
             obscure: true,
+            onChanged: (String? value) {
+              viewModel.setPassword(value);
+            },
           ),
           const SizedBox(height: 25),
           Center(
             child: Column(
               children: [
-                ContinueButton(onPressed: () {}),
+                ContinueButton(
+                  onPressed: () async {
+                    final result = await viewModel.signIn();
+                    if (kDebugMode) {
+                      print('Sign-in result: $result');
+                    }
+                    if (result != null) {
+                      messenger.showSnackBar(
+                        SnackBar(content: Text(l10n.getByKey(result))),
+                      );
+                    } else {
+                      router.go(AppRoutes.home);
+                    }
+                  },
+                ),
                 const SizedBox(height: 18),
                 const OrDivider(),
                 const SizedBox(height: 18),
-                GoogleLoginBtn(onPressed: () {}),
+                GoogleLoginBtn(
+                  onPressed: () async {
+                    final result = await viewModel.signInButtonEnabled;
+                    if (kDebugMode) {
+                      print('Google sign-in result: $result');
+                    }
+                    if (result != null) {
+                      messenger.showSnackBar(
+                        SnackBar(content: Text(l10n.getByKey(result))),
+                      );
+                    } else {
+                      router.go(AppRoutes.home);
+                    }
+                  },
+                ),
                 const SizedBox(height: 18),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

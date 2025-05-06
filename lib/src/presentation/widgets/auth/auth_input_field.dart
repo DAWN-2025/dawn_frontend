@@ -4,8 +4,16 @@ import 'package:flutter/material.dart';
 class AuthInputField extends StatelessWidget {
   final Widget icon;
   final bool obscure; // 글자 숨김 여부
+  final ValueChanged<String?> onChanged; // 텍스트 변경 시 호출되는 콜백
+  final FocusNode? focusNode;
 
-  const AuthInputField({super.key, required this.icon, this.obscure = false});
+  const AuthInputField({
+    super.key,
+    required this.icon,
+    this.obscure = false,
+    required this.onChanged,
+    this.focusNode,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +22,8 @@ class AuthInputField extends StatelessWidget {
       width: double.infinity, // 너비를 부모 기준으로 최대
       child: TextFormField(
         obscureText: obscure,
+        onChanged: onChanged, // 텍스트 변경 시 호출되는 콜백,
+        focusNode: focusNode, // 포커스 노드 추가
         decoration: InputDecoration(
           // 왼쪽 아이콘
           prefixIcon: Padding(
