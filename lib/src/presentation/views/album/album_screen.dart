@@ -73,7 +73,7 @@ class _AlbumScreenState extends State<AlbumScreen> {
                           crossAxisCount: 2,
                           crossAxisSpacing: 20.0,
                           mainAxisSpacing: 25.0,
-                          childAspectRatio: 155 / 180,
+                          childAspectRatio: 0.9,
                         ),
                     itemCount: stampCardListViewModel.stampCards.length,
                     itemBuilder: (context, index) {

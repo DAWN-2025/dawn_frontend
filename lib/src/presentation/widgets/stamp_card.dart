@@ -31,18 +31,25 @@ class StampCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // 이미지 영역
-              ClipRRect(
-                child: SizedBox(
-                  width: 135,
-                  height: 135,
-                  child:
-                      viewModel.imagePath != null
-                          ? SvgPicture.asset(
-                            viewModel.imagePath!,
-                            fit: BoxFit.cover,
-                          )
-                          : const Center(child: Text('No Image')),
-                ),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final size = constraints.maxWidth * 0.95;
+
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: SizedBox(
+                      width: size,
+                      height: size, // 정사각형 유지
+                      child:
+                          viewModel.imagePath != null
+                              ? SvgPicture.asset(
+                                viewModel.imagePath!,
+                                fit: BoxFit.cover,
+                              )
+                              : const Center(child: Text('No Image')),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 5), // 이미지와 텍스트 간격
 
