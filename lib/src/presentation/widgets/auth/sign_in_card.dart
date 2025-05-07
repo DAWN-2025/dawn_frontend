@@ -122,7 +122,7 @@ class SignInCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {
-                        context.go(AppRoutes.signUp);
+                        context.push(AppRoutes.signUp);
                       },
                       child: Text(
                         AppLocalizations.of(context)!.sign_up_btn,

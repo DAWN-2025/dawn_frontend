@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +41,8 @@ class CustomBottomAppBar extends StatelessWidget {
                     return IconButton(
                       icon: SvgPicture.asset(
                         item.iconPath,
+                        width: 50,
+                        height: 50,
                         color:
                             viewModel.selectedIndex == item.index
                                 ? Colors.white

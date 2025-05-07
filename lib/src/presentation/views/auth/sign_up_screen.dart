@@ -1,12 +1,8 @@
 import 'package:dawn_frontend/src/presentation/widgets/auth/sign_up_card.dart';
 import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
+import 'package:dawn_frontend/src/presentation/widgets/custom_top_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import '../../../core/router/router.dart';
-import '../../view_models/auth/sign_up_view_model.dart';
-import '../../widgets/back_white_btn.dart';
 import '../../../core/theme/typography.dart';
 import '../../../core/utils/constants.dart';
 
@@ -31,15 +27,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 30),
 
               // 1. 뒤로 가기 버튼 (왼쪽 정렬만 따로 처리)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: BackWhiteBtn(
-                  onPressed: () {
-                    context.read<SignUpViewModel>().resetFields();
-                    context.go(AppRoutes.signIn);
-                  },
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.centerLeft,
+              //   child: BackWhiteBtn(
+              //     onPressed: () {
+              //       context.go(AppRoutes.signIn);
+              //     },
+              //   ),
+              // ),
+              const CustomTopAppBar(isDark: false),
 
               const SizedBox(height: 40),
 
