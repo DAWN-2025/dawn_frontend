@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class SectionHeader extends StatelessWidget {
   final String text;
@@ -9,10 +10,9 @@ class SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
+      style: typography.AppTextStyle.heading3.copyWith(
         color: Colors.white,
+        fontWeight: FontWeight.w600,
       ),
     );
   }
