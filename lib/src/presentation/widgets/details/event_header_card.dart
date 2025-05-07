@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'tag_chip.dart';
-import 'detail_tap_selector.dart';
+import 'tab_selector.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class EventHeaderCard extends StatelessWidget {
@@ -41,11 +41,11 @@ class EventHeaderCard extends StatelessWidget {
             const SizedBox(height: 12),
             Text(description, style: typography.AppTextStyle.bodyTextPoppins),
             const SizedBox(height: 16),
-            DetailTabSelector(
-              labels: const ['details', 'locations'],
-              selectedIndex: selectedIndex,
-              onTap: onTabSelected,
-            ),
+            // DetailTabSelector(
+            //   labels: const ['details', 'locations'],
+            //   selectedIndex: selectedIndex,
+            //   onTap: onTabSelected,
+            // ),
           ],
         ),
       )),
