@@ -7,7 +7,6 @@ class AuthRepository {
 
   Future<String?> signInWithGoogle() async {
     try {
-      // Google 로그인 로직
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return 'auth_cancelled'; // 취소
 
@@ -16,13 +15,23 @@ class AuthRepository {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-
-      await _firebaseAuth.signInWithCredential(credential);
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        credential,
+      ); // userCredential.additionalUserInfo?.isNewUser 확인 가능
       return null; // 성공
     } on FirebaseAuthException catch (e) {
       return _firebaseErrorKey(e);
     } catch (_) {
       return 'auth_google_failed';
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await _googleSignIn.signOut();
+      await _firebaseAuth.signOut();
+    } catch (e) {
+      // Handle sign out error
     }
   }
 
@@ -33,7 +42,7 @@ class AuthRepository {
         password: password,
       );
       // 이메일 인증
-      await userCredential.user?.sendEmailVerification();
+      //await userCredential.user?.sendEmailVerification();
       return null;
       //return 'email_verification_sent';
     } on FirebaseAuthException catch (e) {
@@ -50,7 +59,7 @@ class AuthRepository {
       );
       return null;
     } on FirebaseAuthException catch (e) {
-      return 'auth_try_again';
+      return _firebaseErrorKey(e);
     }
 
     // await _googleSignIn.disconnect(); // 구글 계정 연결 해제
@@ -63,6 +72,10 @@ class AuthRepository {
         return 'error_email_already_in_use';
       case 'invalid-email':
         return 'error_invalid_email';
+      case 'user-not-found':
+        return 'error_user_not_found';
+      case 'wrong-password':
+        return 'error_wrong_password';
       case 'weak-password':
         return 'error_weak_password';
       default:

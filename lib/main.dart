@@ -1,3 +1,4 @@
+import 'package:dawn_frontend/src/core/utils/helpers.dart';
 import 'package:dawn_frontend/src/data/local/app_preferences.dart';
 import 'package:dawn_frontend/src/domain/repositories/auth_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/auth/sign_in_view_model.dart';
@@ -20,6 +21,7 @@ void main() async {
   final appPrefs = AppPreferences(prefs);
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  //await forceLogout();
 
   runApp(
     MultiProvider(

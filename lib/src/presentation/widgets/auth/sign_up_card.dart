@@ -137,7 +137,6 @@ class _SignUpCardState extends State<SignUpCard> {
                           duration: const Duration(seconds: 3),
                         ),
                       );
-                      await Future.delayed(const Duration(seconds: 3));
                       router.go(AppRoutes.signIn);
                     }
                   },
@@ -147,7 +146,7 @@ class _SignUpCardState extends State<SignUpCard> {
                 const SizedBox(height: 18),
                 GoogleLoginBtn(
                   onPressed: () async {
-                    final result = await viewModel.signUpButtonEnabled();
+                    final result = await viewModel.handleGoogleAuth();
                     if (result != null) {
                       messenger.showSnackBar(
                         SnackBar(content: Text(l10n.getByKey(result))),

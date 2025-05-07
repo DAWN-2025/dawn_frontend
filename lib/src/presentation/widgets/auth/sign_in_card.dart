@@ -96,7 +96,7 @@ class SignInCard extends StatelessWidget {
                 const SizedBox(height: 18),
                 GoogleLoginBtn(
                   onPressed: () async {
-                    final result = await viewModel.signInButtonEnabled;
+                    final result = await viewModel.handleGoogleAuth();
                     if (kDebugMode) {
                       print('Google sign-in result: $result');
                     }
