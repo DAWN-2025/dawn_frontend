@@ -93,15 +93,15 @@ flutter:
   fonts:
     - family: Noto Serif
       fonts:
-        - asset: assets/fonts/NotoSerif_Condensed-Light.ttf
+        - asset: assets/fonts/NotoSerif-Light.ttf
           weight: 300
-        - asset: assets/fonts/NotoSerif_Condensed-Regular.ttf
+        - asset: assets/fonts/NotoSerif-Regular.ttf
           weight: 400
-        - asset: assets/fonts/NotoSerif_Condensed-Medium.ttf
+        - asset: assets/fonts/NotoSerif-Medium.ttf
           weight: 500
-        - asset: assets/fonts/NotoSerif_Condensed-SemiBold.ttf
+        - asset: assets/fonts/NotoSerif-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/NotoSerif_Condensed-Bold.ttf
+        - asset: assets/fonts/NotoSerif-Bold.ttf
           weight: 700
 
     - family: Poppins
