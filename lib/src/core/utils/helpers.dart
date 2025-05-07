@@ -1,5 +1,13 @@
-// lib/src/core/utils/helpers.dart
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-///앱 전역에서 재사용 가능한 도우미(Helper) 함수들을 모아둔 곳입니다.
-/// - 특정 화면이나 기능에 종속되지 않고 여러 곳에서 공통으로 사용되는 유틸리티 로직을 제공합니다.
-/// - 문자열 검사, 포맷 변환, 공통 UI 다이얼로그 등 자주 사용되는 기능을 한곳에 모아 유지보수를 용이하게 합니다.
+/// Firebase 및 Google 인증 세션 초기화 (로그아웃)
+Future<void> forceLogout() async {
+  try {
+    await GoogleSignIn().signOut();
+    await GoogleSignIn().disconnect();
+    await FirebaseAuth.instance.signOut();
+  } catch (e) {
+    print('Logout failed: $e');
+  }
+}

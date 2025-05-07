@@ -65,7 +65,7 @@ class SignUpViewModel extends ChangeNotifier {
         password == confirmPassword;
   }
 
-  Future<String?> get signUpButtonEnable async {
+  Future<String?> handleGoogleAuth() async {
     return await _authRepository.signInWithGoogle();
   }
 
@@ -76,33 +76,7 @@ class SignUpViewModel extends ChangeNotifier {
     if (!_isPasswordValid) return 'error_weak_password';
     if (password != confirmPassword) return 'error_password_mismatch';
 
-    if (!isValid()) return 'error_invalid_input';
-
     final result = await _authRepository.signUpWithEmail(_email!, _password!);
     return result; // null 이면 성공
-
-    /*try {
-      final result = await _authRepository.signUpWithEmail(_email!, _password!);
-      return result;
-    } on FirebaseAuthException catch (e) {
-      return _firebaseErrorKey(e);
-    } catch (_) {
-      return 'error_signup_failed';
-    }*/
   }
-
-  signUpButtonEnabled() {}
-
-  /*String _firebaseErrorKey(FirebaseAuthException e) {
-    switch (e.code) {
-      case 'email-already-in-use':
-        return 'error_email_already_in_use';
-      case 'invalid-email':
-        return 'error_invalid_email';
-      case 'weak-password':
-        return 'error_weak_password';
-      default:
-        return 'error_signup_failed';
-    }
-  }*/
 }

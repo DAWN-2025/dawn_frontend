@@ -27,7 +27,7 @@ class SignInViewModel extends ChangeNotifier {
     return email != null && password != null;
   }
 
-  Future<String?> get signInButtonEnabled async {
+  Future<String?> handleGoogleAuth() async {
     return await _authRepository.signInWithGoogle();
   }
 
