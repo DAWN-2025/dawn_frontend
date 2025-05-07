@@ -13,7 +13,7 @@ class StampCard extends StatelessWidget {
     return InkWell(
       onTap: () async {
         await viewModel.handleCardTap(viewModel.id);
-        context.go(viewModel.navigationPath.value);
+        context.push(viewModel.navigationPath.value);
         viewModel.clearNavigation();
       },
       borderRadius: BorderRadius.circular(15), // 터치 효과의 경계 설정

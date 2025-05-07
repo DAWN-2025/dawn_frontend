@@ -10,30 +10,32 @@ class CustomTopAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: preferredSize.height,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: InkWell(
-          onTap: () => context.pop(),
-          borderRadius: BorderRadius.circular(30),
-          child: Container(
-            width: 45,
-            height: 45,
-            decoration: const ShapeDecoration(
-              color: AppColors.backGray,
-              shape: OvalBorder(
-                side: BorderSide(color: Colors.white, width: 1),
+    return SafeArea(
+      child: Container(
+        height: preferredSize.height,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: InkWell(
+            onTap: () => context.pop(),
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              width: 45,
+              height: 45,
+              decoration: const ShapeDecoration(
+                color: AppColors.backGray,
+                shape: OvalBorder(
+                  side: BorderSide(color: Colors.white, width: 1),
+                ),
               ),
-            ),
-            child: Center(
-              child: SvgPicture.asset(
-                isDark
-                    ? 'assets/icons/back_dark.svg'
-                    : 'assets/icons/back_white.svg',
-                width: 24,
-                height: 24,
+              child: Center(
+                child: SvgPicture.asset(
+                  isDark
+                      ? 'assets/icons/back_dark.svg'
+                      : 'assets/icons/back_white.svg',
+                  width: 24,
+                  height: 24,
+                ),
               ),
             ),
           ),
