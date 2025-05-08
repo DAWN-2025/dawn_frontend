@@ -123,8 +123,10 @@ class HeaderCard extends StatelessWidget {
       child: Text(
         description!,
         style: typography.AppTextStyle.bodyTextPoppins,
-        maxLines: 3,
-        overflow: TextOverflow.ellipsis,
+        textAlign: TextAlign.left,
+        maxLines: null, // 줄 수 제한 해제
+        softWrap: true, // 줄바꿈 허용
+        overflow: TextOverflow.visible, // 넘치는 텍스트 처리
       ),
     );
   }
