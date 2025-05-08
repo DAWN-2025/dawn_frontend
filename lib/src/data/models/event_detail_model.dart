@@ -89,22 +89,22 @@ class Section {
 class Location {
   final String name;
   final String address;
-  final double latitude;
-  final double longitude;
+  final String image;
+  final bool visited;
 
   Location({
     required this.name,
     required this.address,
-    required this.latitude,
-    required this.longitude,
+    required this.image,
+    required this.visited,
   });
 
   factory Location.fromJson(Map<String, dynamic> json) {
     return Location(
       name: json['name'] ?? 'Unknown Location',
       address: json['address'] ?? 'No Address',
-      latitude: (json['latitude'] as num?)?.toDouble() ?? 0.0,
-      longitude: (json['longitude'] as num?)?.toDouble() ?? 0.0,
+      image: json['image'] ?? 'assets/images/default_image.jpg',
+      visited: json['visited'] ?? false,
     );
   }
 }

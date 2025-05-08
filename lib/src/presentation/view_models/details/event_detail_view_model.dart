@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:dawn_frontend/src/data/models/event_detail_model.dart';
 import 'package:dawn_frontend/src/domain/repositories/event_detail_repository.dart';
+import 'package:dawn_frontend/src/presentation/view_models/location_card_view_model.dart';
+import 'package:dawn_frontend/src/data/models/location_card_model.dart';
 
 class EventDetailViewModel extends ChangeNotifier {
   final EventDetailRepository repository;
+  List<LocationCardViewModel> locationViewModels = [];
 
   EventDetailViewModel({required this.repository});
 
@@ -18,12 +21,44 @@ class EventDetailViewModel extends ChangeNotifier {
   int get selectedTabIndex => _selectedTabIndex;
 
   void setSelectedTabIndex(int index) {
-    print("Setting tab index to: $index"); // 디버깅용
     if (_selectedTabIndex != index) {
       _selectedTabIndex = index;
-      print("Tab index updated: $_selectedTabIndex"); // 디버깅용
-      notifyListeners(); // 상태 변경 알림
+      notifyListeners();
     }
+  }
+
+  void initializeLocations(List<Location> locations) {
+    locationViewModels =
+        locations
+            .map(
+              (location) => LocationCardViewModel(
+                model: LocationCardModel(
+                  name: location.name,
+                  address: location.address,
+                  // latitude: location.latitude,
+                  // longitude: location.longitude,
+                ),
+              ),
+            )
+            .toList();
+    notifyListeners();
+  }
+
+  void toggleLocationVisited(String locationName) {
+    final viewModel = locationViewModels.firstWhere(
+      (vm) => vm.model.name == locationName,
+      orElse:
+          () => LocationCardViewModel(
+            model: LocationCardModel(
+              name: locationName,
+              address: '',
+              // latitude: 0,
+              // longitude: 0,
+            ),
+          ),
+    );
+    viewModel.toggleVisited();
+    notifyListeners();
   }
 
   Future<void> fetchEventDetail() async {

@@ -33,7 +33,9 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
       appBar: const CustomTopAppBar(isDark: true),
       body: Consumer<EventDetailViewModel>(
         builder: (context, viewModel, child) {
-          print("Rebuilding UI with tab index: ${viewModel.selectedTabIndex}");  // 디버깅용
+          print(
+            "Rebuilding UI with tab index: ${viewModel.selectedTabIndex}",
+          ); // 디버깅용
 
           if (viewModel.isLoading) {
             return const Center(child: CircularProgressIndicator());
@@ -58,7 +60,10 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                 ImageHeader(imagePath: viewModel.event!.images.header),
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 30,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -71,8 +76,10 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                           selectedIndex: viewModel.selectedTabIndex,
                           tabLabels: ["Details", "Locations"],
                           onTabSelected: (index) {
-                            print("Tab selected: $index");  // 디버깅용
-                            context.read<EventDetailViewModel>().setSelectedTabIndex(index);
+                            print("Tab selected: $index"); // 디버깅용
+                            context
+                                .read<EventDetailViewModel>()
+                                .setSelectedTabIndex(index);
                           },
                         ),
                       ),
@@ -89,17 +96,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                         ],
                         Image.asset(viewModel.event!.images.bodyImage),
                       ] else if (viewModel.selectedTabIndex == 1) ...[
-                        const SizedBox(height: 16),
-                        Text(
-                          "Locations",
-                          style: typography.AppTextStyle.bodyTextPoppins
-                              .copyWith(fontSize: 18, color: Colors.white),
-                        ),
-                        const SizedBox(height: 8),
-                        SizedBox(
-                          height: 300,
-                          child: LocationCardList(locations: viewModel.event!.locations),
-                        ),
+                        LocationCardList(locations: viewModel.event?.locations ?? [],)
                       ],
                     ],
                   ),

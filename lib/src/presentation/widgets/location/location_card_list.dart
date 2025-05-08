@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:dawn_frontend/src/presentation/widgets/location/location_card.dart';
 import 'package:dawn_frontend/src/data/models/event_detail_model.dart';
-import 'location_card.dart';
 
 class LocationCardList extends StatelessWidget {
   final List<Location> locations;
@@ -11,16 +11,20 @@ class LocationCardList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (locations.isEmpty) {
       return const Center(
-        child: Text("No locations available", style: TextStyle(color: Colors.grey)),
+        child: Text(
+          "No locations available",
+          style: TextStyle(color: Colors.grey),
+        ),
       );
     }
 
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      itemCount: locations.length,
-      itemBuilder: (context, index) {
-        return LocationCard(location: locations[index]);
-      },
+    return Column(
+  children: List.generate(locations.length, (index) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3.0),
+      child: LocationCard(location: locations[index]),
     );
+  }),
+);
   }
 }

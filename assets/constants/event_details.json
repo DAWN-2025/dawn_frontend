@@ -19,10 +19,16 @@
     ],
     "locations": [
     {
-      "name": "Jeonil Building 245"
+      "name": "Jeonil Building 245",
+      "address": "Gwangju, South Korea",
+      "image": "assets/images/location-jeonil.jpeg",
+      "visited": true
     },
     {
-      "name": "Democracy Park"
+      "name": "Chonnam National University",
+      "address": "Gwangju, South Korea",
+      "image": "assets/images/location-cnu.jpeg",
+      "visited": false
     }
   ]
 }
