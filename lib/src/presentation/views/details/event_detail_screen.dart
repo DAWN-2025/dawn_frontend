@@ -4,8 +4,10 @@ import 'package:dawn_frontend/src/presentation/view_models/details/event_detail_
 import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
 import 'package:dawn_frontend/src/presentation/widgets/custom_top_app_bar.dart';
 import 'package:dawn_frontend/src/presentation/widgets/custom_bottom_app_bar.dart';
-import 'package:dawn_frontend/src/presentation/widgets/details/event_header_card.dart';
+import 'package:dawn_frontend/src/presentation/widgets/details/header_card.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/section_header.dart';
+import 'package:dawn_frontend/src/presentation/widgets/details/image_header.dart';
+import 'package:dawn_frontend/src/presentation/widgets/location/location_card_list.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class EventDetailScreen extends StatefulWidget {
@@ -17,8 +19,6 @@ class EventDetailScreen extends StatefulWidget {
 }
 
 class _EventDetailScreenState extends State<EventDetailScreen> {
-  int selectedTabIndex = 0;
-
   @override
   void initState() {
     super.initState();
@@ -29,12 +29,12 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<EventDetailViewModel>();
-
     return CustomScaffold(
       appBar: const CustomTopAppBar(isDark: true),
-      body: Builder(
-        builder: (context) {
+      body: Consumer<EventDetailViewModel>(
+        builder: (context, viewModel, child) {
+          print("Rebuilding UI with tab index: ${viewModel.selectedTabIndex}");  // 디버깅용
+
           if (viewModel.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -55,57 +55,52 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                ShaderMask(
-                  shaderCallback: (Rect bounds) {
-                    return const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      stops: [0.0, 0.85, 1.0],
-                      colors: [Colors.white, Colors.white, Colors.transparent],
-                    ).createShader(bounds);
-                  },
-                  blendMode: BlendMode.dstIn,
-                  child: Image.asset(
-                    viewModel.event!.images.header,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: 300,
-                  ),
-                ),
+                ImageHeader(imagePath: viewModel.event!.images.header),
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 30,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Transform.translate(
                         offset: const Offset(0, -50),
-                        child: EventHeaderCard(
+                        child: HeaderCard(
                           title: viewModel.event!.title,
                           description: viewModel.event!.description,
                           tags: viewModel.event!.tags,
                           selectedIndex: viewModel.selectedTabIndex,
+                          tabLabels: ["Details", "Locations"],
                           onTabSelected: (index) {
-                            viewModel.setSelectedTabIndex(index);
+                            print("Tab selected: $index");  // 디버깅용
+                            context.read<EventDetailViewModel>().setSelectedTabIndex(index);
                           },
                         ),
                       ),
-                      for (final section in viewModel.event!.sections) ...[
-                        SectionHeader(text: section.header),
-                        const SizedBox(height: 8),
-                        Text(
-                          section.body,
-                          style: typography.AppTextStyle.bodyTextPoppins.copyWith(
-                            fontSize: 16,
-                            color:Colors.white,
+                      if (viewModel.selectedTabIndex == 0) ...[
+                        for (final section in viewModel.event!.sections) ...[
+                          SectionHeader(text: section.header),
+                          const SizedBox(height: 8),
+                          Text(
+                            section.body,
+                            style: typography.AppTextStyle.bodyTextPoppins
+                                .copyWith(fontSize: 16, color: Colors.white),
                           ),
+                          const SizedBox(height: 24),
+                        ],
+                        Image.asset(viewModel.event!.images.bodyImage),
+                      ] else if (viewModel.selectedTabIndex == 1) ...[
+                        const SizedBox(height: 16),
+                        Text(
+                          "Locations",
+                          style: typography.AppTextStyle.bodyTextPoppins
+                              .copyWith(fontSize: 18, color: Colors.white),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 8),
+                        SizedBox(
+                          height: 300,
+                          child: LocationCardList(locations: viewModel.event!.locations),
+                        ),
                       ],
-                      Image.asset(viewModel.event!.images.bodyImage),
                     ],
                   ),
                 ),

@@ -15,7 +15,8 @@ import 'package:dawn_frontend/src/presentation/view_models/language_view_model.d
 import 'package:dawn_frontend/src/presentation/view_models/stamp_card_list_view_model.dart';
 import 'package:dawn_frontend/src/domain/repositories/stamp_card_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/details/event_detail_view_model.dart';
-import 'package:dawn_frontend/src/domain/repositories/details/event_detail_repository.dart';
+import 'package:dawn_frontend/src/domain/repositories/event_detail_repository.dart';
+import 'package:dawn_frontend/src/presentation/view_models/details/detail_tab_selector_view_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,8 +43,10 @@ void main() async {
               (_) => StampCardListViewModel(repository: StampCardRepository()),
         ),
         ChangeNotifierProvider(
-          create: (_) => EventDetailViewModel(repository: EventDetailRepository()),
+          create:
+              (_) => EventDetailViewModel(repository: EventDetailRepository()),
         ),
+        ChangeNotifierProvider(create: (_) => DetailTabSelectorViewModel()),
       ],
       child: const MyApp(),
     ),

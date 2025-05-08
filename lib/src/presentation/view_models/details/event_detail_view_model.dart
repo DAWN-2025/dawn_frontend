@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dawn_frontend/src/data/models/event_detail_model.dart';
-import 'package:dawn_frontend/src/domain/repositories/details/event_detail_repository.dart';
+import 'package:dawn_frontend/src/domain/repositories/event_detail_repository.dart';
 
 class EventDetailViewModel extends ChangeNotifier {
   final EventDetailRepository repository;
@@ -18,8 +18,12 @@ class EventDetailViewModel extends ChangeNotifier {
   int get selectedTabIndex => _selectedTabIndex;
 
   void setSelectedTabIndex(int index) {
-    _selectedTabIndex = index;
-    notifyListeners();
+    print("Setting tab index to: $index"); // 디버깅용
+    if (_selectedTabIndex != index) {
+      _selectedTabIndex = index;
+      print("Tab index updated: $_selectedTabIndex"); // 디버깅용
+      notifyListeners(); // 상태 변경 알림
+    }
   }
 
   Future<void> fetchEventDetail() async {
@@ -29,6 +33,7 @@ class EventDetailViewModel extends ChangeNotifier {
 
     try {
       _event = await repository.loadEventDetail();
+      _event = _event?.copyWith(locations: _event?.locations ?? []);
     } catch (e) {
       _errorMessage = 'Failed to load event details';
     }

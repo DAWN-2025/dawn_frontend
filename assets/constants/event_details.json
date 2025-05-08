@@ -3,6 +3,10 @@
     "title": "The Gwangju Uprising",
     "description": "Jeonil Building 245 is Historical landmark in Gwangju, related to the May 18 Democratic Movement.\n5.18 민주화 운동 짧은 소개",
     "tags": ["#Korea", "#1980s", "#Democracy"],
+    "images": {
+      "header": "assets/images/event-detail-header.jpeg",
+      "bodyImage": "assets/images/event-detail-statistics.jpeg"
+    },
     "sections": [
       {
         "header": "# 대한민국",
@@ -13,9 +17,13 @@
         "body": "Jeonil Building 245 is Historical landmark in Gwangju, related to the May 18 Democratic Movement."
       }
     ],
-    "images": {
-      "header": "assets/images/event-detail-header.jpeg",
-      "statistics": "assets/images/event-detail-statistics.jpeg"
+    "locations": [
+    {
+      "name": "Jeonil Building 245"
+    },
+    {
+      "name": "Democracy Park"
     }
+  ]
 }
   

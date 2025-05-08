@@ -3,40 +3,59 @@ class EventDetail {
   final String title;
   final String description;
   final List<String> tags;
-  final List<Section> sections;
   final EventImages images;
+  final List<Section> sections;
+  final List<Location> locations;
 
   EventDetail({
     required this.id,
     required this.title,
     required this.description,
     required this.tags,
-    required this.sections,
     required this.images,
+    required this.sections,
+    required this.locations,
   });
 
-  factory EventDetail.fromJson(Map<String, dynamic> json) => EventDetail(
-        id: json['id'],
-        title: json['title'],
-        description: json['description'],
-        tags: List<String>.from(json['tags']),
-        sections: (json['sections'] as List)
-            .map((e) => Section.fromJson(e))
-            .toList(),
-        images: EventImages.fromJson(json['images']),
-      );
-}
+  /// copyWith 메서드 추가
+  EventDetail copyWith({
+    String? id,
+    String? title,
+    String? description,
+    List<String>? tags,
+    EventImages? images,
+    List<Section>? sections,
+    List<Location>? locations,
+  }) {
+    return EventDetail(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      tags: tags ?? this.tags,
+      images: images ?? this.images,
+      sections: sections ?? this.sections,
+      locations: locations ?? this.locations,
+    );
+  }
 
-class Section {
-  final String header;
-  final String body;
-
-  Section({required this.header, required this.body});
-
-  factory Section.fromJson(Map<String, dynamic> json) => Section(
-        header: json['header'],
-        body: json['body'],
-      );
+  /// fromJson 메서드 수정
+  factory EventDetail.fromJson(Map<String, dynamic> json) {
+    return EventDetail(
+      id: json['id']?.toString() ?? 'Unknown ID', // 안전 처리
+      title: json['title'] ?? 'No Title', // 기본값 추가
+      description: json['description'] ?? 'No Description', // 기본값 추가
+      tags: (json['tags'] as List?)?.map((e) => e.toString()).toList() ?? [],
+      images: EventImages.fromJson(json['images'] ?? {}),
+      sections: (json['sections'] as List?)
+              ?.map((item) => Section.fromJson(item))
+              .toList() ??
+          [],
+      locations: (json['locations'] as List?) // 위치 정보 추가
+              ?.map((item) => Location.fromJson(item))
+              .toList() ??
+          [],
+    );
+  }
 }
 
 class EventImages {
@@ -45,8 +64,47 @@ class EventImages {
 
   EventImages({required this.header, required this.bodyImage});
 
-  factory EventImages.fromJson(Map<String, dynamic> json) => EventImages(
-        header: json['header'],
-        bodyImage: json['statistics'],
-      );
+  factory EventImages.fromJson(Map<String, dynamic> json) {
+    return EventImages(
+      header: json['header'] ?? 'assets/images/default_header.jpg', // 기본값
+      bodyImage: json['bodyImage'] ?? 'assets/images/default_body.jpg', // 기본값
+    );
+  }
+}
+
+class Section {
+  final String header;
+  final String body;
+
+  Section({required this.header, required this.body});
+
+  factory Section.fromJson(Map<String, dynamic> json) {
+    return Section(
+      header: json['header'] ?? 'No Header', // 기본값 추가
+      body: json['body'] ?? 'No Content', // 기본값 추가
+    );
+  }
+}
+
+class Location {
+  final String name;
+  final String address;
+  final double latitude;
+  final double longitude;
+
+  Location({
+    required this.name,
+    required this.address,
+    required this.latitude,
+    required this.longitude,
+  });
+
+  factory Location.fromJson(Map<String, dynamic> json) {
+    return Location(
+      name: json['name'] ?? 'Unknown Location',
+      address: json['address'] ?? 'No Address',
+      latitude: (json['latitude'] as num?)?.toDouble() ?? 0.0,
+      longitude: (json['longitude'] as num?)?.toDouble() ?? 0.0,
+    );
+  }
 }
