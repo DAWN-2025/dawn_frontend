@@ -1,0 +1,25 @@
+[
+    {
+        "seq": 101,
+        "userSeq": 1,
+        "locationSeq": 3,
+        "content": "Visited Gwangju Democratic Park",
+        "stampImg": "assets/images/stamp1.png",
+        "markImg": "assets/images/mark1.png",
+        "letterTime": "2025-05-09T14:30:00"
+    },
+    {
+        "seq": 102,
+        "userSeq": 1,
+        "locationSeq": 1,
+        "content": "Stopped by Jeonil Building 245",
+        "letterTime": "2025-05-08T17:00:00"
+    },
+    {
+        "seq": 103,
+        "userSeq": 2,
+        "locationSeq": 3,
+        "content": "Revisited Gwangju Democratic Park",
+        "letterTime": "2025-05-07T11:00:00"
+    }
+]

@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "name": "Jeonil Building 245",
+        "locationImage": "assets/images/location-jeonil.jpeg",
+        "address": "45 Uprising Rd, Gwangju",
+        "keywords": [
+            { "keyword": "Human Rights" },
+            { "keyword": "Memorial" },
+            { "keyword": "Gwangju" }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Chonnam National University",
+        "locationImage": "assets/images/location-cnu.jpeg",
+        "address": "77 Yongbong St, Gwangju",
+        "keywords": [
+            { "keyword": "Democracy" },
+            { "keyword": "Protest" },
+            { "keyword": "History" }
+        ]
+    }
+]

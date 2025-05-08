@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:dawn_frontend/src/presentation/widgets/location/location_card.dart';
-import 'package:dawn_frontend/src/data/models/event_detail_model.dart';
+import 'location_card.dart';
+import 'package:dawn_frontend/src/presentation/view_models/location_card_view_model.dart';
 
 class LocationCardList extends StatelessWidget {
-  final List<Location> locations;
+  final List<LocationCardViewModel> locationViewModels;
 
-  const LocationCardList({Key? key, required this.locations}) : super(key: key);
+  const LocationCardList({Key? key, required this.locationViewModels}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (locations.isEmpty) {
-      return const Center(
-        child: Text(
-          "No locations available",
-          style: TextStyle(color: Colors.grey),
-        ),
-      );
-    }
-
-    return Column(
-  children: List.generate(locations.length, (index) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3.0),
-      child: LocationCard(location: locations[index]),
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      itemCount: locationViewModels.length,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        return LocationCard(locationViewModel: locationViewModels[index]);
+      },
     );
-  }),
-);
   }
 }

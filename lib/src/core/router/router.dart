@@ -15,7 +15,7 @@ class AppRoutes {
   static const String setting = '/setting';
   static const String map = '/map';
   static const String album = '/album';
-  static const String eventDetail = '/event-detail/:id';
+  static const String eventDetail = '/event-detail/:eventId';
 }
 
 class AppRouter {
@@ -59,8 +59,12 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.eventDetail,
         pageBuilder: (context, state) {
-          final eventId = state.pathParameters['id'];
-          return NoTransitionPage(child: EventDetailScreen(eventId: eventId!));
+          final eventId = int.tryParse(state.pathParameters['eventId'] ?? '') ?? 0;
+          final userSeq = 1;
+
+          return NoTransitionPage(
+            child: EventDetailScreen(eventId: eventId, userSeq: userSeq),
+          );
         },
       ),
     ],
