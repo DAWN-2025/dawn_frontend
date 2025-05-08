@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dawn_frontend/src/data/models/event_detail_model.dart';
-import 'package:dawn_frontend/src/domain/repositories/event_detail_repository.dart';
+import 'package:dawn_frontend/src/domain/repositories/details/event_detail_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/location_card_view_model.dart';
 import 'package:dawn_frontend/src/data/models/location_card_model.dart';
 

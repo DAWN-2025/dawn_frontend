@@ -3,38 +3,52 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 import 'package:dawn_frontend/src/presentation/view_models/location_card_view_model.dart';
+import 'package:dawn_frontend/src/presentation/views/details/location_detail_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class LocationCard extends StatelessWidget {
   final LocationCardViewModel locationViewModel;
 
-  const LocationCard({Key? key, required this.locationViewModel}) : super(key: key);
+  const LocationCard({Key? key, required this.locationViewModel})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.white.withOpacity(0.5),
-              width: 2,
+      child: GestureDetector(
+        onTap: () => _navigateToDetail(context),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.white.withOpacity(0.5),
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(15),
             ),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Stack(
-            children: [
-              _buildImage(),
-              if (!locationViewModel.visited) _buildOverlay(),
-              _buildBottomBlur(),
-              _buildVisitedIcon(),
-              _buildLocationName(),
-            ],
+            child: Stack(
+              children: [
+                _buildImage(),
+                if (!locationViewModel.visited) _buildOverlay(),
+                _buildBottomBlur(),
+                _buildVisitedIcon(),
+                _buildLocationName(),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  /// 화면 전환 함수
+  void _navigateToDetail(BuildContext context) {
+    print(
+      "Navigating to location: ${locationViewModel.locationId} - ${locationViewModel.name}",
+    );
+    context.push('/location-detail/${locationViewModel.locationId}');
   }
 
   /// 이미지 배경
@@ -46,6 +60,16 @@ class LocationCard extends StatelessWidget {
         fit: BoxFit.cover,
         width: double.infinity,
         height: 100,
+        errorBuilder: (context, error, stackTrace) {
+          return Container(
+            color: Colors.grey,
+            child: const Icon(
+              Icons.broken_image,
+              size: 50,
+              color: Colors.white,
+            ),
+          );
+        },
       ),
     );
   }
@@ -69,19 +93,14 @@ class LocationCard extends StatelessWidget {
       left: 0,
       right: 0,
       child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(
-          bottom: Radius.circular(15),
-        ),
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(15)),
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
           child: Container(
             height: 50,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Colors.white.withOpacity(0.5),
-                  Colors.transparent,
-                ],
+                colors: [Colors.white.withOpacity(0.5), Colors.transparent],
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
               ),

@@ -80,7 +80,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                           description: event.shortInfo,
                           tags: event.keywords,
                           selectedIndex: viewModel.selectedTabIndex,
-                          tabLabels: ["Details", "Locations"],
+                          tabLabels: ["Info", "Locations"],
                           onTabSelected: (index) {
                             context
                                 .read<EventDetailViewModel>()

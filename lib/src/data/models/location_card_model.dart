@@ -1,5 +1,5 @@
 class LocationCardModel {
-  final int id;
+  final int locationId;
   final String name;
   final String address;
   final String image;
@@ -7,7 +7,7 @@ class LocationCardModel {
   final bool visited;
 
   LocationCardModel({
-    required this.id,
+    required this.locationId,
     required this.name,
     required this.address,
     required this.image,
@@ -16,10 +16,12 @@ class LocationCardModel {
   });
 
   factory LocationCardModel.fromJson(Map<String, dynamic> json, List<int> visitedLocationSeqs) {
+    print("Parsing LocationCardModel: ${json['id']} - ${json['name']}");
+
     final int locationId = json['id'] ?? 0;
     final bool isVisited = visitedLocationSeqs.contains(locationId);
     return LocationCardModel(
-      id: locationId,
+      locationId: locationId,
       name: json['name'] ?? 'Unknown Location',
       address: json['address'] ?? 'No Address',
       image: json['locationImage'] ?? 'assets/images/default.jpg',
