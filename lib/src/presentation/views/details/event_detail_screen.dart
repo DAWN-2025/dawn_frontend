@@ -74,7 +74,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Transform.translate(
-                        offset: const Offset(0, -50),
+                        offset: const Offset(0, -70),
                         child: HeaderCard(
                           title: event.name,
                           description: event.shortInfo,
