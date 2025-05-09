@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 115),
+            const SizedBox(height: 65),
             Center(
               child: SvgPicture.asset(
                 'assets/icons/logo_sub.svg',
