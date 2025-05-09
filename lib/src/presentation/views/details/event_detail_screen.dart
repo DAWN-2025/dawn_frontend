@@ -7,7 +7,7 @@ import 'package:dawn_frontend/src/presentation/widgets/custom_bottom_app_bar.dar
 import 'package:dawn_frontend/src/presentation/widgets/details/header_card.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/section_header.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/image_header.dart';
-import 'package:dawn_frontend/src/presentation/widgets/location/location_card_list.dart';
+import 'package:dawn_frontend/src/presentation/widgets/location_card_list.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class EventDetailScreen extends StatefulWidget {
