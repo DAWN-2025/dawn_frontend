@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:dawn_frontend/src/data/models/event_detail_model.dart';
-import 'package:dawn_frontend/src/domain/repositories/event_detail_repository.dart';
+import 'package:dawn_frontend/src/domain/repositories/details/event_detail_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/location_card_view_model.dart';
 import 'package:dawn_frontend/src/data/models/location_card_model.dart';
 
 class EventDetailViewModel extends ChangeNotifier {
   final EventDetailRepository repository;
   List<LocationCardViewModel> locationViewModels = [];
+  List<int> visitedLocationSeqs = [];
 
   EventDetailViewModel({required this.repository});
 
@@ -27,52 +28,37 @@ class EventDetailViewModel extends ChangeNotifier {
     }
   }
 
-  void initializeLocations(List<Location> locations) {
-    locationViewModels =
-        locations
-            .map(
-              (location) => LocationCardViewModel(
-                model: LocationCardModel(
-                  name: location.name,
-                  address: location.address,
-                  // latitude: location.latitude,
-                  // longitude: location.longitude,
-                ),
-              ),
-            )
-            .toList();
+  void initializeLocations(List<LocationCardModel> locations) {
+    locationViewModels = locations
+        .map((location) => LocationCardViewModel(model: location))
+        .toList();
     notifyListeners();
   }
 
-  void toggleLocationVisited(String locationName) {
-    final viewModel = locationViewModels.firstWhere(
-      (vm) => vm.model.name == locationName,
-      orElse:
-          () => LocationCardViewModel(
-            model: LocationCardModel(
-              name: locationName,
-              address: '',
-              // latitude: 0,
-              // longitude: 0,
-            ),
-          ),
-    );
-    viewModel.toggleVisited();
-    notifyListeners();
-  }
-
-  Future<void> fetchEventDetail() async {
-    _isLoading = true;
-    _errorMessage = null;
-    notifyListeners();
+  Future<void> fetchEventDetail(int eventId, int userSeq) async {
+    _setLoadingState(true);
 
     try {
-      _event = await repository.loadEventDetail();
-      _event = _event?.copyWith(locations: _event?.locations ?? []);
-    } catch (e) {
-      _errorMessage = 'Failed to load event details';
-    }
+      _event = await repository.fetchEventDetail(eventId);
+      visitedLocationSeqs = await repository.fetchVisitedLocations(userSeq);
+      List<LocationCardModel> locations = await repository.fetchEventLocations(visitedLocationSeqs);
 
+      initializeLocations(locations);
+      print("Loaded event details: ${_event?.name}");
+    } catch (e) {
+      _setErrorState('Failed to load event details: $e');
+    } finally {
+      _setLoadingState(false);
+    }
+  }
+
+  void _setLoadingState(bool isLoading) {
+    _isLoading = isLoading;
+    notifyListeners();
+  }
+
+  void _setErrorState(String message) {
+    _errorMessage = message;
     _isLoading = false;
     notifyListeners();
   }

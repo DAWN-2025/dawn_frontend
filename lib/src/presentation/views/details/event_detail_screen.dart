@@ -7,12 +7,18 @@ import 'package:dawn_frontend/src/presentation/widgets/custom_bottom_app_bar.dar
 import 'package:dawn_frontend/src/presentation/widgets/details/header_card.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/section_header.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/image_header.dart';
-import 'package:dawn_frontend/src/presentation/widgets/location/location_card_list.dart';
+import 'package:dawn_frontend/src/presentation/widgets/location_card_list.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class EventDetailScreen extends StatefulWidget {
-  final String eventId;
-  const EventDetailScreen({Key? key, required this.eventId}) : super(key: key);
+  final int eventId;
+  final int userSeq;
+
+  const EventDetailScreen({
+    Key? key,
+    required this.eventId,
+    required this.userSeq,
+  }) : super(key: key);
 
   @override
   State<EventDetailScreen> createState() => _EventDetailScreenState();
@@ -23,7 +29,9 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<EventDetailViewModel>().fetchEventDetail();
+      context
+          .read<EventDetailViewModel>()
+          .fetchEventDetail(widget.eventId, widget.userSeq);
     });
   }
 
@@ -33,10 +41,6 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
       appBar: const CustomTopAppBar(isDark: true),
       body: Consumer<EventDetailViewModel>(
         builder: (context, viewModel, child) {
-          print(
-            "Rebuilding UI with tab index: ${viewModel.selectedTabIndex}",
-          ); // 디버깅용
-
           if (viewModel.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -54,10 +58,12 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
             return const Center(child: Text("No event details available"));
           }
 
+          final event = viewModel.event!;
+
           return SingleChildScrollView(
             child: Column(
               children: [
-                ImageHeader(imagePath: viewModel.event!.images.header),
+                ImageHeader(imagePath: event.image),
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(
@@ -70,13 +76,12 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                       Transform.translate(
                         offset: const Offset(0, -50),
                         child: HeaderCard(
-                          title: viewModel.event!.title,
-                          description: viewModel.event!.description,
-                          tags: viewModel.event!.tags,
+                          title: event.name,
+                          description: event.shortInfo,
+                          tags: event.keywords,
                           selectedIndex: viewModel.selectedTabIndex,
-                          tabLabels: ["Details", "Locations"],
+                          tabLabels: ["Info", "Locations"],
                           onTabSelected: (index) {
-                            print("Tab selected: $index"); // 디버깅용
                             context
                                 .read<EventDetailViewModel>()
                                 .setSelectedTabIndex(index);
@@ -84,19 +89,35 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                         ),
                       ),
                       if (viewModel.selectedTabIndex == 0) ...[
-                        for (final section in viewModel.event!.sections) ...[
-                          SectionHeader(text: section.header),
-                          const SizedBox(height: 8),
-                          Text(
-                            section.body,
-                            style: typography.AppTextStyle.bodyTextPoppins
-                                .copyWith(fontSize: 16, color: Colors.white),
-                          ),
-                          const SizedBox(height: 24),
-                        ],
-                        Image.asset(viewModel.event!.images.bodyImage),
+                        SectionHeader(text: "Background"),
+                        const SizedBox(height: 8),
+                        Text(
+                          event.background,
+                          style: typography.AppTextStyle.bodyTextPoppins
+                              .copyWith(fontSize: 16, color: Colors.white),
+                        ),
+                        const SizedBox(height: 24),
+                        SectionHeader(text: "Progress"),
+                        const SizedBox(height: 8),
+                        Text(
+                          event.progress,
+                          style: typography.AppTextStyle.bodyTextPoppins
+                              .copyWith(fontSize: 16, color: Colors.white),
+                        ),
+                        const SizedBox(height: 24),
+                        SectionHeader(text: "Meaning"),
+                        const SizedBox(height: 8),
+                        Text(
+                          event.meaning,
+                          style: typography.AppTextStyle.bodyTextPoppins
+                              .copyWith(fontSize: 16, color: Colors.white),
+                        ),
+                        const SizedBox(height: 24),
+                        Image.asset(event.image),
                       ] else if (viewModel.selectedTabIndex == 1) ...[
-                        LocationCardList(locations: viewModel.event?.locations ?? [],)
+                        LocationCardList(
+                          locationViewModels: viewModel.locationViewModels,
+                        ),
                       ],
                     ],
                   ),

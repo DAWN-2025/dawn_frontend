@@ -7,6 +7,7 @@ import '../../presentation/views/map/map_screen.dart';
 import '../../presentation/views/album/album_screen.dart';
 import '../../presentation/views/setting/setting_screen.dart';
 import '../../presentation/views/details/event_detail_screen.dart';
+import '../../presentation/views/details/location_detail_screen.dart';
 
 class AppRoutes {
   static const String signIn = '/signIn';
@@ -15,7 +16,8 @@ class AppRoutes {
   static const String setting = '/setting';
   static const String map = '/map';
   static const String album = '/album';
-  static const String eventDetail = '/event-detail/:id';
+  static const String eventDetail = '/event-detail/:eventId';
+  static const String locationDetail = '/location-detail/:locationId';
 }
 
 class AppRouter {
@@ -59,8 +61,22 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.eventDetail,
         pageBuilder: (context, state) {
-          final eventId = state.pathParameters['id'];
-          return NoTransitionPage(child: EventDetailScreen(eventId: eventId!));
+          final eventId = int.tryParse(state.pathParameters['eventId'] ?? '') ?? 0;
+          final userSeq = 1;
+
+          return NoTransitionPage(
+            child: EventDetailScreen(eventId: eventId, userSeq: userSeq),
+          );
+        },
+      ),
+      // 장소 상세 화면
+      GoRoute(
+        path: AppRoutes.locationDetail,
+        pageBuilder: (context, state) {
+          final locationId = int.tryParse(state.pathParameters['locationId'] ?? '') ?? 0;
+          return NoTransitionPage(
+            child: LocationDetailScreen(locationId: locationId),
+          );
         },
       ),
     ],

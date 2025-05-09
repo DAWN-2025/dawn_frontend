@@ -1,15 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:dawn_frontend/src/data/models/location_card_model.dart';
 
-class LocationCardViewModel extends ChangeNotifier {
+class LocationCardViewModel {
   final LocationCardModel model;
 
-  LocationCardViewModel({required this.model});
-
-  bool get visited => model.visited;
-
-  void toggleVisited() {
-    model.toggleVisited();
-    notifyListeners();
+  LocationCardViewModel({required this.model}) {
+    print("LocationCardViewModel created: ${model.locationId} - ${model.name}");
   }
+
+  int get locationId => model.locationId;
+  String get name => model.name;
+  String get address => model.address;
+  String get image => model.image;
+  List<String> get keywords => model.keywords;
+  bool get visited => model.visited;
 }

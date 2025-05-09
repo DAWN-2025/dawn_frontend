@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dawn_frontend/src/presentation/widgets/tag/tag_chip.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/detail_tab_selector.dart';
-import 'package:dawn_frontend/src/presentation/view_models/details/detail_tab_selector_view_model.dart';
+import 'package:go_router/go_router.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class HeaderCard extends StatelessWidget {
@@ -11,9 +11,9 @@ class HeaderCard extends StatelessWidget {
   final List<String>? tags;
   final String? description;
   final List<String> tabLabels;
-  //final DetailTabType type;
   final int selectedIndex;
   final Function(int) onTabSelected;
+  final int? eventId;
 
   const HeaderCard({
     Key? key,
@@ -26,13 +26,11 @@ class HeaderCard extends StatelessWidget {
     //required this.type,
     required this.selectedIndex,
     required this.onTabSelected,
+    this.eventId,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // return AspectRatio(
-    //   aspectRatio: 4 / 3,
-    //   child: (
     return Container(
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
@@ -49,6 +47,17 @@ class HeaderCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 5),
+
+          if (eventId != null)
+            GestureDetector(
+              onTap: () {
+                context.push('/event-detail/$eventId');
+              },
+              child: Text(
+                'The Gwangju Uprising',
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            ),
 
           // Date and Location Row
           if (date != null || location != null) _buildDateLocationRow(),
@@ -123,8 +132,10 @@ class HeaderCard extends StatelessWidget {
       child: Text(
         description!,
         style: typography.AppTextStyle.bodyTextPoppins,
-        maxLines: 3,
-        overflow: TextOverflow.ellipsis,
+        textAlign: TextAlign.left,
+        maxLines: null, // 줄 수 제한 해제
+        softWrap: true, // 줄바꿈 허용
+        overflow: TextOverflow.visible, // 넘치는 텍스트 처리
       ),
     );
   }
