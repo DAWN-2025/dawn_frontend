@@ -20,6 +20,8 @@ import 'package:dawn_frontend/src/domain/repositories/details/event_detail_repos
 import 'package:dawn_frontend/src/presentation/view_models/details/detail_tab_selector_view_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/details/location_detail_view_model.dart';
 import 'package:dawn_frontend/src/domain/repositories/details/location_detail_repository.dart';
+import 'package:dawn_frontend/src/presentation/view_models/details/comment_view_model.dart';
+import 'package:dawn_frontend/src/domain/repositories/details/comment_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,10 +54,21 @@ void main() async {
               (_) => EventDetailViewModel(repository: EventDetailRepository()),
         ),
         ChangeNotifierProvider(create: (_) => DetailTabSelectorViewModel()),
-        ChangeNotifierProvider(
+        Provider<CommentRepository>(create: (_) => CommentRepository()),
+        ChangeNotifierProvider<CommentViewModel>(
           create:
-              (_) => LocationDetailViewModel(
-                repository: LocationDetailRepository(),
+              (context) => CommentViewModel(
+                commentRepository: context.read<CommentRepository>(),
+              ),
+        ),
+        Provider<LocationDetailRepository>(
+          create: (_) => LocationDetailRepository(),
+        ),
+        ChangeNotifierProvider<LocationDetailViewModel>(
+          create:
+              (context) => LocationDetailViewModel(
+                repository: context.read<LocationDetailRepository>(),
+                commentViewModel: context.read<CommentViewModel>(),
               ),
         ),
       ],
