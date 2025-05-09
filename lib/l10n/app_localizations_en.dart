@@ -76,4 +76,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get auth_try_again => 'Please try again.';
+
+  @override
+  String get search_hint => 'Search';
+
+  @override
+  String get week_1 => 'First week';
+
+  @override
+  String get week_2 => 'Second week';
+
+  @override
+  String get week_3 => 'Third week';
+
+  @override
+  String get week_4 => 'Fourth week';
+
+  @override
+  String get week_5 => 'Fifth week';
+
+  @override
+  String get event => 'Events';
 }

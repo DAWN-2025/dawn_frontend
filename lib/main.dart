@@ -1,8 +1,9 @@
-import 'package:dawn_frontend/src/core/utils/helpers.dart';
 import 'package:dawn_frontend/src/data/local/app_preferences.dart';
 import 'package:dawn_frontend/src/domain/repositories/auth_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/auth/sign_in_view_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/auth/sign_up_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/home/event_cards_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/home/weekly_featured_view_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,8 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) => SignInViewModel(AuthRepository()),
         ),
+        ChangeNotifierProvider(create: (_) => WeeklyFeaturedViewModel()),
+        ChangeNotifierProvider(create: (_) => EventCardsViewModel()),
         ChangeNotifierProvider(
           create:
               (_) => StampCardListViewModel(repository: StampCardRepository()),

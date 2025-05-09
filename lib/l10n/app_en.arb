@@ -22,5 +22,12 @@
     "error_invalid_email": "Please enter a valid email address.",
     "error_signup_failed": "Sign-up failed. Please try again.",
     "email_verification_sent": "A verification link has been sent to your email. Please check your inbox.",
-    "auth_try_again": "Please try again."
+    "auth_try_again": "Please try again.",
+    "search_hint": "Search",
+    "week_1": "First week",
+    "week_2": "Second week",
+    "week_3": "Third week",
+    "week_4": "Fourth week",
+    "week_5": "Fifth week",
+    "event": "Events"
 }
