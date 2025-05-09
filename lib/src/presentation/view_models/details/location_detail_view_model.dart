@@ -36,8 +36,8 @@ Address  |  ${_location!.address}
 Hours  |  ${_location!.openTime} - ${_location!.closeTime}
 Phone  |  ${_location!.phoneNum}
 Exhibition tour  |  ${_location!.exhibitionTime}
-Available  |  ${_location!.available == 'Y' ? 'Yes' : 'No'}
-Translate  |  ${_location!.translate == 'Y' ? 'Yes' : 'No'}
+Available  |  ${_location!.available}
+Translate  |  ${_location!.translate}
 ''';
   }
 

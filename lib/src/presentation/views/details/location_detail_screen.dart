@@ -76,6 +76,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                             offset: const Offset(0, -50),
                             child: HeaderCard(
                               title: location.name,
+                              eventId: location.eventId,
                               description: locationViewModel.formattedDescription,
                               tags: location.keywords,
                               selectedIndex: locationViewModel.selectedTabIndex,

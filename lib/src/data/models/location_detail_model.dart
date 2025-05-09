@@ -2,6 +2,7 @@ class LocationDetail {
   final int id;
   final String name;
   final String address;
+  final int eventId;
   final String image;
   final String shortInfo;
   final String historicInfo;
@@ -18,6 +19,7 @@ class LocationDetail {
     required this.id,
     required this.name,
     required this.address,
+    required this.eventId,
     required this.image,
     required this.shortInfo,
     required this.historicInfo,
@@ -34,15 +36,17 @@ class LocationDetail {
   factory LocationDetail.fromJson(Map<String, dynamic> json) {
     List<String> parsedKeywords = [];
     if (json['keywords'] != null && json['keywords'] is List) {
-      parsedKeywords = (json['keywords'] as List)
-          .map((item) => item['keyword']?.toString() ?? '')
-          .where((keyword) => keyword.isNotEmpty)
-          .toList();
+      parsedKeywords =
+          (json['keywords'] as List)
+              .map((item) => item['keyword']?.toString() ?? '')
+              .where((keyword) => keyword.isNotEmpty)
+              .toList();
     }
     return LocationDetail(
       id: json['id'],
       name: json['name'],
       address: json['address'],
+      eventId: json['eventId'],
       image: json['image'],
       shortInfo: json['shortInfo'],
       historicInfo: json['historicInfo'],
