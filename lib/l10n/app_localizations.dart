@@ -232,6 +232,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please try again.'**
   String get auth_try_again;
+
+  /// No description provided for @search_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search_hint;
+
+  /// No description provided for @week_1.
+  ///
+  /// In en, this message translates to:
+  /// **'First week'**
+  String get week_1;
+
+  /// No description provided for @week_2.
+  ///
+  /// In en, this message translates to:
+  /// **'Second week'**
+  String get week_2;
+
+  /// No description provided for @week_3.
+  ///
+  /// In en, this message translates to:
+  /// **'Third week'**
+  String get week_3;
+
+  /// No description provided for @week_4.
+  ///
+  /// In en, this message translates to:
+  /// **'Fourth week'**
+  String get week_4;
+
+  /// No description provided for @week_5.
+  ///
+  /// In en, this message translates to:
+  /// **'Fifth week'**
+  String get week_5;
+
+  /// No description provided for @event.
+  ///
+  /// In en, this message translates to:
+  /// **'Events'**
+  String get event;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

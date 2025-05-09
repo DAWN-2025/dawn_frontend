@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": {
+      "en": "The Gwangju Uprising",
+      "ko": "5·18 민주화 운동"
+    },
+    "eventImage": "https://firebasestorage.googleapis.com/v0/b/dawn-a6a20.firebasestorage.app/o/gwangju_uprising_card.jpeg?alt=media&token=0475a755-89cb-4d2f-8963-b470d3a9726c",
+    "keywords": [
+      {
+        "keyword": {
+          "en": "#Korea",
+          "ko": "#대한민국"
+        }
+      },
+      {
+        "keyword": {
+          "en": "#1980s",
+          "ko": "#1980년대"
+        }
+      },
+      {
+        "keyword": {
+          "en": "#Democracy",
+          "ko": "#민주주의"
+        }
+      }
+    ]
+  }
+]

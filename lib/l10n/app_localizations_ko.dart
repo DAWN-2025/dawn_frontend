@@ -76,4 +76,25 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get auth_try_again => '다시 시도해 주세요.';
+
+  @override
+  String get search_hint => '검색';
+
+  @override
+  String get week_1 => '첫째 주';
+
+  @override
+  String get week_2 => '둘째 주';
+
+  @override
+  String get week_3 => '셋째 주';
+
+  @override
+  String get week_4 => '넷째 주';
+
+  @override
+  String get week_5 => '다섯째 주';
+
+  @override
+  String get event => '이벤트';
 }

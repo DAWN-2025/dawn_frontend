@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dawn_frontend/src/presentation/widgets/tag_chip.dart';
+import 'package:dawn_frontend/src/presentation/widgets/tag/tag_chip.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/detail_tab_selector.dart';
 import 'package:dawn_frontend/src/presentation/view_models/details/detail_tab_selector_view_model.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;

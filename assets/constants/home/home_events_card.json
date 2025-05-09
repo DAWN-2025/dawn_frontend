@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": {
+      "en": "Gwangju Uprising",
+      "ko": "5·18 민주화 운동"
+    },
+    "eventImage": "https://firebasestorage.googleapis.com/v0/b/dawn-a6a20.firebasestorage.app/o/gwangju_uprising_episode.jpeg?alt=media&token=15d5e6ed-137e-4958-b24d-de225fdf00c9",
+    "keywords": [
+      {
+        "keyword": {
+          "en": "#Korea",
+          "ko": "#대한민국"
+        }
+      },
+      {
+        "keyword": {
+          "en": "#1980s",
+          "ko": "#1980년대"
+        }
+      },
+      {
+        "keyword": {
+          "en": "#Democracy",
+          "ko": "#민주주의"
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": {
+      "en": "6·25 Korean War",
+      "ko": "6·25 전쟁"
+    },
+    "eventImage": "https://firebasestorage.googleapis.com/v0/b/dawn-a6a20.firebasestorage.app/o/6.25_episodes.png?alt=media&token=4acf9d52-2afd-4510-a7bd-7a23f8b3b57d",
+    "keywords": [
+      {
+        "keyword": {
+          "en": "#Korea",
+          "ko": "#대한민국"
+        }
+      },
+      {
+        "keyword": {
+          "en": "#1950s",
+          "ko": "#1950년대"
+        }
+      },
+      {
+        "keyword": {
+          "en": "#War",
+          "ko": "#전쟁"
+        }
+      }
+    ]
+  }
+]
