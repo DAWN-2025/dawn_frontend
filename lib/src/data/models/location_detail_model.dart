@@ -8,9 +8,9 @@ class LocationDetail {
   final String etiquette;
   final String openTime;
   final String closeTime;
-  final String exhibitionTime;
   final String phoneNum;
   final List<String> keywords;
+  final String exhibitionTime;
   final String available;
   final String translate;
 
@@ -24,9 +24,9 @@ class LocationDetail {
     required this.etiquette,
     required this.openTime,
     required this.closeTime,
-    required this.exhibitionTime,
     required this.phoneNum,
     required this.keywords,
+    required this.exhibitionTime,
     required this.available,
     required this.translate,
   });
@@ -39,60 +39,21 @@ class LocationDetail {
           .where((keyword) => keyword.isNotEmpty)
           .toList();
     }
-
     return LocationDetail(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? 'Unknown Location',
-      address: json['address'] ?? 'Unknown Address',
-      image: json['image'] ?? 'assets/images/default.jpg',
-      shortInfo: json['shortInfo'] ?? '',
-      historicInfo: json['historicInfo'] ?? '',
-      etiquette: json['etiquette'] ?? '',
-      openTime: json['openTime'] ?? '',
-      closeTime: json['closeTime'] ?? '',
-      exhibitionTime: json['exhibitionTime'] ?? '',
-      phoneNum: json['phoneNum'] ?? '',
+      id: json['id'],
+      name: json['name'],
+      address: json['address'],
+      image: json['image'],
+      shortInfo: json['shortInfo'],
+      historicInfo: json['historicInfo'],
+      etiquette: json['etiquette'],
+      openTime: json['openTime'],
+      closeTime: json['closeTime'],
+      phoneNum: json['phoneNum'],
       keywords: parsedKeywords,
-      available: json['available'] ?? 'N',
-      translate: json['translate'] ?? 'N',
+      exhibitionTime: json['exhibitionTime'],
+      available: json['available'],
+      translate: json['translate'],
     );
-  }
-
-  /// 포맷된 Description 반환
-  String getFormattedDescription() {
-    final List<String> descriptionParts = [];
-
-    // Address
-    if (address.isNotEmpty) {
-      descriptionParts.add("Address  |  $address");
-    }
-
-    // Hours (Open and Close)
-    if (openTime.isNotEmpty && closeTime.isNotEmpty) {
-      descriptionParts.add("Hours  |  Open ⋅ Closes $closeTime");
-    }
-
-    // Phone
-    if (phoneNum.isNotEmpty) {
-      descriptionParts.add("Phone  |  $phoneNum");
-    }
-
-    // Exhibition Tour
-    if (exhibitionTime.isNotEmpty) {
-      descriptionParts.add("Exhibition tour  |  $exhibitionTime");
-    }
-
-    // Available Facilities
-    if (available == "Y") {
-      descriptionParts.add("Available  |  wheelchair, baby stroller, elevator");
-    }
-
-    // Translation Options
-    if (translate == "Y") {
-      descriptionParts.add("Translate  |  English, Japanese");
-    }
-
-    // Join the description parts into a single formatted string
-    return descriptionParts.join("\n");
   }
 }

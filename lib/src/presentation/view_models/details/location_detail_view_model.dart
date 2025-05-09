@@ -1,11 +1,13 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:dawn_frontend/src/data/models/location_detail_model.dart';
 import 'package:dawn_frontend/src/domain/repositories/details/location_detail_repository.dart';
+import 'package:dawn_frontend/src/presentation/view_models/details/comment_view_model.dart';
 
 class LocationDetailViewModel extends ChangeNotifier {
   final LocationDetailRepository repository;
-
-  LocationDetailViewModel({required this.repository});
+  final CommentViewModel commentViewModel;
 
   LocationDetail? _location;
   bool _isLoading = false;
@@ -17,36 +19,53 @@ class LocationDetailViewModel extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   int get selectedTabIndex => _selectedTabIndex;
 
+  LocationDetailViewModel({
+    required this.repository,
+    required this.commentViewModel,  // 수정 부분
+  });
+
   void setSelectedTabIndex(int index) {
     _selectedTabIndex = index;
     notifyListeners();
   }
 
-  String get formattedDescription => _location?.getFormattedDescription() ?? '';
+  String get formattedDescription {
+    if (_location == null) return 'No description available';
+    return '''
+Address  |  ${_location!.address}
+Hours  |  ${_location!.openTime} - ${_location!.closeTime}
+Phone  |  ${_location!.phoneNum}
+Exhibition tour  |  ${_location!.exhibitionTime}
+Available  |  ${_location!.available == 'Y' ? 'Yes' : 'No'}
+Translate  |  ${_location!.translate == 'Y' ? 'Yes' : 'No'}
+''';
+  }
 
   Future<void> fetchLocationDetail(int locationId) async {
-    _setLoadingState(true);
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
     try {
-      final locationDetail = await repository.fetchLocationDetail(locationId);
-      if (locationDetail != null) {
-        _location = locationDetail;
+      final String response = await rootBundle.loadString('assets/constants/location_details.json');
+      final Map<String, dynamic> data = jsonDecode(response);
+
+      final List<dynamic> locations = data['locations'] ?? [];
+      final locationData = locations.firstWhere(
+        (item) => item['id'] == locationId,
+        orElse: () => null,
+      );
+
+      if (locationData != null) {
+        _location = LocationDetail.fromJson(locationData);
       } else {
-        _setErrorState("No location found for ID: $locationId");
+        _errorMessage = 'Location not found';
       }
     } catch (e) {
-      _setErrorState('Failed to load location details: $e');
-    } finally {
-      _setLoadingState(false);
+      _errorMessage = 'Failed to load location details: $e';
+      print('Error: $e');
     }
-  }
 
-  void _setLoadingState(bool isLoading) {
-    _isLoading = isLoading;
-    notifyListeners();
-  }
-
-  void _setErrorState(String message) {
-    _errorMessage = message;
     _isLoading = false;
     notifyListeners();
   }

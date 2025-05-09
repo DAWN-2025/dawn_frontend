@@ -6,13 +6,8 @@ class LocationDetailRepository {
   Future<LocationDetail?> fetchLocationDetail(int locationId) async {
     try {
       final String response = await rootBundle.loadString('assets/constants/location_details.json');
-      
-      // 루트 키 'locations'로 접근하여 리스트를 파싱
       final Map<String, dynamic> jsonData = jsonDecode(response);
       final List<dynamic> dataList = jsonData['locations'] ?? [];
-
-      // 디버깅 로그 추가
-      print("Loaded JSON data: $dataList");
 
       // ID 필터링 로직 수정
       final Map<String, dynamic>? locationData = dataList.firstWhere(

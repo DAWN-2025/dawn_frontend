@@ -2,30 +2,37 @@
     "locations": [
         {
             "id": 1,
-            "name": "금남로",
-            "address": "광주광역시 동구 금남로",
+            "name": "Jeonin Building 245",
+            "address": "전일빌딩 245",
             "image": "assets/images/location-geumnamro.jpeg",
-            "shortInfo": "5.18 민주화운동 당시 주요 시위 장소",
-            "historicInfo": "역사적으로 중요한 시위의 중심지였던 거리입니다.",
-            "etiquette": "방문 시 정숙을 유지해주세요.",
-            "openTime": "2023-01-01T09:00:00",
-            "closeTime": "2023-01-01T18:00:00",
-            "phoneNum": "062-123-4567",
-            "exhibitionTime": "09:00 ~ 18:00",
+            "shortInfo": "The Jeonil Building, located directly in front of the former South Jeolla Provincial Office, is the site where evidence of helicopter machine gun fire by martial law forces during the May 18 Gwangju Democratization Movement in 1980 was discovered.",
+            "historicInfo": "Prior to the mass shooting on May 21, 1980, martial law forces had established a defense line centered around the Jeonil Building and the Gwangju Tourist Hotel. During the shooting, troops stationed on the rooftop of the Jeonil Building engaged in targeted sniper fire. On the final day of the Gwangju Uprising, May 27, citizen militias staged their last stand at the former Jeonnam Provincial Office, the Jeonil Building, and the nearby Gwangju YWCA. The Jeonil Building, being the tallest structure in the area, was seized first by the military, followed by battles with armed citizens in nearby locations. Allegations of helicopter gunfire by the military during the suppression of the uprising emerged from the very beginning. Eyewitnesses reported helicopters firing near the Wolsan Rotary and over roads leading from Wolsan to Baegun-dong. Father Cho Bi-o testified that he saw flashes and heard machine gun fire from a helicopter moving toward Sajik Park. Despite these accounts, deniers of the Gwangju Uprising persistently refuted the existence of helicopter gunfire, and for decades, there was no conclusive evidence to counter their claims. A major breakthrough came in 2017—37 years after the uprising—when over 200 bullet marks were discovered on the 10th floor of the Jeonil Building. Analysis revealed that the bullets had come from a point higher than the 10th floor, leading to the conclusion that the shots were fired from a helicopter. This discovery confirmed the reality of helicopter gunfire and undermined the military regime’s justification of the crackdown as “self-defense.” Firing from helicopters is an act of deliberate aggression, fundamentally contradicting the notion of an urgent, defensive situation.",
+            "etiquette": "1. Jeonil Building 245 is a symbolic site of the May 18 Democratization Movement. Please observe with a quiet and respectful attitude.\n2. Do not touch exhibits, walls, or preserved bullet marks. Damaging historical remains harms our shared memory.\n3. Photography is allowed, but refrain from using flash and be mindful in memorial spaces.\n4. Please refrain from eating or drinking inside the exhibition area to help maintain a clean environment.\n5. When viewing exhibits, listening to guides, or watching videos, keep quiet so as not to disturb others.\n6. If you share your visit on social media, please use language that respects the spirit of May 18.",
+            "openTime": "09:00",
+            "closeTime": "22:00(21:00 at winter)",
+            "phoneNum": "062-225-0245",
+            "exhibitionTime": "11:00, 13:00, 14:30, 16:00, 17:30",
             "available": "Y",
             "translate": "Y",
-            "nameEng": "Geumnam-ro",
-            "addressEng": "Geumnam-ro, Dong-gu, Gwangju, South Korea",
+            "nameEng": "Jeonin Building 245",
+            "addressEng": "Jeonin Building 245, Dong-gu, Gwangju, South Korea",
             "keywords": [
                 {
-                    "keyword": "민주주의"
+                    "keyword": "#MemorialSpace"
                 },
                 {
-                    "keyword": "Gwangju"
+                    "keyword": "#Democracy"
                 },
                 {
-                    "keyword": "시민 저항"
+                    "keyword": "#StateViolence"
+                },
+                {
+                    "keyword": "#CivilResistance"
+                },
+                {
+                    "keyword": "#1980s"
                 }
+                
             ]
         },
         {
