@@ -22,6 +22,10 @@ import 'package:dawn_frontend/src/presentation/view_models/details/location_deta
 import 'package:dawn_frontend/src/domain/repositories/details/location_detail_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/details/comment_view_model.dart';
 import 'package:dawn_frontend/src/domain/repositories/details/comment_repository.dart';
+import 'package:dawn_frontend/src/presentation/view_models/ai-tour/explore_now_btn_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/modals/modal_view_model.dart';
+// import 'package:dawn_frontend/src/presentation/widgets/modals/tour_start_modal.dart';
+// import 'package:dawn_frontend/src/presentation/widgets/modals/delete_comment_modal.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -71,6 +75,8 @@ void main() async {
                 commentViewModel: context.read<CommentViewModel>(),
               ),
         ),
+        ChangeNotifierProvider(create: (_) => ExploreNowBtnViewModel()),
+        ChangeNotifierProvider(create: (_) => ModalViewModel()),
       ],
       child: const MyApp(),
     ),

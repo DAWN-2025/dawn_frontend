@@ -9,13 +9,15 @@ import 'package:dawn_frontend/src/presentation/widgets/details/section_header.da
 import 'package:dawn_frontend/src/presentation/widgets/details/image_header.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/comment_input_field.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/comment_card_list.dart';
-import 'package:dawn_frontend/src/presentation/widgets/details/explore_now_btn.dart';
+import 'package:dawn_frontend/src/presentation/widgets/ai-tour/explore_now_btn.dart';
+import 'package:dawn_frontend/src/presentation/view_models/ai-tour/explore_now_btn_view_model.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class LocationDetailScreen extends StatefulWidget {
   final int locationId;
 
-  const LocationDetailScreen({Key? key, required this.locationId}) : super(key: key);
+  const LocationDetailScreen({Key? key, required this.locationId})
+    : super(key: key);
 
   @override
   State<LocationDetailScreen> createState() => _LocationDetailScreenState();
@@ -27,9 +29,11 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Location 정보 로딩
-      context.read<LocationDetailViewModel>().fetchLocationDetail(widget.locationId);
+      context.read<LocationDetailViewModel>().fetchLocationDetail(
+        widget.locationId,
+      );
       // Comment 정보 로딩
-      context.read<CommentViewModel>().fetchComments();  // 수정 부분
+      context.read<CommentViewModel>().fetchComments(); // 수정 부분
     });
   }
 
@@ -67,17 +71,21 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                     ImageHeader(imagePath: location.image),
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 30,
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // HeaderCard 사용
                           Transform.translate(
-                            offset: const Offset(0, -50),
+                            offset: const Offset(0, -70),
                             child: HeaderCard(
                               title: location.name,
                               eventId: location.eventId,
-                              description: locationViewModel.formattedDescription,
+                              description:
+                                  locationViewModel.formattedDescription,
                               tags: location.keywords,
                               selectedIndex: locationViewModel.selectedTabIndex,
                               tabLabels: ["Info", "Comments"],
@@ -86,37 +94,41 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                               },
                             ),
                           ),
-                          // const SizedBox(height: 16),
 
+                          // const SizedBox(height: 16),
                           if (locationViewModel.selectedTabIndex == 0) ...[
                             SectionHeader(text: "Short Info"),
                             const SizedBox(height: 8),
                             Text(
                               location.shortInfo,
-                              style: typography.AppTextStyle.bodyTextPoppins.copyWith(fontSize: 16, color: Colors.white),
+                              style: typography.AppTextStyle.bodyTextPoppins
+                                  .copyWith(fontSize: 16, color: Colors.white),
                             ),
                             const SizedBox(height: 24),
                             SectionHeader(text: "Historical Info"),
                             const SizedBox(height: 8),
                             Text(
                               location.historicInfo,
-                              style: typography.AppTextStyle.bodyTextPoppins.copyWith(fontSize: 16, color: Colors.white),
+                              style: typography.AppTextStyle.bodyTextPoppins
+                                  .copyWith(fontSize: 16, color: Colors.white),
                             ),
                             const SizedBox(height: 24),
                             SectionHeader(text: "Etiquette"),
                             const SizedBox(height: 8),
                             Text(
                               location.etiquette,
-                              style: typography.AppTextStyle.bodyTextPoppins.copyWith(fontSize: 16, color: Colors.white),
+                              style: typography.AppTextStyle.bodyTextPoppins
+                                  .copyWith(fontSize: 16, color: Colors.white),
                             ),
-                          ] else if (locationViewModel.selectedTabIndex == 1) ...[
+                          ] else if (locationViewModel.selectedTabIndex ==
+                              1) ...[
                             if (commentViewModel.comments.isEmpty)
                               const Text(
                                 "No comments available",
                                 style: TextStyle(color: Colors.grey),
                               )
                             else
-                              CommentCardList()  
+                              CommentCardList(),
                           ],
                         ],
                       ),
@@ -129,12 +141,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  child: ExploreNowBtn(
-                    onTap: () {
-                      print("Explore Now button tapped");
-                      // Add your onTap logic here
-                    },
-                  ),
+                  child: ExploreNowBtn(),
                 ),
               ] else if (locationViewModel.selectedTabIndex == 1) ...[
                 Positioned(
