@@ -1,10 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:dawn_frontend/src/presentation/view_models/ai-tour/explore_now_btn_view_model.dart';
 
 class ExploreNowBtn extends StatelessWidget {
-  final VoidCallback onTap;
-
-  const ExploreNowBtn({Key? key, required this.onTap}) : super(key: key);
+  // 수정된 생성자: onTap을 필수 인자로 받음
+  const ExploreNowBtn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,11 @@ class ExploreNowBtn extends StatelessWidget {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: GestureDetector(
-            onTap: onTap,
+            onTap: () {
+              // Using Provider to call the view model method
+              final viewModel = Provider.of<ExploreNowBtnViewModel>(context, listen: false);
+              viewModel.onTap(context);
+            },
             child: Container(
               width: double.infinity,
               height: 60,
