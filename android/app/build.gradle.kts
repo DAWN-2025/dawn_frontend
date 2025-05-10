@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("dev.flutter.flutter-gradle-plugin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -17,6 +18,12 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+
+        resValue(
+            "string",
+            "google_maps_key",
+            project.findProperty("googleMapApiKey") as String? ?: ""
+        )
     }
 
     buildTypes {
@@ -45,4 +52,13 @@ tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
         jvmTarget = "11"
     }
+}
+
+secrets {
+    propertiesFileName = "secrets.properties"
+    defaultPropertiesFileName = "local.defaults.properties"
+}
+
+dependencies {
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
 }

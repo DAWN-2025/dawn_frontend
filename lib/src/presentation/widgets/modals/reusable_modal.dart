@@ -1,5 +1,3 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_native_type_patch.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dawn_frontend/src/presentation/view_models/modals/modal_view_model.dart';
@@ -13,7 +11,7 @@ class ReusableModal extends StatelessWidget {
   final String? bottomText;
   final VoidCallback? onBottomTextPressed;
 
-  const ReusableModal({
+  const  ReusableModal({
     Key? key,
     required this.title,
     required this.primaryButtonText,
