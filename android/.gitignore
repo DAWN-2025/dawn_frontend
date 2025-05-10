@@ -15,3 +15,10 @@ key.properties
 
 # Firebase files
 google-services.json
+
+# Google Map API key
+string.xml
+secrets.properties
+
+# Gradle and Flutter build artifacts
+.last_build_id

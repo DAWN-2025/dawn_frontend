@@ -7,6 +7,8 @@ class CustomScaffold extends StatelessWidget {
   final Widget? bottomNavigationBar;
   final bool resizeToAvoidBottomInset;
 
+  final Widget? backgroundImage;
+
   const CustomScaffold({
     super.key,
     required this.body,
@@ -14,6 +16,7 @@ class CustomScaffold extends StatelessWidget {
     this.floatingActionButton,
     this.bottomNavigationBar,
     this.resizeToAvoidBottomInset = false,
+    this.backgroundImage,
   });
 
   @override
@@ -21,7 +24,8 @@ class CustomScaffold extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset('assets/images/background.png', fit: BoxFit.cover),
+          child: backgroundImage ??
+              Image.asset('assets/images/background.png', fit: BoxFit.cover),
         ),
 
         Scaffold(
