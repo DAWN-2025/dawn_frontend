@@ -29,6 +29,7 @@ class CustomScaffold extends StatelessWidget {
         ),
 
         Scaffold(
+          extendBody: true,
           extendBodyBehindAppBar: true,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           backgroundColor: Colors.transparent,

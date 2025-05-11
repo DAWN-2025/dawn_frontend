@@ -1,5 +1,5 @@
-import Flutter
 import UIKit
+import Flutter
 import GoogleMaps
 
 @main
@@ -8,7 +8,13 @@ import GoogleMaps
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    //GMSServices.provideAPIKey("YOUR KEY HERE")
+
+    if let apiKey = Bundle.main.object(forInfoDictionaryKey: "GMSApiKey") as? String {
+        GMSServices.provideAPIKey(apiKey)
+    } else {
+        print("Error: Google Maps API Key not found in Info.plist")
+    }
+
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

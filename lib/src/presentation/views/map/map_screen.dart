@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../widgets/custom_bottom_app_bar.dart';
@@ -13,27 +13,14 @@ class MapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      backgroundImage: SvgPicture.asset(
-        'assets/icons/map_background.svg',
-        fit: BoxFit.cover,
-        width: double.infinity,
-        height: double.infinity,
-      ),
       bottomNavigationBar: const CustomBottomAppBar(),
-      body: Stack(
-        children: [
-          /// 전체 화면 지도
-          Positioned.fill(
-            child: GoogleMap(
-              initialCameraPosition: const CameraPosition(
-                target: _pGwangjuStation,
-                zoom: 14,
-              ),
-              zoomControlsEnabled: false,
-              myLocationButtonEnabled: false,
-            ),
-          ),
-        ],
+      body: GoogleMap(
+        initialCameraPosition: const CameraPosition(
+          target: _pGwangjuStation,
+          zoom: 14,
+        ),
+        zoomControlsEnabled: false,
+        myLocationButtonEnabled: false,
       ),
     );
   }
