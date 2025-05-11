@@ -36,31 +36,35 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return CustomScaffold(
-      appBar: const CustomTopAppBar(isDark: true),
-      body: Consumer<EventDetailViewModel>(
-        builder: (context, viewModel, child) {
-          if (viewModel.isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
+Widget build(BuildContext context) {
+  return CustomScaffold(
+    appBar: const CustomTopAppBar(isDark: true),
+    body: Consumer<EventDetailViewModel>(
+      builder: (context, viewModel, child) {
+        if (viewModel.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-          if (viewModel.errorMessage != null) {
-            return Center(
-              child: Text(
-                viewModel.errorMessage!,
-                style: const TextStyle(color: Colors.red),
-              ),
-            );
-          }
+        if (viewModel.errorMessage != null) {
+          return Center(
+            child: Text(
+              viewModel.errorMessage!,
+              style: const TextStyle(color: Colors.red),
+            ),
+          );
+        }
 
-          if (viewModel.event == null) {
-            return const Center(child: Text("No event details available"));
-          }
+        if (viewModel.event == null) {
+          return const Center(child: Text("No event details available"));
+        }
 
-          final event = viewModel.event!;
+        final event = viewModel.event!;
 
-          return SingleChildScrollView(
+        return Padding(
+          padding: const EdgeInsets.only(
+            bottom: kBottomNavigationBarHeight + 50, // 하단 패딩 추가
+          ),
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 ImageHeader(imagePath: event.image),
@@ -124,10 +128,12 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                 ),
               ],
             ),
-          );
-        },
-      ),
-      bottomNavigationBar: const CustomBottomAppBar(),
-    );
-  }
+          ),
+        );
+      },
+    ),
+    bottomNavigationBar: const CustomBottomAppBar(),
+  );
+}
+
 }
