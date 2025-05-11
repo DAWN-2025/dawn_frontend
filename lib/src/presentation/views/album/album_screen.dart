@@ -27,68 +27,64 @@ class _AlbumScreenState extends State<AlbumScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final stampCardListViewModel = Provider.of<StampCardListViewModel>(context);
+Widget build(BuildContext context) {
+  final stampCardListViewModel = Provider.of<StampCardListViewModel>(context);
 
-    return CustomScaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SafeArea(
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
-                  child: Text(
-                    'Album',
-                    style: typography.AppTextStyle.heading2.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+  return CustomScaffold(
+    body: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // 상단 여백 조정
+          const SizedBox(height: kToolbarHeight + 50), 
+          Align(
+            alignment: Alignment.topCenter,
+            child: Text(
+              'Album',
+              style: typography.AppTextStyle.heading2.copyWith(
+                color: Colors.white,
               ),
             ),
-            const SizedBox(height: 0),
-            // 👇 GridView는 Expanded로 감싸서 아래 영역 채우게
-            Expanded(
-              child: FutureBuilder(
-                future: _loadFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
+          ),
+          // Album과 리스트 사이 간격 조정
+          const SizedBox(height: 30), 
+          Expanded(
+            child: FutureBuilder(
+              future: _loadFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
 
-                  if (stampCardListViewModel.stampCards.isEmpty) {
-                    return const Center(
-                      child: Text('No Stamp Cards Available'),
-                    );
-                  }
-
-                  return GridView.builder(
-                    padding: const EdgeInsets.only(top: 40.0),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 20.0,
-                          mainAxisSpacing: 25.0,
-                          childAspectRatio: 0.9,
-                        ),
-                    itemCount: stampCardListViewModel.stampCards.length,
-                    itemBuilder: (context, index) {
-                      final viewModel =
-                          stampCardListViewModel.stampCards[index];
-                      return StampCard(viewModel: viewModel);
-                    },
+                if (stampCardListViewModel.stampCards.isEmpty) {
+                  return const Center(
+                    child: Text('No Stamp Cards Available'),
                   );
-                },
-              ),
+                }
+
+                return GridView.builder(
+                  padding: const EdgeInsets.only(top: 10.0),  // 적절한 간격 조정
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20.0,
+                    mainAxisSpacing: 25.0,
+                    childAspectRatio: 0.9,
+                  ),
+                  itemCount: stampCardListViewModel.stampCards.length,
+                  itemBuilder: (context, index) {
+                    final viewModel = stampCardListViewModel.stampCards[index];
+                    return StampCard(viewModel: viewModel);
+                  },
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-      bottomNavigationBar: CustomBottomAppBar(),
-    );
-  }
+    ),
+    bottomNavigationBar: CustomBottomAppBar(),
+  );
+}
+
 }
