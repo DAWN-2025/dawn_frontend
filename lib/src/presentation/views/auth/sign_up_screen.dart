@@ -4,7 +4,7 @@ import 'package:dawn_frontend/src/presentation/widgets/custom_top_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../core/theme/typography.dart';
-import '../../../core/utils/constants.dart';
+import '../../../core/utils/constants/constants.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

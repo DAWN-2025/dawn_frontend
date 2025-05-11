@@ -47,3 +47,5 @@ app.*.map.json
 # iOS build artifacts
 ios/build/
 ios/Runner/Info.plist
+
+api_constants.dart

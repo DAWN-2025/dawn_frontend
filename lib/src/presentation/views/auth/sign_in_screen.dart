@@ -1,5 +1,5 @@
 import 'package:dawn_frontend/src/core/theme/typography.dart';
-import 'package:dawn_frontend/src/core/utils/constants.dart';
+import 'package:dawn_frontend/src/core/utils/constants/constants.dart';
 import 'package:dawn_frontend/src/presentation/view_models/language_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
