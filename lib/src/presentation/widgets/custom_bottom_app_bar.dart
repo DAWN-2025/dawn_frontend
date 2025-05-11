@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,39 +22,48 @@ class CustomBottomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<BottomAppBarViewModel>(
       builder: (context, viewModel, child) {
-        return Container(
-          decoration: const BoxDecoration(
-            border: Border(top: BorderSide(color: Colors.white, width: 0.5)),
-            color: Colors.black12,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50),
-              topRight: Radius.circular(50),
-            ),
+        return ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(50),
+            topRight: Radius.circular(50),
           ),
-          child: BottomAppBar(
-            shape: const CircularNotchedRectangle(),
-            elevation: 10,
-            color: Colors.transparent,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children:
-                  items.map((item) {
-                    return IconButton(
-                      icon: SvgPicture.asset(
-                        item.iconPath,
-                        width: 50,
-                        height: 50,
-                        color:
-                            viewModel.selectedIndex == item.index
-                                ? Colors.white
-                                : AppColors.darkGray,
-                      ),
-                      onPressed: () {
-                        viewModel.onItemTapped(item.index);
-                        context.go(item.route);
-                      },
-                    );
-                  }).toList(),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                child: Container(
+              decoration: const BoxDecoration(
+                border: Border(top: BorderSide(color: Colors.white, width: 0.5)),
+                color: Colors.black12,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
+                ),
+              ),
+              child: BottomAppBar(
+                shape: const CircularNotchedRectangle(),
+                elevation: 10,
+                color: Colors.transparent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children:
+                      items.map((item) {
+                        return IconButton(
+                          icon: SvgPicture.asset(
+                            item.iconPath,
+                            width: 50,
+                            height: 50,
+                            color:
+                                viewModel.selectedIndex == item.index
+                                    ? Colors.white
+                                    : AppColors.darkGray,
+                          ),
+                          onPressed: () {
+                            viewModel.onItemTapped(item.index);
+                            context.go(item.route);
+                          },
+                        );
+                      }).toList(),
+                ),
+              ),
             ),
           ),
         );
