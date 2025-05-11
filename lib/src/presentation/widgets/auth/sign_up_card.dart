@@ -120,8 +120,9 @@ class _SignUpCardState extends State<SignUpCard> {
             child: Column(
               children: [
                 ContinueButton(
+                  //회원 가입
                   onPressed: () async {
-                    final result = await viewModel.signUp();
+                    final result = await viewModel.signUpAndLoginToBackend();
                     if (result != null) {
                       final message = l10n.getByKey(result);
                       messenger.showSnackBar(
@@ -137,7 +138,7 @@ class _SignUpCardState extends State<SignUpCard> {
                           duration: const Duration(seconds: 3),
                         ),
                       );
-                      router.go(AppRoutes.signIn);
+                      router.go(AppRoutes.home);
                     }
                   },
                 ),
@@ -146,7 +147,8 @@ class _SignUpCardState extends State<SignUpCard> {
                 const SizedBox(height: 18),
                 GoogleLoginBtn(
                   onPressed: () async {
-                    final result = await viewModel.handleGoogleAuth();
+                    final result =
+                        await viewModel.googleSignUpAndLoginToBackend();
                     if (result != null) {
                       messenger.showSnackBar(
                         SnackBar(content: Text(l10n.getByKey(result))),

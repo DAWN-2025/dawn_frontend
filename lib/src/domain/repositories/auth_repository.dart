@@ -5,6 +5,7 @@ class AuthRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+  // 구글 로그인 및 회원 가입
   Future<String?> signInWithGoogle() async {
     try {
       final googleUser = await _googleSignIn.signIn();
@@ -26,6 +27,7 @@ class AuthRepository {
     }
   }
 
+  // 로그아웃
   Future<void> signOut() async {
     try {
       await _googleSignIn.signOut();
@@ -35,6 +37,7 @@ class AuthRepository {
     }
   }
 
+  // 이메일로 회원 가입
   Future<String?> signUpWithEmail(String email, String password) async {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
@@ -51,6 +54,7 @@ class AuthRepository {
     }
   }
 
+  // 이메일 로그인
   Future<String?> signInWithEmail(String email, String password) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
@@ -64,6 +68,17 @@ class AuthRepository {
 
     // await _googleSignIn.disconnect(); // 구글 계정 연결 해제
     // await _firebaseAuth.signOut();    // Firebase 인증 로그아웃
+  }
+
+  // 토큰, email 정보 가져 오기
+  Future<Map<String, String>?> getUserInfoWithToken() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return null;
+
+    final idToken = await user.getIdToken();
+    final email = user.email ?? '';
+
+    return {'idToken': idToken!, 'email': email};
   }
 
   String _firebaseErrorKey(FirebaseAuthException e) {
