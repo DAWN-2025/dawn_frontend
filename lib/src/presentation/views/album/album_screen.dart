@@ -19,6 +19,7 @@ class _AlbumScreenState extends State<AlbumScreen> {
   @override
   void initState() {
     super.initState();
+    // Provider를 사용하여 StampCardListViewModel 초기화
     final stampCardListViewModel = Provider.of<StampCardListViewModel>(
       context,
       listen: false,
@@ -28,6 +29,7 @@ class _AlbumScreenState extends State<AlbumScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // 변경점: Provider를 직접 사용하여 상태 관리
     final stampCardListViewModel = Provider.of<StampCardListViewModel>(context);
 
     return CustomScaffold(
@@ -36,50 +38,62 @@ class _AlbumScreenState extends State<AlbumScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SafeArea(
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
-                  child: Text(
-                    'Album',
-                    style: typography.AppTextStyle.heading2.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
+            // 상단 여백 조정
+            const SizedBox(height: kToolbarHeight + 50),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Text(
+                'Album',
+                style: typography.AppTextStyle.heading2.copyWith(
+                  color: Colors.white,
                 ),
               ),
             ),
-            const SizedBox(height: 0),
-            // 👇 GridView는 Expanded로 감싸서 아래 영역 채우게
+            // Album과 리스트 사이 간격 조정
+            const SizedBox(height: 30),
             Expanded(
               child: FutureBuilder(
                 future: _loadFuture,
                 builder: (context, snapshot) {
+                  // 로딩 중일 때 표시
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  if (stampCardListViewModel.stampCards.isEmpty) {
-                    return const Center(
-                      child: Text('No Stamp Cards Available'),
+                  // 에러가 있을 때 표시
+                  if (stampCardListViewModel.errorMessage.isNotEmpty) {
+                    return Center(
+                      child: Text(
+                        stampCardListViewModel.errorMessage,
+                        style: const TextStyle(color: Colors.red),
+                      ),
                     );
                   }
 
+                  // 스탬프 카드 목록이 비었을 때 표시
+                  if (stampCardListViewModel.stampCards.isEmpty) {
+                    return const Center(
+                      child: Text('No stamps available'),
+                    );
+                  }
+
+                  // 스탬프 카드 목록이 있을 때 표시
                   return GridView.builder(
-                    padding: const EdgeInsets.only(top: 40.0),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 20.0,
-                          mainAxisSpacing: 25.0,
-                          childAspectRatio: 0.9,
-                        ),
+                    padding: const EdgeInsets.only(top: 10.0),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 20.0,
+                      mainAxisSpacing: 25.0,
+                      childAspectRatio: 0.9,
+                    ),
                     itemCount: stampCardListViewModel.stampCards.length,
                     itemBuilder: (context, index) {
-                      final viewModel =
-                          stampCardListViewModel.stampCards[index];
-                      return StampCard(viewModel: viewModel);
+                      final stamp = stampCardListViewModel.stampCards[index];
+                      return StampCard(
+                        title: stamp.eventName, // 이벤트 이름
+                        imagePath: stamp.eventStampImg, // 스탬프 이미지
+                        eventId:stamp.eventSeq,
+                      );
                     },
                   );
                 },

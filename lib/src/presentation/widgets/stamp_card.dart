@@ -1,69 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-import '../view_models/stamp_card_view_model.dart';
+import 'package:provider/provider.dart';
+import 'package:dawn_frontend/src/presentation/view_models/stamp_card_view_model.dart';
+
 
 class StampCard extends StatelessWidget {
-  final StampCardViewModel viewModel;
+  final String title;
+  final String? imagePath;
+  final int eventId;
 
-  const StampCard({super.key, required this.viewModel});
+  const StampCard({
+    super.key,
+    required this.title,
+    this.imagePath,
+    required this.eventId,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final stampCardViewModel = Provider.of<StampCardViewModel>(context);
     return InkWell(
-      onTap: () async {
-        await viewModel.handleCardTap(viewModel.id);
-        context.push(viewModel.navigationPath.value);
-        viewModel.clearNavigation();
-      },
-      borderRadius: BorderRadius.circular(15), // 터치 효과의 경계 설정
+      onTap: () => stampCardViewModel.handleCardTap(context, eventId),
+      borderRadius: BorderRadius.circular(15),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
           side: BorderSide(color: Colors.white.withOpacity(0.5), width: 1),
         ),
         color: Colors.white.withOpacity(0.2),
-        elevation: 0, // 그림자 깊이
+        elevation: 0,
         child: Padding(
-          padding: const EdgeInsets.all(8.0), // 카드 내부 여백
+          padding: const EdgeInsets.all(8.0),
           child: Column(
-            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // 이미지 영역
               LayoutBuilder(
                 builder: (context, constraints) {
                   final size = constraints.maxWidth * 0.95;
-
                   return ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: SizedBox(
                       width: size,
-                      height: size, // 정사각형 유지
-                      child:
-                          viewModel.imagePath != null
-                              ? SvgPicture.asset(
-                                viewModel.imagePath!,
-                                fit: BoxFit.cover,
-                              )
-                              : const Center(child: Text('No Image')),
+                      height: size,
+                      child: imagePath != null
+                          ? Image.network(
+                              imagePath!,
+                              fit: BoxFit.cover,
+                            )
+                          : const Center(child: Text('No Image')),
                     ),
                   );
                 },
               ),
-              const SizedBox(height: 5), // 이미지와 텍스트 간격
-
+              const SizedBox(height: 5),
               Expanded(
                 child: Center(
                   child: Text(
-                    viewModel.title,
+                    title,
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                     textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis, // 텍스트가 길어지면 생략 부호 표시
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),

@@ -1,35 +1,35 @@
 class LocationCardModel {
-  final int locationId;
+  final int id;
   final String name;
+  final String locationImage;
   final String address;
-  final String image;
-  final List<String> keywords;
   final bool visited;
 
   LocationCardModel({
-    required this.locationId,
+    required this.id,
     required this.name,
+    required this.locationImage,
     required this.address,
-    required this.image,
-    required this.keywords,
-    required this.visited,
+    this.visited = false,
   });
 
-  factory LocationCardModel.fromJson(Map<String, dynamic> json, List<int> visitedLocationSeqs) {
-    print("Parsing LocationCardModel: ${json['id']} - ${json['name']}");
+  factory LocationCardModel.fromJson(Map<String, dynamic> json) {
+    // 이미지 URL 유효성 검사 함수
+    String _getImageUrl(Map<String, dynamic> json) {
+      if (json.containsKey('locationSimpleImage')) {
+        return json['locationSimpleImage'] ?? '';
+      } else if (json.containsKey('locationImage')) {
+        return json['locationImage'] ?? '';
+      }
+      return '';
+    }
 
-    final int locationId = json['id'] ?? 0;
-    final bool isVisited = visitedLocationSeqs.contains(locationId);
     return LocationCardModel(
-      locationId: locationId,
-      name: json['name'] ?? 'Unknown Location',
+      id: json['id'] ?? 0,
+      name: json['name'] ?? 'Unknown',
+      locationImage: _getImageUrl(json),  // 수정된 부분
       address: json['address'] ?? 'No Address',
-      image: json['locationImage'] ?? 'assets/images/default.jpg',
-      keywords: (json['keywords'] as List?)
-              ?.map((item) => item['keyword'].toString())
-              .toList() ??
-          [],
-      visited: isVisited,
+      visited: json['visited'] ?? false,
     );
   }
 }

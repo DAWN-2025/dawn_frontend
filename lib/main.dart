@@ -21,11 +21,15 @@ import 'package:dawn_frontend/src/presentation/view_models/details/event_detail_
 import 'package:dawn_frontend/src/domain/repositories/details/event_detail_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/details/detail_tab_selector_view_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/details/location_detail_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/location_card_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/details/event_detail_view_model.dart';
 import 'package:dawn_frontend/src/domain/repositories/details/location_detail_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/details/comment_view_model.dart';
 import 'package:dawn_frontend/src/domain/repositories/details/comment_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/ai-tour/explore_now_btn_view_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/modals/modal_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/stamp_card_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/stamp_card_list_view_model.dart';
 
 // import 'package:dawn_frontend/src/presentation/widgets/modals/tour_start_modal.dart';
 // import 'package:dawn_frontend/src/presentation/widgets/modals/delete_comment_modal.dart';
@@ -59,8 +63,7 @@ void main() async {
               (_) => StampCardListViewModel(repository: StampCardRepository()),
         ),
         ChangeNotifierProvider(
-          create:
-              (_) => EventDetailViewModel(repository: EventDetailRepository()),
+          create: (_) => EventDetailViewModel(repository: EventDetailRepository()),
         ),
         ChangeNotifierProvider(create: (_) => DetailTabSelectorViewModel()),
         Provider<CommentRepository>(create: (_) => CommentRepository()),
@@ -82,6 +85,16 @@ void main() async {
         ),
         ChangeNotifierProvider(create: (_) => ExploreNowBtnViewModel()),
         ChangeNotifierProvider(create: (_) => ModalViewModel()),
+        ChangeNotifierProvider(
+          create: (_) => StampCardListViewModel(
+            repository: StampCardRepository(),
+          ),
+        ),
+        ChangeNotifierProvider(create: (_) => StampCardViewModel()),
+        ChangeNotifierProvider(
+          create: (_) => EventDetailViewModel(repository: EventDetailRepository()),
+        ),
+        ChangeNotifierProvider(create: (_) => LocationCardViewModel()),
       ],
       child: const MyApp(),
     ),

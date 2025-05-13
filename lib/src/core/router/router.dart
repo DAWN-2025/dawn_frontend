@@ -2,6 +2,7 @@ import 'package:dawn_frontend/src/presentation/views/ai_test/ai_test_screen.dart
 import 'package:dawn_frontend/src/presentation/views/auth/sign_up_screen.dart';
 import 'package:dawn_frontend/src/presentation/views/home/search_result_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../../presentation/views/auth/sign_in_screen.dart';
 import '../../presentation/views/home/home_screen.dart';
 import '../../presentation/views/map/map_screen.dart';
@@ -9,6 +10,7 @@ import '../../presentation/views/album/album_screen.dart';
 import '../../presentation/views/setting/setting_screen.dart';
 import '../../presentation/views/details/event_detail_screen.dart';
 import '../../presentation/views/details/location_detail_screen.dart';
+import '../../presentation/view_models/details/event_detail_view_model.dart';
 
 class AppRoutes {
   static const String signIn = '/signIn';
@@ -20,7 +22,6 @@ class AppRoutes {
   static const String album = '/album';
   static const String eventDetail = '/event-detail/:eventId';
   static const String locationDetail = '/location-detail/:locationId';
-
   static const String aiTest = '/ai_test';
 }
 
@@ -69,14 +70,14 @@ class AppRouter {
       // 사건 상세 화면
       GoRoute(
         path: AppRoutes.eventDetail,
-        pageBuilder: (context, state) {
-          final eventId =
-              int.tryParse(state.pathParameters['eventId'] ?? '') ?? 0;
-          final userSeq = 1;
+        builder: (context, state) {
+          final int eventId =
+              int.tryParse(state.pathParameters['eventId'] ?? '0') ?? 0;
+          final int userSeq =
+              int.tryParse(state.uri.queryParameters['userSeq'] ?? '0') ?? 0;
 
-          return NoTransitionPage(
-            child: EventDetailScreen(eventId: eventId, userSeq: userSeq),
-          );
+          print('Received eventId: $eventId, userSeq: $userSeq');
+          return EventDetailScreen(eventId: eventId, userSeq: userSeq);
         },
       ),
       // 장소 상세 화면
