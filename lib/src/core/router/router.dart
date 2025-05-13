@@ -1,5 +1,6 @@
 import 'package:dawn_frontend/src/presentation/views/ai_test/ai_test_screen.dart';
 import 'package:dawn_frontend/src/presentation/views/auth/sign_up_screen.dart';
+import 'package:dawn_frontend/src/presentation/views/home/search_result_screen.dart';
 import 'package:go_router/go_router.dart';
 import '../../presentation/views/auth/sign_in_screen.dart';
 import '../../presentation/views/home/home_screen.dart';
@@ -13,6 +14,7 @@ class AppRoutes {
   static const String signIn = '/signIn';
   static const String signUp = '/signUp';
   static const String home = '/';
+  static const String search = '/search-result';
   static const String setting = '/setting';
   static const String map = '/map';
   static const String album = '/album';
@@ -42,6 +44,11 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.home,
         pageBuilder: (context, state) => NoTransitionPage(child: HomeScreen()),
+      ),
+      GoRoute(
+        path: AppRoutes.search,
+        pageBuilder:
+            (context, state) => NoTransitionPage(child: SearchResultScreen()),
       ),
       // 지도 화면
       GoRoute(
