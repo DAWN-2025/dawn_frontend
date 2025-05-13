@@ -20,7 +20,7 @@ class _AiTestScreen extends State<AiTestScreen> {
   final Dio _dio = DioClient().dio;
 
   int _chatCount = 0;
-  int? _lastChatSeq;
+  String? _userUid;
   int? _lastLocationSeq;
 
   @override
@@ -83,27 +83,28 @@ class _AiTestScreen extends State<AiTestScreen> {
       setState(() {
         _responseMessage = '전송 성공';
         _chatCount++;
-        _lastChatSeq = data['chatSeq'];
+        _userUid = data['userUid'];
         _lastLocationSeq = data['locationSeq'];
       });
 
       // 대화가 3회에 도달하면 다음 화면으로 이동
-      if (_chatCount >= 3 && _lastChatSeq != null && _lastLocationSeq != null) {
+      if (_chatCount >= 3 && _userUid != null && _lastLocationSeq != null) {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => LetterResultTestScreen(
-              jwtToken: _jwtToken!,
-              chatSeq: _lastChatSeq!,
-              locationSeq: _lastLocationSeq!,
-            ),
+            builder:
+                (_) => LetterResultTestScreen(
+                  jwtToken: _jwtToken!,
+                  userUid: _userUid!,
+                  locationSeq: _lastLocationSeq!,
+                ),
           ),
         );
       }
     } on DioException catch (e) {
       setState(() {
         _responseMessage =
-        '오류 발생: ${e.response?.statusCode} - ${e.response?.data}';
+            '오류 발생: ${e.response?.statusCode} - ${e.response?.data}';
       });
     } catch (e) {
       setState(() {

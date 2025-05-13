@@ -5,13 +5,13 @@ import '../../../data/clients/dio_client.dart'; // DioClient 사용
 
 class LetterResultTestScreen extends StatefulWidget {
   final String jwtToken;
-  final int chatSeq;
+  final String userUid;
   final int locationSeq;
 
   const LetterResultTestScreen({
     super.key,
     required this.jwtToken,
-    required this.chatSeq,
+    required this.userUid,
     required this.locationSeq,
   });
 
@@ -39,10 +39,7 @@ class _LetterResultTestScreenState extends State<LetterResultTestScreen> {
             'Content-Type': 'application/json',
           },
         ),
-        data: {
-          "chatSeq": widget.chatSeq,
-          "locationSeq": widget.locationSeq,
-        },
+        data: {"userUid": widget.userUid, "locationSeq": widget.locationSeq},
       );
 
       final data = response.data;
@@ -65,9 +62,7 @@ class _LetterResultTestScreenState extends State<LetterResultTestScreen> {
       appBar: AppBar(title: const Text('편지 결과')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          child: Text(_log ?? '로딩 중...'),
-        ),
+        child: SingleChildScrollView(child: Text(_log ?? '로딩 중...')),
       ),
     );
   }
