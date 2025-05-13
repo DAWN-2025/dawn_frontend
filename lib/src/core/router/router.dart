@@ -2,6 +2,7 @@ import 'package:dawn_frontend/src/presentation/views/ai_test/ai_test_screen.dart
 import 'package:dawn_frontend/src/presentation/views/auth/sign_up_screen.dart';
 import 'package:dawn_frontend/src/presentation/views/home/search_result_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../../presentation/views/auth/sign_in_screen.dart';
 import '../../presentation/views/home/home_screen.dart';
 import '../../presentation/views/map/map_screen.dart';
@@ -9,6 +10,7 @@ import '../../presentation/views/album/album_screen.dart';
 import '../../presentation/views/setting/setting_screen.dart';
 import '../../presentation/views/details/event_detail_screen.dart';
 import '../../presentation/views/details/location_detail_screen.dart';
+import '../../presentation/view_models/details/event_detail_view_model.dart';
 
 class AppRoutes {
   static const String signIn = '/signIn';
@@ -69,7 +71,8 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.eventDetail,
         builder: (context, state) {
-          final int eventId = int.tryParse(state.pathParameters['eventId'] ?? '0') ?? 0;
+          final int eventId =
+              int.tryParse(state.pathParameters['eventId'] ?? '0') ?? 0;
           final int userSeq =
               int.tryParse(state.uri.queryParameters['userSeq'] ?? '0') ?? 0;
 
