@@ -5,6 +5,7 @@ import '../../widgets/stamp_card.dart';
 import 'package:provider/provider.dart';
 import 'package:dawn_frontend/src/presentation/view_models/stamp_card_list_view_model.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
+import 'package:go_router/go_router.dart';
 
 class AlbumScreen extends StatefulWidget {
   const AlbumScreen({super.key});
@@ -58,8 +59,8 @@ Widget build(BuildContext context) {
                 }
 
                 if (stampCardListViewModel.stampCards.isEmpty) {
-                  return const Center(
-                    child: Text('No Stamp Cards Available'),
+                  return Center(
+                    child: Text(stampCardListViewModel.errorMessage),
                   );
                 }
 
@@ -73,9 +74,15 @@ Widget build(BuildContext context) {
                   ),
                   itemCount: stampCardListViewModel.stampCards.length,
                   itemBuilder: (context, index) {
-                    final viewModel = stampCardListViewModel.stampCards[index];
-                    return StampCard(viewModel: viewModel);
-                  },
+                      final stamp = stampCardListViewModel.stampCards[index];
+                      return StampCard(
+                        title: stamp.eventName,         // 이벤트 이름
+                        imagePath: stamp.eventStampImg, // 스탬프 이미지
+                        onTap: () {
+                          context.push('/event/detail/${stamp.eventSeq}');
+                        },
+                      );
+                    },
                 );
               },
             ),

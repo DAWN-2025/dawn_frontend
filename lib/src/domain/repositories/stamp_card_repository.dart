@@ -1,14 +1,27 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:dawn_frontend/src/data/models/stamp_card_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/stamp_card_view_model.dart';
+import 'package:dawn_frontend/src/core/utils/constants/api_constants.dart';
+import 'package:dawn_frontend/src/data/clients/dio_client.dart';
 
 class StampCardRepository {
-  Future<List<StampCardViewModel>> fetchStampCards() async {
-    // JSON 파일 읽기
-    final String response = await rootBundle.loadString('assets/constants/stamp_cards.json');
-    final List<dynamic> data = json.decode(response);
+  final DioClient _dioClient = DioClient();
 
-    // JSON 데이터를 ViewModel 리스트로 변환
-    return data.map((json) => StampCardViewModel.fromJson(json)).toList();
+  Future<List<StampCard>> fetchStampCards() async {
+    try {
+      final response = await _dioClient.dio.get(
+        '/stamp/getStampImage',
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = response.data;
+        return data.map((item) => StampCard.fromJson(item)).toList();
+      } else {
+        throw Exception('Failed to load stamp cards');
+      }
+    } catch (e) {
+      throw Exception('Error fetching stamp cards: $e');
+    }
   }
 }
