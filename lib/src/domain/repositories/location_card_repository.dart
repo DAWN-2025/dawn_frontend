@@ -33,10 +33,9 @@ class LocationCardRepository {
   Future<bool> checkVisited(int locationSeq, int userSeq) async {
     try {
       final response = await _dioClient.dio.get(
-        '/letter/byLocation',
+        '/letter/byUser',
         queryParameters: {
-          'locationSeq': locationSeq,
-          'userSeq': userSeq,
+          'userSeq': 1,
         },
       );
 

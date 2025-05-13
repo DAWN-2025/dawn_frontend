@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:dawn_frontend/src/data/models/location_detail_model.dart';
 import 'package:dawn_frontend/src/domain/repositories/details/location_detail_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/details/comment_view_model.dart';
@@ -21,7 +19,7 @@ class LocationDetailViewModel extends ChangeNotifier {
 
   LocationDetailViewModel({
     required this.repository,
-    required this.commentViewModel,  // 수정 부분
+    required this.commentViewModel,
   });
 
   void setSelectedTabIndex(int index) {
@@ -32,12 +30,12 @@ class LocationDetailViewModel extends ChangeNotifier {
   String get formattedDescription {
     if (_location == null) return 'No description available';
     return '''
-Address  |  ${_location!.address}
-Hours  |  ${_location!.openTime} - ${_location!.closeTime}
-Phone  |  ${_location!.phoneNum}
-Exhibition tour  |  ${_location!.exhibitionTime}
-Available  |  ${_location!.available}
-Translate  |  ${_location!.translate}
+Address       |  ${_location!.address}
+Hours         |  ${_location!.openTime} - ${_location!.closeTime}
+Phone         |  ${_location!.phoneNum}
+Exhibition    |  ${_location!.exhibitionTime}
+Available     |  ${_location!.available}
+Translate     |  ${_location!.translate}
 ''';
   }
 
@@ -47,17 +45,11 @@ Translate  |  ${_location!.translate}
     notifyListeners();
 
     try {
-      final String response = await rootBundle.loadString('assets/constants/location_details.json');
-      final Map<String, dynamic> data = jsonDecode(response);
+      // API를 통해 위치 상세 정보 가져오기
+      final LocationDetail? fetchedLocation = await repository.fetchLocationDetail(locationId);
 
-      final List<dynamic> locations = data['locations'] ?? [];
-      final locationData = locations.firstWhere(
-        (item) => item['id'] == locationId,
-        orElse: () => null,
-      );
-
-      if (locationData != null) {
-        _location = LocationDetail.fromJson(locationData);
+      if (fetchedLocation != null) {
+        _location = fetchedLocation;
       } else {
         _errorMessage = 'Location not found';
       }
