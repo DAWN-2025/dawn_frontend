@@ -1,5 +1,6 @@
+import 'package:dawn_frontend/src/presentation/views/ai_test/ai_test_screen.dart';
 import 'package:dawn_frontend/src/presentation/views/auth/sign_up_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:dawn_frontend/src/presentation/views/home/search_result_screen.dart';
 import 'package:go_router/go_router.dart';
 import '../../presentation/views/auth/sign_in_screen.dart';
 import '../../presentation/views/home/home_screen.dart';
@@ -13,11 +14,14 @@ class AppRoutes {
   static const String signIn = '/signIn';
   static const String signUp = '/signUp';
   static const String home = '/';
+  static const String search = '/search-result';
   static const String setting = '/setting';
   static const String map = '/map';
   static const String album = '/album';
   static const String eventDetail = '/event-detail/:eventId';
   static const String locationDetail = '/location-detail/:locationId';
+
+  static const String aiTest = '/ai_test';
 }
 
 class AppRouter {
@@ -41,6 +45,11 @@ class AppRouter {
         path: AppRoutes.home,
         pageBuilder: (context, state) => NoTransitionPage(child: HomeScreen()),
       ),
+      GoRoute(
+        path: AppRoutes.search,
+        pageBuilder:
+            (context, state) => NoTransitionPage(child: SearchResultScreen()),
+      ),
       // 지도 화면
       GoRoute(
         path: AppRoutes.map,
@@ -61,7 +70,8 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.eventDetail,
         pageBuilder: (context, state) {
-          final eventId = int.tryParse(state.pathParameters['eventId'] ?? '') ?? 0;
+          final eventId =
+              int.tryParse(state.pathParameters['eventId'] ?? '') ?? 0;
           final userSeq = 1;
 
           return NoTransitionPage(
@@ -73,11 +83,18 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.locationDetail,
         pageBuilder: (context, state) {
-          final locationId = int.tryParse(state.pathParameters['locationId'] ?? '') ?? 0;
+          final locationId =
+              int.tryParse(state.pathParameters['locationId'] ?? '') ?? 0;
           return NoTransitionPage(
             child: LocationDetailScreen(locationId: locationId),
           );
         },
+      ),
+      // AI 테스트 화면
+      GoRoute(
+        path: AppRoutes.aiTest,
+        pageBuilder:
+            (context, state) => NoTransitionPage(child: AiTestScreen()),
       ),
     ],
   );

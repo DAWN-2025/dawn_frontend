@@ -97,4 +97,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get event => '이벤트';
+
+  @override
+  String get map_notice => '현재 지도에는 총 2곳의 장소가 표시되어 있습니다. 눌러서 자세한 정보를 확인해보세요.';
 }

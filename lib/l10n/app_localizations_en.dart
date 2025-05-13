@@ -97,4 +97,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get event => 'Events';
+
+  @override
+  String get map_notice => 'There are 2 locations marked on the map. Tap to view more details.';
 }

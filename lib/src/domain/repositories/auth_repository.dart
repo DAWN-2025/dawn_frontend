@@ -1,9 +1,18 @@
+import 'dart:async';
+
+import 'package:dawn_frontend/src/core/utils/log.dart';
+import 'package:dawn_frontend/src/data/services/auth_service.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import '../../data/clients/dio_client.dart';
 
 class AuthRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final Dio _dio = DioClient().dio;
+  final AuthService _authService = AuthService();
 
   // 구글 로그인 및 회원 가입
   Future<String?> signInWithGoogle() async {
@@ -70,17 +79,6 @@ class AuthRepository {
     // await _firebaseAuth.signOut();    // Firebase 인증 로그아웃
   }
 
-  // 토큰, email 정보 가져 오기
-  Future<Map<String, String>?> getUserInfoWithToken() async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return null;
-
-    final idToken = await user.getIdToken();
-    final email = user.email ?? '';
-
-    return {'idToken': idToken!, 'email': email};
-  }
-
   String _firebaseErrorKey(FirebaseAuthException e) {
     switch (e.code) {
       case 'email-already-in-use':
@@ -96,5 +94,10 @@ class AuthRepository {
       default:
         return 'error_signup_failed';
     }
+  }
+
+  // JWT 로그인
+  Future<String?> loginWithFirebaseToken(String idToken) {
+    return _authService.loginWithFirebaseToken(idToken);
   }
 }

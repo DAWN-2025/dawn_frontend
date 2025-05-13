@@ -9,10 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
 import 'package:dawn_frontend/src/presentation/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../l10n/app_localizations.dart';
 import '../../../core/utils/date_utils.dart';
+import '../../../data/storage/secure_storage.dart';
+import '../../view_models/home/search_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -62,6 +65,21 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SearchInputField(
                 controller: _searchController,
                 hintText: null,
+                onChanged: null,
+                onSearchTap: () async {
+                  final token = await SecureStorage.getJwt();
+                  final keyword = _searchController.text.trim();
+
+                  if (keyword.isEmpty || token == null) return;
+
+                  // context 사용 전에 mounted 체크
+                  if (!mounted) return;
+                  await context.read<SearchResultViewModel>().fetchSearchResults(keyword, token);
+                  await context.read<SearchResultViewModel>().searchEventByKeyword(keyword, token);
+
+                  if (!mounted) return;
+                  context.push('/search-result');
+                },
               ),
             ),
 

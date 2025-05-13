@@ -18,7 +18,7 @@ class WeeklyFeaturedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 190,
+      height: 200,
       width: double.infinity,
       //margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(

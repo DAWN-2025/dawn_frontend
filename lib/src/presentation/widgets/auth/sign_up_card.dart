@@ -155,6 +155,7 @@ class _SignUpCardState extends State<SignUpCard> {
                       );
                     } else {
                       router.go(AppRoutes.home);
+                      //router.go(AppRoutes.aiTest);
                     }
                   },
                 ),
