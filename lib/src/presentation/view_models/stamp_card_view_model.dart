@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class StampCardViewModel extends ChangeNotifier {
   String? navigationPath;
 
-  void handleCardTap(int eventSeq) {
-    // 예시로 네비게이션 경로를 설정
-    navigationPath = '/event-detail/$eventSeq';
+  void handleCardTap(BuildContext context, int eventId) {
+    navigationPath = '/event-detail/$eventId';
+    if (navigationPath != null) {
+      context.push(navigationPath!);
+    }
     notifyListeners();
   }
 

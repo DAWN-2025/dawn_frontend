@@ -1,35 +1,25 @@
 class LocationCardModel {
-  final int locationId;
+  final int id;
   final String name;
+  final String locationImage;
   final String address;
-  final String image;
-  final List<String> keywords;
   final bool visited;
 
   LocationCardModel({
-    required this.locationId,
+    required this.id,
     required this.name,
+    required this.locationImage,
     required this.address,
-    required this.image,
-    required this.keywords,
-    required this.visited,
+    this.visited = false,
   });
 
-  factory LocationCardModel.fromJson(Map<String, dynamic> json, List<int> visitedLocationSeqs) {
-    print("Parsing LocationCardModel: ${json['id']} - ${json['name']}");
-
-    final int locationId = json['id'] ?? 0;
-    final bool isVisited = visitedLocationSeqs.contains(locationId);
+  factory LocationCardModel.fromJson(Map<String, dynamic> json) {
     return LocationCardModel(
-      locationId: locationId,
-      name: json['name'] ?? 'Unknown Location',
+      id: json['id'] ?? 0,
+      name: json['name'] ?? 'Unknown',
+      locationImage: json['locationImage'] ?? '',
       address: json['address'] ?? 'No Address',
-      image: json['locationImage'] ?? 'assets/images/default.jpg',
-      keywords: (json['keywords'] as List?)
-              ?.map((item) => item['keyword'].toString())
-              .toList() ??
-          [],
-      visited: isVisited,
+      visited: json['visited'] ?? false,
     );
   }
 }

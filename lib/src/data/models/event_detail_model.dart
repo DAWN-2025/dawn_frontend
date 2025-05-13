@@ -33,7 +33,7 @@ class EventDetail {
 
   factory EventDetail.fromJson(Map<String, dynamic> json) {
     return EventDetail(
-      id: _parseInt(json['id']) ?? 0,
+      id: _parseInt(json['id']),
       name: json['name'] ?? 'Unknown',
       shortInfo: json['shortInfo'] ?? 'No short info',
       background: json['background'] ?? 'No background info',
@@ -46,14 +46,15 @@ class EventDetail {
       nationEng: json['nationEng'] ?? 'No English nation',
       categoryEng: json['categoryEng'] ?? 'No English category',
       image: json['image'] ?? 'assets/images/default.jpg',
-      keywords:
-          (json['keywords'] as List?)
-              ?.map((item) => item['keyword'] as String)
+      keywords: (json['keywords'] as List?)
+              ?.map((item) => item['keyword'] as String? ?? 'Unknown')
               .toList() ??
           [],
     );
   }
+
   static int _parseInt(dynamic value) {
+    if (value == null) return 0;
     if (value is int) return value;
     if (value is String) {
       return int.tryParse(value) ?? 0;

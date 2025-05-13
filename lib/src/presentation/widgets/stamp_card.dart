@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+import 'package:dawn_frontend/src/presentation/view_models/stamp_card_view_model.dart';
+
 
 class StampCard extends StatelessWidget {
   final String title;
   final String? imagePath;
-  final VoidCallback onTap;
+  final int eventId;
 
   const StampCard({
     super.key,
     required this.title,
     this.imagePath,
-    required this.onTap,
+    required this.eventId,
   });
 
   @override
   Widget build(BuildContext context) {
+    final stampCardViewModel = Provider.of<StampCardViewModel>(context);
     return InkWell(
-      onTap: onTap,
+      onTap: () => stampCardViewModel.handleCardTap(context, eventId),
       borderRadius: BorderRadius.circular(15),
       child: Card(
         shape: RoundedRectangleBorder(
@@ -39,7 +43,7 @@ class StampCard extends StatelessWidget {
                       width: size,
                       height: size,
                       child: imagePath != null
-                          ? SvgPicture.asset(
+                          ? Image.network(
                               imagePath!,
                               fit: BoxFit.cover,
                             )

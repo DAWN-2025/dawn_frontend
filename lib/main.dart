@@ -26,6 +26,8 @@ import 'package:dawn_frontend/src/presentation/view_models/details/comment_view_
 import 'package:dawn_frontend/src/domain/repositories/details/comment_repository.dart';
 import 'package:dawn_frontend/src/presentation/view_models/ai-tour/explore_now_btn_view_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/modals/modal_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/stamp_card_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/stamp_card_list_view_model.dart';
 
 // import 'package:dawn_frontend/src/presentation/widgets/modals/tour_start_modal.dart';
 // import 'package:dawn_frontend/src/presentation/widgets/modals/delete_comment_modal.dart';
@@ -82,6 +84,12 @@ void main() async {
         ),
         ChangeNotifierProvider(create: (_) => ExploreNowBtnViewModel()),
         ChangeNotifierProvider(create: (_) => ModalViewModel()),
+        ChangeNotifierProvider(
+          create: (_) => StampCardListViewModel(
+            repository: StampCardRepository(),
+          ),
+        ),
+        ChangeNotifierProvider(create: (_) => StampCardViewModel()),
       ],
       child: const MyApp(),
     ),

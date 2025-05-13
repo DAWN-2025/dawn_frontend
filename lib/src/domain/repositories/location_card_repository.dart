@@ -4,24 +4,26 @@ import 'package:dawn_frontend/src/data/models/event_detail_model.dart';
 import 'package:dawn_frontend/src/data/models/location_card_model.dart';
 import 'package:dawn_frontend/src/data/clients/dio_client.dart';
 
-class EventDetailRepository {
+class LocationCardRepository {
   final DioClient _dioClient = DioClient();
-  Future<EventDetail> fetchEventDetail(int eventId) async {
+
+  Future<List<LocationCardModel>> fetchEventLocations(int eventId) async {
     try {
       final response = await _dioClient.dio.get(
-        '/event/viewEventInfo',
-        queryParameters: {'id': eventId},
+        '/location/viewLocationByEvent',
+        queryParameters: {'eventId': eventId},
       );
+
       if (response.statusCode == 200) {
-        return EventDetail.fromJson(response.data);
+        final List<dynamic> data = response.data;
+        return data
+            .map((item) => LocationCardModel.fromJson(item))
+            .toList();
       } else {
-        throw Exception('Failed to load event detail');
+        throw Exception('Failed to load event locations');
       }
     } catch (e) {
-      throw Exception('Failed to load event details: $e');
+      throw Exception('Error fetching event locations: $e');
     }
   }
-
-
-  
 }

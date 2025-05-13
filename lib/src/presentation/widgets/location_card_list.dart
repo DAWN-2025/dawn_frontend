@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:dawn_frontend/src/data/models/location_card_model.dart';
 import 'location_card.dart';
-import 'package:dawn_frontend/src/presentation/view_models/location_card_view_model.dart';
 
 class LocationCardList extends StatelessWidget {
-  final List<LocationCardViewModel> locationViewModels;
+  final List<LocationCardModel> locationCards;
 
-  const LocationCardList({Key? key, required this.locationViewModels}) : super(key: key);
+  const LocationCardList({Key? key, required this.locationCards}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      itemCount: locationViewModels.length,
+      itemCount: locationCards.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return LocationCard(locationViewModel: locationViewModels[index]);
+        return LocationCard(locationCardModel: locationCards[index]);
       },
     );
   }
