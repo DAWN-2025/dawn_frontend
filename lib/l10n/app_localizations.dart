@@ -274,6 +274,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Events'**
   String get event;
+
+  /// No description provided for @map_notice.
+  ///
+  /// In en, this message translates to:
+  /// **'There are 2 locations marked on the map. Tap to view more details.'**
+  String get map_notice;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
