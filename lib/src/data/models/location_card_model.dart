@@ -14,10 +14,20 @@ class LocationCardModel {
   });
 
   factory LocationCardModel.fromJson(Map<String, dynamic> json) {
+    // 이미지 URL 유효성 검사 함수
+    String _getImageUrl(Map<String, dynamic> json) {
+      if (json.containsKey('locationSimpleImage')) {
+        return json['locationSimpleImage'] ?? '';
+      } else if (json.containsKey('locationImage')) {
+        return json['locationImage'] ?? '';
+      }
+      return '';
+    }
+
     return LocationCardModel(
       id: json['id'] ?? 0,
       name: json['name'] ?? 'Unknown',
-      locationImage: json['locationImage'] ?? '',
+      locationImage: _getImageUrl(json),  // 수정된 부분
       address: json['address'] ?? 'No Address',
       visited: json['visited'] ?? false,
     );
