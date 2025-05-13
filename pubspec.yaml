@@ -70,10 +70,25 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   build_runner: ^2.4.15
 
+  flutter_native_splash: ^2.4.6
+  flutter_launcher_icons: ^0.14.3
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter_native_splash:
+  color: "#443751"
+  image: "assets/icons/dawn_logo.png"
+  fullscreen: true
+  android: true
+  ios: true
+
+flutter_icons:
+  ios: true
+  image_path: "assets/icons/dawn_logo.png"
+  android: true
+
 flutter:
 
   # The following line ensures that the Material Icons font is
