@@ -1,4 +1,3 @@
-import 'package:dawn_frontend/src/core/extensions/localization_extensions.dart';
 import 'package:dawn_frontend/src/presentation/widgets/auth/auth_input_field.dart';
 import 'package:dawn_frontend/src/presentation/widgets/auth/continue_btn.dart';
 import 'package:flutter/foundation.dart';
@@ -78,17 +77,13 @@ class SignInCard extends StatelessWidget {
               children: [
                 ContinueButton(
                   onPressed: () async {
-                    final result = await viewModel.signIn();
+                    final result = await viewModel.validateAndLogin();
                     if (kDebugMode) {
                       print('Sign-in result: $result');
                     }
                     if (result != null) {
-                      messenger.showSnackBar(
-                        SnackBar(content: Text(l10n.getByKey(result))),
-                      );
-                    } else {
                       router.go(AppRoutes.home);
-                    }
+                    } else {}
                   },
                 ),
                 const SizedBox(height: 18),
@@ -96,17 +91,14 @@ class SignInCard extends StatelessWidget {
                 const SizedBox(height: 18),
                 GoogleLoginBtn(
                   onPressed: () async {
-                    final result = await viewModel.handleGoogleAuth();
+                    final result = await viewModel.validateAndLogin();
                     if (kDebugMode) {
                       print('Google sign-in result: $result');
                     }
                     if (result != null) {
-                      messenger.showSnackBar(
-                        SnackBar(content: Text(l10n.getByKey(result))),
-                      );
-                    } else {
                       router.go(AppRoutes.home);
-                    }
+                      //router.go(AppRoutes.aiTest);
+                    } else {}
                   },
                 ),
                 const SizedBox(height: 18),
