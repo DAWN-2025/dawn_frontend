@@ -15,9 +15,10 @@ import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class LocationDetailScreen extends StatefulWidget {
   final int locationId;
+  final int userSeq;
 
-  const LocationDetailScreen({Key? key, required this.locationId})
-    : super(key: key);
+  const LocationDetailScreen({Key? key, required this.locationId, required this.userSeq})
+      : super(key: key);
 
   @override
   State<LocationDetailScreen> createState() => _LocationDetailScreenState();
@@ -28,12 +29,13 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Location 정보 로딩
-      context.read<LocationDetailViewModel>().fetchLocationDetail(
-        widget.locationId,
-      );
-      // Comment 정보 로딩
-      context.read<CommentViewModel>().fetchComments(); // 수정 부분
+      final locationDetailViewModel = context.read<LocationDetailViewModel>();
+      final commentViewModel = context.read<CommentViewModel>();
+
+      // 초기화 및 데이터 로딩
+      locationDetailViewModel.resetState();
+      locationDetailViewModel.fetchLocationDetail(widget.locationId);
+      commentViewModel.fetchComments();
     });
   }
 
@@ -71,21 +73,17 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                     ImageHeader(imagePath: location.image),
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 30,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // HeaderCard 사용
+                          // 방문 여부와 함께 표시
                           Transform.translate(
                             offset: const Offset(0, -70),
                             child: HeaderCard(
                               title: location.name,
                               eventId: location.eventId,
-                              description:
-                                  locationViewModel.formattedDescription,
+                              description: locationViewModel.formattedDescription,
                               tags: location.keywords,
                               selectedIndex: locationViewModel.selectedTabIndex,
                               tabLabels: ["Info", "Comments"],
@@ -94,8 +92,6 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                               },
                             ),
                           ),
-
-                          // const SizedBox(height: 16),
                           if (locationViewModel.selectedTabIndex == 0) ...[
                             SectionHeader(text: "Short Info"),
                             const SizedBox(height: 8),
@@ -120,8 +116,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                               style: typography.AppTextStyle.bodyTextPoppins
                                   .copyWith(fontSize: 16, color: Colors.white),
                             ),
-                          ] else if (locationViewModel.selectedTabIndex ==
-                              1) ...[
+                          ] else if (locationViewModel.selectedTabIndex == 1) ...[
                             if (commentViewModel.comments.isEmpty)
                               const Text(
                                 "No comments available",

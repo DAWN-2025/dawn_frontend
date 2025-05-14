@@ -53,7 +53,7 @@ class LocationCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(14),
       child: Image.network(
-        locationViewModel.locationCard!.locationImage,
+        locationViewModel.locationCard!.locationSimpleImage,
         fit: BoxFit.cover,
         width: double.infinity,
         height: 100,
