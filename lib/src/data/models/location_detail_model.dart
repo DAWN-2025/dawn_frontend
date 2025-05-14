@@ -50,7 +50,7 @@ class LocationDetail {
       image: json['image'],
       shortInfo: json['shortInfo'],
       historicInfo: json['historicInfo'],
-      etiquette: json['etiquette'],
+      etiquette: _formatString(json['etiquette'], 'No etiquette info'),
       openTime: json['openTime'],
       closeTime: json['closeTime'],
       phoneNum: json['phoneNum'],
@@ -59,5 +59,12 @@ class LocationDetail {
       available: json['available'],
       translate: json['translate'],
     );
+  }
+
+  // 개행 문자 처리 메서드 (정규 표현식 사용)
+  static String _formatString(String? value, String defaultValue) {
+    if (value == null || value.isEmpty) return defaultValue;
+    // \\n을 \n으로 변환하여 실제 개행 처리
+    return value.replaceAll(RegExp(r'\\n'), '\n');
   }
 }
