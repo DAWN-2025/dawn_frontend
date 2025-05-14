@@ -33,18 +33,17 @@ class _LetterScreenState extends State<LetterScreen> {
       appBar: CustomTopAppBar(),
       body: Consumer<LetterViewModel>(
         builder: (context, viewModel, child) {
-          if (viewModel.isLoading) {
+          // 로딩 상태 또는 데이터가 없는 경우 로딩 스피너 표시
+          if (viewModel.isLoading || viewModel.letters.isEmpty) {
             return const Center(child: CircularProgressIndicator());
           }
 
+          // 오류 메시지가 있는 경우 화면에 표시
           if (viewModel.errorMessage.isNotEmpty) {
             return Center(child: Text(viewModel.errorMessage));
           }
 
-          if (viewModel.letters.isEmpty) {
-            return const Center(child: Text('No letters found'));
-          }
-
+          // 데이터가 정상적으로 로드된 경우
           final letter = viewModel.letters.first;
 
           return SizedBox.expand(
@@ -58,7 +57,7 @@ class _LetterScreenState extends State<LetterScreen> {
                       width: MediaQuery.of(context).size.width * 0.9,
                       constraints: BoxConstraints(
                         minHeight: 100, // 최소 높이 설정
-                        maxHeight: MediaQuery.of(context).size.height * 0.55,
+                        maxHeight: MediaQuery.of(context).size.height * 0.65,
                       ),
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
@@ -75,16 +74,16 @@ class _LetterScreenState extends State<LetterScreen> {
                       child: SingleChildScrollView(
                         child: ConstrainedBox(
                           constraints: BoxConstraints(
-                            minHeight:
-                                MediaQuery.of(context).size.height *
-                                0.5, // 스크롤뷰 높이 지정
+                            minHeight: MediaQuery.of(context).size.height * 0.5, // 스크롤뷰 높이 지정
                           ),
                           child: IntrinsicHeight(
                             // 자식 요소의 최소 높이를 계산하여 레이아웃 문제 방지
                             child: Text(
                               letter.content.isNotEmpty ? letter.content : '',
                               textAlign: TextAlign.start,
-                              style: typography.AppTextStyle.bodyText,
+                              style: typography.AppTextStyle.bodyText.copyWith(
+                                fontStyle: FontStyle.italic,
+                              ),
                             ),
                           ),
                         ),

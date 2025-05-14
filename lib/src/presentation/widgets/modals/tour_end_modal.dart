@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'reusable_modal.dart';
 
 class TourEndModal extends StatelessWidget {
-  const TourEndModal({super.key, required this.onCheckLetter, required this.onLeaveComment, required this.onBackToTour});
+  const TourEndModal({
+    super.key,
+    required this.onCheckLetter,
+    required this.onGoToHome,
+  });
 
   final VoidCallback onCheckLetter;
-  final VoidCallback onLeaveComment;
-  final VoidCallback onBackToTour;
+  final VoidCallback onGoToHome;
 
   @override
   Widget build(BuildContext context) {
     return ReusableModal(
-      title: 'OO will remember the time spent with you.\nYou got a letter from OO.\n\nWould you check it out in the album?\nYou can also continue tour with DAWN',
+      title: 'They will remember the time spent with you.\nYou got a letter.\n\nWould you check it out in the album?',
       primaryButtonText: 'Check the letter',
-      secondaryButtonText: 'Leave a comment',
+      secondaryButtonText: 'Back to Home',
       onPrimaryPressed: onCheckLetter,
-      onSecondaryPressed: onLeaveComment,
+      onSecondaryPressed: onGoToHome,
+      //footer: BackToTourButton(onPressed: onBackToTour),
     );
   }
 }
@@ -29,7 +33,7 @@ class BackToTourButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       child: const Text(
-        'back to tour with DAWN',
+        'Back to tour with DAWN',
         style: TextStyle(
           decoration: TextDecoration.underline,
           color: Colors.black,

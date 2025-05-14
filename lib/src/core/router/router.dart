@@ -1,4 +1,4 @@
-import 'package:dawn_frontend/src/presentation/views/ai-tour/ai_test_screen.dart'; // Ensure this file contains the AiTestScreen class definition
+import 'package:dawn_frontend/src/presentation/views/ai-tour/ai_tour_screen.dart'; // Ensure this file contains the AiTestScreen class definition
 // If AiTestScreen is not defined, define it in the corresponding file or import the correct file.
 import 'package:dawn_frontend/src/presentation/views/auth/sign_up_screen.dart';
 import 'package:dawn_frontend/src/presentation/views/home/search_result_screen.dart';
@@ -23,7 +23,7 @@ class AppRoutes {
   static const String album = '/album';
   static const String eventDetail = '/event-detail/:eventId';
   static const String locationDetail = '/location-detail/:locationId';
-  static const String aiTest = '/ai_test';
+  static const String aiTour = '/ai-tour';
   static const String letter = '/letter/:locationSeq';
 }
 
@@ -93,9 +93,9 @@ class AppRouter {
       ),
       // AI 테스트 화면
       GoRoute(
-        path: AppRoutes.aiTest,
+        path: AppRoutes.aiTour,
         pageBuilder:
-            (context, state) => NoTransitionPage(child: AiTestScreen()),
+            (context, state) => NoTransitionPage(child: AiTourScreen()),
       ),
       // 편지 조회 화면
       GoRoute(
