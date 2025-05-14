@@ -112,4 +112,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get map_notice => 'There are 2 locations marked on the map. Tap to view more details.';
+
+  @override
+  String get emailCopied => 'Email address copied to clipboard!';
+
+  @override
+  String get settingsIntroMessage => 'Thank you for using our app!\nWe are currently working hard to design and develop the service\nto create a better dark tourism culture.\n\nIf you have any recommendations, ideas, or improvements\nplease feel free to contact us.\nYour feedback is very helpful!';
 }

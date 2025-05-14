@@ -112,4 +112,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get map_notice => '현재 지도에는 총 2곳의 장소가 표시되어 있습니다. 눌러서 자세한 정보를 확인해보세요.';
+
+  @override
+  String get emailCopied => '이메일 주소가 클립보드에 복사되었습니다!';
+
+  @override
+  String get settingsIntroMessage => '저희 앱을 사용해주셔서 감사합니다!\n현재 더 나은 다크 투어리즘 문화를 만들어가기 위해\n열심히 서비스를 기획하고 개발하고 있습니다.\n\n추천 장소, 아이디어 또는 개선사항이 있다면\n언제든지 편하게 저희에게 연락해주세요.\n여러분의 의견이 큰 도움이 됩니다!';
 }
