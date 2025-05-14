@@ -82,13 +82,8 @@ class AppRouter {
         pageBuilder: (context, state) {
           final locationId =
               int.tryParse(state.pathParameters['locationId'] ?? '') ?? 0;
-          final int userSeq =
-              int.tryParse(state.uri.queryParameters['userSeq'] ?? '0') ?? 0;
           return NoTransitionPage(
-            child: LocationDetailScreen(
-              locationId: locationId,
-              userSeq: userSeq,
-            ),
+            child: LocationDetailScreen(locationId: locationId),
           );
         },
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'reusable_modal.dart';
+import 'package:go_router/go_router.dart';
 
 class NoVisitHistoryModal extends StatelessWidget {
   const NoVisitHistoryModal({super.key, required this.onGoToDetail});
@@ -13,7 +14,7 @@ class NoVisitHistoryModal extends StatelessWidget {
       primaryButtonText: 'Go to details',
       secondaryButtonText: 'Cancel',
       onPrimaryPressed: onGoToDetail,
-      onSecondaryPressed: () => Navigator.of(context).pop(),
+      onSecondaryPressed: () => GoRouter.of(context).pop(),
     );
   }
 }

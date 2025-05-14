@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 import 'package:dawn_frontend/src/data/models/location_card_model.dart';
+import 'package:dawn_frontend/src/presentation/widgets/modals/no_visit_history_modal.dart';
 
 class LocationCard extends StatelessWidget {
   final LocationCardModel locationCard;
@@ -15,7 +16,7 @@ class LocationCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: GestureDetector(
-        onTap: () => _navigateToDetail(context),
+        onTap: () => _handleCardTap(context),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: Container(
@@ -39,11 +40,6 @@ class LocationCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _navigateToDetail(BuildContext context) {
-    print("Navigating to location: ${locationCard.id} - ${locationCard.name}");
-    context.push('/location-detail/${locationCard.id}');
   }
 
   Widget _buildImage() {
@@ -140,4 +136,39 @@ class LocationCard extends StatelessWidget {
       ),
     );
   }
+
+  void _handleCardTap(BuildContext context) {
+    if (locationCard.visited) {
+      // 방문한 경우 바로 이동
+      print("편지 api 연결 필요합니다!!!");
+    } else {
+      // 미방문한 경우 모달 표시
+      _showNoVisitHistoryModal(context);
+    }
+  }
+
+  void _showNoVisitHistoryModal(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext modalContext) {
+        return NoVisitHistoryModal(
+          onGoToDetail: () {
+            Navigator.of(modalContext).pop();  // 모달 닫기
+            Future.microtask(() => 
+            GoRouter.of(context).push('/location-detail/${locationCard.id}')
+          );
+          },
+        );
+      },
+    );
+  }
+
+  // void _navigateToDetail(BuildContext context) {
+  //   // 부모 context를 사용하여 경로 이동
+  // if (context.mounted) {
+  //   context.push('/location-detail/${locationCard.id}');
+  // } else {
+  //   GoRouter.of(context).push('/location-detail/${locationCard.id}');
+  // }
+  //}
 }

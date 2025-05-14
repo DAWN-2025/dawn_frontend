@@ -15,9 +15,8 @@ import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class LocationDetailScreen extends StatefulWidget {
   final int locationId;
-  final int userSeq;
 
-  const LocationDetailScreen({Key? key, required this.locationId, required this.userSeq})
+  const LocationDetailScreen({Key? key, required this.locationId})
       : super(key: key);
 
   @override
