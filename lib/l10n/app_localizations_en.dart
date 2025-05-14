@@ -99,5 +99,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get event => 'Events';
 
   @override
+  String get events => 'Events';
+
+  @override
+  String get locations => 'Locations';
+
+  @override
+  String get noSearchResults => 'No results found';
+
+  @override
+  String get instead_events => 'See this week\'s featured events instead';
+
+  @override
   String get map_notice => 'There are 2 locations marked on the map. Tap to view more details.';
 }

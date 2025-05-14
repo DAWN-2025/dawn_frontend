@@ -13,6 +13,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../l10n/app_localizations.dart';
+import '../../../core/router/router.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../data/storage/secure_storage.dart';
 import '../../view_models/home/search_view_model.dart';
@@ -74,11 +75,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   // context 사용 전에 mounted 체크
                   if (!mounted) return;
-                  await context.read<SearchResultViewModel>().fetchSearchResults(keyword, token);
-                  await context.read<SearchResultViewModel>().searchEventByKeyword(keyword, token);
+                  await context
+                      .read<SearchResultViewModel>()
+                      .fetchSearchResults(keyword, token);
+                  await context
+                      .read<SearchResultViewModel>()
+                      .searchEventByKeyword(keyword, token);
 
                   if (!mounted) return;
-                  context.push('/search-result');
+                  context.push(
+                    AppRoutes.search,
+                    extra: _searchController.text.trim(),
+                  );
                 },
               ),
             ),
@@ -115,6 +123,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     imageUrl: episode.eventImage,
                     title: episode.getNameByLocale(locale),
                     tags: episode.getKeywordsByLocale(locale),
+                    onTap: () {
+                      final id = 1;
+                      context.push('/event-detail/$id');
+                    },
                   ),
                 );
               },
@@ -151,13 +163,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
-                      children: eventVm.events.map((event) {
-                        return EventCard(
-                          imageUrl: event.eventImage,
-                          title: event.getNameByLocale(locale),
-                          tags: event.getKeywordsByLocale(locale),
-                        );
-                      }).toList(),
+                      children:
+                          eventVm.events.map((event) {
+                            return EventCard(
+                              imageUrl: event.eventImage,
+                              title: event.getNameByLocale(locale),
+                              tags: event.getKeywordsByLocale(locale),
+                              onTap: () {
+                                context.push('/event-detail/${event.id}');
+                              },
+                            );
+                          }).toList(),
                     ),
                   ),
                 );

@@ -275,6 +275,30 @@ abstract class AppLocalizations {
   /// **'Events'**
   String get event;
 
+  /// No description provided for @events.
+  ///
+  /// In en, this message translates to:
+  /// **'Events'**
+  String get events;
+
+  /// No description provided for @locations.
+  ///
+  /// In en, this message translates to:
+  /// **'Locations'**
+  String get locations;
+
+  /// No description provided for @noSearchResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get noSearchResults;
+
+  /// No description provided for @instead_events.
+  ///
+  /// In en, this message translates to:
+  /// **'See this week\'s featured events instead'**
+  String get instead_events;
+
   /// No description provided for @map_notice.
   ///
   /// In en, this message translates to:
