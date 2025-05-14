@@ -83,6 +83,7 @@ class SignInCard extends StatelessWidget {
                     }
                     if (result != null) {
                       router.go(AppRoutes.home);
+                      //router.go(AppRoutes.aiTest);
                     } else {}
                   },
                 ),
@@ -96,8 +97,7 @@ class SignInCard extends StatelessWidget {
                       print('Google sign-in result: $result');
                     }
                     if (result != null) {
-                      router.go(AppRoutes.home);
-                      //router.go(AppRoutes.aiTest);
+                      context.go(AppRoutes.home);
                     } else {}
                   },
                 ),

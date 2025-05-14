@@ -22,34 +22,47 @@ class LocationDetailViewModel extends ChangeNotifier {
     required this.commentViewModel,
   });
 
+  // 탭 인덱스 설정
   void setSelectedTabIndex(int index) {
     _selectedTabIndex = index;
     notifyListeners();
   }
 
+  // 데이터 초기화
+  void resetState() {
+    _location = null;
+    _isLoading = false;
+    _errorMessage = null;
+    _selectedTabIndex = 0;
+    notifyListeners();
+  }
+
+  // 주소 포맷팅
   String get formattedDescription {
     if (_location == null) return 'No description available';
     return '''
-Address       |  ${_location!.address}
-Hours         |  ${_location!.openTime} - ${_location!.closeTime}
-Phone         |  ${_location!.phoneNum}
-Exhibition    |  ${_location!.exhibitionTime}
-Available     |  ${_location!.available}
-Translate     |  ${_location!.translate}
+Address       |  ${_location!.address ?? 'N/A'}
+Hours         |  ${_location!.openTime ?? 'N/A'} - ${_location!.closeTime ?? 'N/A'}
+Phone         |  ${_location!.phoneNum ?? 'N/A'}
+Exhibition    |  ${_location!.exhibitionTime ?? 'N/A'}
+Available     |  ${_location!.available ?? 'N/A'}
+Translate     |  ${_location!.translate ?? 'N/A'}
 ''';
   }
 
+  // 위치 상세 정보 가져오기
   Future<void> fetchLocationDetail(int locationId) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
 
     try {
-      // API를 통해 위치 상세 정보 가져오기
-      final LocationDetail? fetchedLocation = await repository.fetchLocationDetail(locationId);
+      // 상세 정보 가져오기
+      final LocationDetail? result = await repository.getLocationDetail(locationId);
 
-      if (fetchedLocation != null) {
-        _location = fetchedLocation;
+      if (result != null) {
+        _location = result;
+        _errorMessage = null;
       } else {
         _errorMessage = 'Location not found';
       }

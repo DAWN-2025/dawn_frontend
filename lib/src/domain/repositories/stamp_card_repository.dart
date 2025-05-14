@@ -1,27 +1,18 @@
-import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:dawn_frontend/src/data/models/stamp_card_model.dart';
-import 'package:dawn_frontend/src/presentation/view_models/stamp_card_view_model.dart';
-import 'package:dawn_frontend/src/core/utils/constants/api_constants.dart';
-import 'package:dawn_frontend/src/data/clients/dio_client.dart';
+import 'package:dawn_frontend/src/data/services/stamp_service.dart';
 
 class StampCardRepository {
-  final DioClient _dioClient = DioClient();
+  final StampService _stampService = StampService();
 
+  // 스탬프 카드 목록 가져오기
   Future<List<StampCard>> fetchStampCards() async {
     try {
-      final response = await _dioClient.dio.get(
-        '/stamp/getStampImage',
-      );
-
-      if (response.statusCode == 200) {
-        final List<dynamic> data = response.data;
-        return data.map((item) => StampCard.fromJson(item)).toList();
-      } else {
-        throw Exception('Failed to load stamp cards');
-      }
+      // await로 비동기 반환값 명시
+      final List<StampCard> stampCards = await _stampService.fetchStampCards();
+      return stampCards;
     } catch (e) {
-      throw Exception('Error fetching stamp cards: $e');
+      print('Error in repository while fetching stamp cards: $e');
+      return [];
     }
   }
 }

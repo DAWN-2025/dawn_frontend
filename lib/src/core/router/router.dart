@@ -1,4 +1,4 @@
-import 'package:dawn_frontend/src/presentation/views/ai_test/ai_test_screen.dart';
+import 'package:dawn_frontend/src/presentation/views/ai-tour/ai_test_screen.dart';
 import 'package:dawn_frontend/src/presentation/views/auth/sign_up_screen.dart';
 import 'package:dawn_frontend/src/presentation/views/home/search_result_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +9,8 @@ import '../../presentation/views/album/album_screen.dart';
 import '../../presentation/views/setting/setting_screen.dart';
 import '../../presentation/views/details/event_detail_screen.dart';
 import '../../presentation/views/details/location_detail_screen.dart';
+import '../../presentation/view_models/details/event_detail_view_model.dart';
+import '../../presentation/views/ai-tour/letter_screen.dart';
 
 class AppRoutes {
   static const String signIn = '/signIn';
@@ -21,6 +23,7 @@ class AppRoutes {
   static const String eventDetail = '/event-detail/:eventId';
   static const String locationDetail = '/location-detail/:locationId';
   static const String aiTest = '/ai_test';
+  static const String letter = '/letter/:locationSeq';
 }
 
 class AppRouter {
@@ -73,11 +76,7 @@ class AppRouter {
         builder: (context, state) {
           final int eventId =
               int.tryParse(state.pathParameters['eventId'] ?? '0') ?? 0;
-          final int userSeq =
-              int.tryParse(state.uri.queryParameters['userSeq'] ?? '0') ?? 0;
-
-          print('Received eventId: $eventId, userSeq: $userSeq');
-          return EventDetailScreen(eventId: eventId, userSeq: userSeq);
+          return EventDetailScreen(eventId: eventId);
         },
       ),
       // 장소 상세 화면
@@ -96,6 +95,15 @@ class AppRouter {
         path: AppRoutes.aiTest,
         pageBuilder:
             (context, state) => NoTransitionPage(child: AiTestScreen()),
+      ),
+      // 편지 조회 화면
+      GoRoute(
+        path: AppRoutes.letter,
+        builder: (context, state) {
+          final locationSeq =
+              int.tryParse(state.pathParameters['locationSeq'] ?? '') ?? 0;
+          return LetterScreen(locationSeq: locationSeq);
+        },
       ),
     ],
   );

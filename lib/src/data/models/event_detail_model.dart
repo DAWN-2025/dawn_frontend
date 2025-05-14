@@ -31,28 +31,44 @@ class EventDetail {
     required this.keywords,
   });
 
+  // JSON 데이터를 모델로 변환
   factory EventDetail.fromJson(Map<String, dynamic> json) {
     return EventDetail(
       id: _parseInt(json['id']),
-      name: json['name'] ?? 'Unknown',
-      shortInfo: json['shortInfo'] ?? 'No short info',
-      background: json['background'] ?? 'No background info',
-      progress: json['progress'] ?? 'No progress info',
-      meaning: json['meaning'] ?? 'No meaning info',
-      date: json['date'] ?? 'No date',
-      nation: json['nation'] ?? 'No nation',
-      category: json['category'] ?? 'No category',
-      nameEng: json['nameEng'] ?? 'No English name',
-      nationEng: json['nationEng'] ?? 'No English nation',
-      categoryEng: json['categoryEng'] ?? 'No English category',
-      image: json['image'] ?? 'assets/images/default.jpg',
-      keywords: (json['keywords'] as List?)
-              ?.map((item) => item['keyword'] as String? ?? 'Unknown')
-              .toList() ??
-          [],
+      name: _formatString(json['name'], 'Unknown'),
+      shortInfo: _formatString(json['shortInfo'], 'No short info'),
+      background: _formatString(json['background'], 'No background info'),
+      progress: _formatString(json['progress'], 'No progress info'),
+      meaning: _formatString(json['meaning'], 'No meaning info'),
+      date: _formatString(json['date'], 'No date'),
+      nation: _formatString(json['nation'], 'No nation'),
+      category: _formatString(json['category'], 'No category'),
+      nameEng: _formatString(json['nameEng'], 'No English name'),
+      nationEng: _formatString(json['nationEng'], 'No English nation'),
+      categoryEng: _formatString(json['categoryEng'], 'No English category'),
+      image: _formatString(json['image'], 'assets/images/default.jpg'),
+      keywords: _parseKeywords(json['keywords']),
     );
   }
 
+ // 개행 문자 처리 메서드 (정규 표현식 사용)
+  static String _formatString(String? value, String defaultValue) {
+    if (value == null || value.isEmpty) return defaultValue;
+    // \\n을 \n으로 변환하여 실제 개행 처리
+    return value.replaceAll(RegExp(r'\\n'), '\n');
+  }
+
+  // 키워드 리스트 처리 메서드
+  static List<String> _parseKeywords(dynamic keywords) {
+    if (keywords is List) {
+      return keywords
+          .map((item) => (item is Map && item['keyword'] is String) ? item['keyword'] as String : 'Unknown')
+          .toList();
+    }
+    return [];
+  }
+
+  // 숫자 파싱 메서드
   static int _parseInt(dynamic value) {
     if (value == null) return 0;
     if (value is int) return value;
@@ -60,5 +76,10 @@ class EventDetail {
       return int.tryParse(value) ?? 0;
     }
     return 0;
+  }
+
+  @override
+  String toString() {
+    return 'EventDetail(id: $id, name: $name, shortInfo: $shortInfo, keywords: $keywords)';
   }
 }

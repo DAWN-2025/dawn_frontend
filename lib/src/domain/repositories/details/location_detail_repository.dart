@@ -1,34 +1,26 @@
-import 'dart:convert';
-import 'package:dawn_frontend/src/data/clients/dio_client.dart';
+import 'package:dawn_frontend/src/data/services/location_service.dart';
 import 'package:dawn_frontend/src/data/models/location_detail_model.dart';
-import 'package:dawn_frontend/src/core/utils/constants/api_constants.dart';
+import 'package:dawn_frontend/src/core/utils/log.dart';
 
 class LocationDetailRepository {
-  final DioClient _dioClient = DioClient();
+  final LocationService _locationService = LocationService();
 
-  Future<LocationDetail?> fetchLocationDetail(int locationId) async {
+  // 장소 상세 정보 가져오기 (Service 호출)
+  Future<LocationDetail?> getLocationDetail(int locationId) async {
     try {
-      // API 엔드포인트 설정
-      final response = await _dioClient.dio.get(
-        '/location/viewLocationByInfo',
-        queryParameters: {'id': locationId},
-      );
+      // LocationService를 통해 데이터 가져오기
+      LocationDetail? detail = await _locationService.fetchLocationDetail(locationId);
 
-      // 상태 코드 확인
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> locationData = response.data;
-
-        print("Matched location data: $locationData");
-
-        // LocationDetail 모델로 변환하여 반환
-        return LocationDetail.fromJson(locationData);
+      if (detail != null) {
+        debugLog('LocationDetailRepository: 장소 상세 정보 로드 성공');
+        return detail;
       } else {
-        print("Failed to load location details. Status code: ${response.statusCode}");
+        debugLog('LocationDetailRepository: 장소 상세 정보 없음');
         return null;
       }
     } catch (e) {
-      print("Error fetching location details: $e");
-      throw Exception('Failed to load location details: $e');
+      debugLog('LocationDetailRepository: 오류 발생 - $e');
+      return null;
     }
   }
 }
