@@ -110,50 +110,32 @@ class LocationService {
     }
   }
 
-  // 방문 여부 체크
-  Future<bool> checkVisited(int locationSeq, int userSeq) async {
-    try {
-      // 사용자 UID 가져오기
-      final String? userUid = await getUserUidFromFirebase();
-      if (userUid == null) {
-        debugLog('사용자 UID를 가져올 수 없습니다.');
-        return false;
-      }
+  // 방문 여부 확인하는 API 호출
+Future<Set<int>> fetchVisitedLocationSeqs(String userUid) async {
+  try {
+    final headers = await _getAuthHeader();
+    final response = await _dio.get(
+      '/letter/byUser',
+      queryParameters: {'userUid': userUid},
+      options: Options(headers: headers),
+    );
 
-      // JWT 토큰 불러오기
-      final token = await SecureStorage.getJwt();
-      if (token == null) {
-        debugLog('JWT 토큰이 없습니다.');
-        return false;
-      }
+    debugLog('방문 여부 응답 상태 코드: ${response.statusCode}');
+    debugLog('방문 여부 응답 데이터: ${response.data}');
 
-      // API 호출
-      final response = await _dio.get(
-        '/letter/byUser',
-        queryParameters: {'userUid': userUid},
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
-      );
-
-      debugLog('응답 상태 코드: ${response.statusCode}');
-      debugLog('방문 여부 응답 데이터: ${response.data}');
-
-      if (response.statusCode == 200 && response.data is List) {
-        return response.data.isNotEmpty;
-      } else {
-        debugLog('방문 여부 확인 실패');
-        return false;
-      }
-    } on DioException catch (e) {
-      debugLog('Dio 에러 발생: ${e.message}');
-      debugLog('응답 내용: ${e.response?.data}');
-      return false;
-    } catch (e) {
-      debugLog('알 수 없는 에러: $e');
-      return false;
+    if (response.statusCode == 200 && response.data is List) {
+      return (response.data as List)
+          .map((item) => item['locationSeq'] as int)
+          .toSet();
+    } else {
+      return {};
     }
+  } on DioException catch (e) {
+    debugLog('Dio 에러 발생: ${e.message}');
+    return {};
+  } catch (e) {
+    debugLog('알 수 없는 에러: $e');
+    return {};
   }
+}
 }

@@ -47,23 +47,15 @@ class LocationCardModel {
   }
 
   // 객체 복사 메서드
-  LocationCardModel copyWith({
-    int? id,
-    String? name,
-    String? nameEng,
-    String? locationSimpleImage,
-    String? address,
-    bool? visited,
-    List<String>? keywords,
-  }) {
+  LocationCardModel copyWith({bool? visited}){
     return LocationCardModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      nameEng: nameEng ?? this.nameEng,
-      locationSimpleImage: locationSimpleImage ?? this.locationSimpleImage,
-      address: address ?? this.address,
+      id: this.id,
+      name: this.name,
+      nameEng: this.nameEng,
+      locationSimpleImage: this.locationSimpleImage,
+      address: this.address,
       visited: visited ?? this.visited,
-      keywords: keywords ?? this.keywords,
+      keywords: this.keywords,
     );
   }
 }

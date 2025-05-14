@@ -73,11 +73,7 @@ class AppRouter {
         builder: (context, state) {
           final int eventId =
               int.tryParse(state.pathParameters['eventId'] ?? '0') ?? 0;
-          final int userSeq =
-              int.tryParse(state.uri.queryParameters['userSeq'] ?? '0') ?? 0;
-
-          print('Received eventId: $eventId, userSeq: $userSeq');
-          return EventDetailScreen(eventId: eventId, userSeq: userSeq);
+          return EventDetailScreen(eventId: eventId);
         },
       ),
       // 장소 상세 화면

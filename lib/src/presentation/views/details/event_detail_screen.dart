@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:dawn_frontend/src/presentation/view_models/details/event_detail_view_model.dart';
 import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
@@ -13,29 +14,50 @@ import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 
 class EventDetailScreen extends StatefulWidget {
   final int eventId;
-  final int userSeq;
 
-  const EventDetailScreen({Key? key, required this.eventId, required this.userSeq}) : super(key: key);
+  const EventDetailScreen({Key? key, required this.eventId}) : super(key: key);
 
   @override
   State<EventDetailScreen> createState() => _EventDetailScreenState();
 }
 
 class _EventDetailScreenState extends State<EventDetailScreen> {
+  String? userUid;
+
   @override
   void initState() {
     super.initState();
     print('Received event ID on detail event page: ${widget.eventId}');
+    _loadUserUid();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-    final eventId = widget.eventId;
+      final eventId = widget.eventId;
 
-    // EventDetail 가져오기
-    context.read<EventDetailViewModel>().fetchEventDetail(eventId);
+      // EventDetail 가져오기
+      context.read<EventDetailViewModel>().fetchEventDetail(eventId);
 
-    // Location 정보 초기화 및 로드
-    //context.read<LocationCardViewModel>().clearLocations();
-    context.read<LocationCardViewModel>().fetchEventLocations(eventId);
-  });
+      // Location 정보 초기화 및 로드
+      if (userUid != null) {
+        context.read<LocationCardViewModel>().fetchEventLocations(eventId, userUid!);
+      }
+    });
+  }
+
+  // Firebase에서 userUid를 가져오는 메서드
+  Future<void> _loadUserUid() async {
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final User? user = auth.currentUser;
+      if (user != null) {
+        setState(() {
+          userUid = user.uid;
+        });
+        print('User UID loaded: $userUid');
+      } else {
+        print('No user logged in.');
+      }
+    } catch (e) {
+      print('Error fetching user UID: $e');
+    }
   }
 
   @override
@@ -65,7 +87,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
 
           return Padding(
             padding: const EdgeInsets.only(
-              bottom: kBottomNavigationBarHeight + 50, // 하단 패딩 추가
+              bottom: kBottomNavigationBarHeight + 50,
             ),
             child: SingleChildScrollView(
               child: Column(
@@ -89,9 +111,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                             selectedIndex: viewModel.selectedTabIndex,
                             tabLabels: ["Info", "Locations"],
                             onTabSelected: (index) {
-                              context
-                                  .read<EventDetailViewModel>()
-                                  .setSelectedTabIndex(index);
+                              context.read<EventDetailViewModel>().setSelectedTabIndex(index);
                             },
                           ),
                         ),
@@ -123,9 +143,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                           Image.network(event.image),
                         ] else if (viewModel.selectedTabIndex == 1) ...[
                           LocationCardList(
-                            locationCards: context
-                                .watch<LocationCardViewModel>()
-                                .locationCards,
+                            locationCards: context.watch<LocationCardViewModel>().locationCards,
                           ),
                         ],
                       ],

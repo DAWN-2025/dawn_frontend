@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:dawn_frontend/src/data/models/location_card_model.dart';
-import 'package:dawn_frontend/src/presentation/view_models/location_card_view_model.dart';
 import 'location_card.dart';
 
 class LocationCardList extends StatelessWidget {
@@ -16,8 +15,8 @@ class LocationCardList extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        final viewModel = LocationCardViewModel(locationCard: locationCards[index]);
-        return LocationCard(locationViewModel: viewModel);
+        final locationCard = locationCards[index];
+        return LocationCard(locationCard: locationCard);
       },
     );
   }
