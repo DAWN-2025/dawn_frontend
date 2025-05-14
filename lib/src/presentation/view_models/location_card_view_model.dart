@@ -9,11 +9,11 @@ class LocationCardViewModel extends ChangeNotifier {
   String? errorMessage;
 
   // 이벤트 장소 목록 가져오기 (방문 여부 반영)
-  Future<void> fetchEventLocations(int eventId, String userUid) async {
+  Future<void> fetchEventLocations(int eventId) async {
     isLoading = true;
     notifyListeners();
     try {
-      locationCards = await _repository.fetchEventLocations(eventId, userUid);
+      locationCards = await _repository.fetchEventLocations(eventId);
     } catch (e) {
       errorMessage = 'Failed to load location cards: $e';
     } finally {

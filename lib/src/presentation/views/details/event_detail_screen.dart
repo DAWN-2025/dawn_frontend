@@ -22,13 +22,11 @@ class EventDetailScreen extends StatefulWidget {
 }
 
 class _EventDetailScreenState extends State<EventDetailScreen> {
-  String? userUid;
 
   @override
   void initState() {
     super.initState();
     print('Received event ID on detail event page: ${widget.eventId}');
-    _loadUserUid();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final eventId = widget.eventId;
 
@@ -36,28 +34,8 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
       context.read<EventDetailViewModel>().fetchEventDetail(eventId);
 
       // Location 정보 초기화 및 로드
-      if (userUid != null) {
-        context.read<LocationCardViewModel>().fetchEventLocations(eventId, userUid!);
-      }
+        context.read<LocationCardViewModel>().fetchEventLocations(eventId);
     });
-  }
-
-  // Firebase에서 userUid를 가져오는 메서드
-  Future<void> _loadUserUid() async {
-    try {
-      final FirebaseAuth auth = FirebaseAuth.instance;
-      final User? user = auth.currentUser;
-      if (user != null) {
-        setState(() {
-          userUid = user.uid;
-        });
-        print('User UID loaded: $userUid');
-      } else {
-        print('No user logged in.');
-      }
-    } catch (e) {
-      print('Error fetching user UID: $e');
-    }
   }
 
   @override

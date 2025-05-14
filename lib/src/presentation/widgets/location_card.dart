@@ -140,7 +140,7 @@ class LocationCard extends StatelessWidget {
   void _handleCardTap(BuildContext context) {
     if (locationCard.visited) {
       // 방문한 경우 바로 이동
-      print("편지 api 연결 필요합니다!!!");
+      context.push('/letter/${locationCard.id}');
     } else {
       // 미방문한 경우 모달 표시
       _showNoVisitHistoryModal(context);
@@ -153,10 +153,12 @@ class LocationCard extends StatelessWidget {
       builder: (BuildContext modalContext) {
         return NoVisitHistoryModal(
           onGoToDetail: () {
-            Navigator.of(modalContext).pop();  // 모달 닫기
-            Future.microtask(() => 
-            GoRouter.of(context).push('/location-detail/${locationCard.id}')
-          );
+            Navigator.of(modalContext).pop(); // 모달 닫기
+            Future.microtask(
+              () => GoRouter.of(
+                context,
+              ).push('/location-detail/${locationCard.id}'),
+            );
           },
         );
       },
