@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:dawn_frontend/src/presentation/view_models/stamp_card_view_model.dart';
 
-
 class StampCard extends StatelessWidget {
   final String title;
   final String? imagePath;
@@ -42,12 +41,35 @@ class StampCard extends StatelessWidget {
                     child: SizedBox(
                       width: size,
                       height: size,
-                      child: imagePath != null
-                          ? Image.network(
-                              imagePath!,
-                              fit: BoxFit.cover,
-                            )
-                          : const Center(child: Text('No Image')),
+                      child:
+                          imagePath != null
+                              ? Image.network(
+                                imagePath!,
+                                fit: BoxFit.cover,
+                                loadingBuilder: (
+                                  BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent? loadingProgress,
+                                ) {
+                                  if (loadingProgress == null) {
+                                    return child;
+                                  }
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  (loadingProgress
+                                                          .expectedTotalBytes ??
+                                                      1)
+                                              : null,
+                                    ),
+                                  );
+                                },
+                              )
+                              : const Center(child: Text('No Image')),
                     ),
                   );
                 },
