@@ -65,9 +65,8 @@ class AiTourScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(12),
                               child: Text(
                                 chat.message,
-                                textAlign: isUser
-                                    ? TextAlign.end
-                                    : TextAlign.start,
+                                textAlign:
+                                    isUser ? TextAlign.end : TextAlign.start,
                                 style: typography.AppTextStyle.bodyText
                                     .copyWith(
                                       fontSize: isUser ? 18 : 20,
@@ -82,61 +81,31 @@ class AiTourScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 24),
                 // 입력 필드와 전송 버튼
-                Row(
-                  children: [
-                    // 입력 필드 (비율: 7)
-                    Expanded(
-                      flex: 8,
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: TextField(
-                          controller:
-                              context.read<AiTourViewModel>().inputController,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 14,
-                            ),
-                            hintText: 'Type your message...',
-                            border: InputBorder.none,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    // 전송 버튼 (비율: 3)
-                    Expanded(
-                      flex: 3,
-                      child: SizedBox(
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white.withOpacity(0.8),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                Consumer<AiTourViewModel>(
+                  builder: (context, viewModel, child) {
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: viewModel.inputController,
+                            decoration: const InputDecoration(
+                              labelText: '질문을 입력하세요',
+                              border: OutlineInputBorder(),
                             ),
                           ),
+                        ),
+                        const SizedBox(width: 8),
+                        ElevatedButton(
                           onPressed: () async {
-                            await context.read<AiTourViewModel>().sendMessage(
-                              context,
-                            );
+                            await viewModel.sendMessage(context);
                           },
-                          child: const Text(
-                            'Send',
-                            style: TextStyle(color: Colors.black),
-                          ),
+                          child: const Text('전송'),
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  },
                 ),
-                const SizedBox(height: 20),
               ],
             ),
           ),
