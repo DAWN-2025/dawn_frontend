@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
 import '../../../core/theme/typography.dart';
 import '../tag/tag_chip_small.dart';
 
@@ -9,21 +10,33 @@ class EventCard extends StatelessWidget {
   final List<String> tags;
   final VoidCallback? onTap;
 
+  // 크기 조절 파라미터
+  final double? width;
+  final double? height;
+  final double? fontSize;
+
   const EventCard({
     super.key,
     required this.imageUrl,
     required this.title,
     required this.tags,
     this.onTap,
+    this.width, // default 값은 아래에서 처리
+    this.height,
+    this.fontSize,
   });
 
   @override
   Widget build(BuildContext context) {
+    final cardWidth = width ?? 175;
+    final cardHeight = height ?? 195;
+    final titleFontSize = fontSize ?? 11;
+
     return GestureDetector(
-      onTap: onTap, // ← 클릭 이벤트도 여기서 처리
+      onTap: onTap,
       child: Container(
-        height: 195,
-        width: 175,
+        width: cardWidth,
+        height: cardHeight,
         margin: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
@@ -43,10 +56,13 @@ class EventCard extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: imageUrl,
                     fit: BoxFit.cover,
-                    width: 152,
-                    height: 120,
-                    placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    width: cardWidth - 23,
+                    height: cardHeight * 0.6,
+                    placeholder:
+                        (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                    errorWidget:
+                        (context, url, error) => const Icon(Icons.error),
                   ),
                 ),
               ),
@@ -64,7 +80,7 @@ class EventCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: AppTextStyle.heading3.copyWith(
-                    fontSize: 11,
+                    fontSize: titleFontSize,
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                   ),

@@ -30,5 +30,9 @@
     "week_4": "Fourth week",
     "week_5": "Fifth week",
     "event": "Events",
+    "events": "Events",
+    "locations": "Locations",
+    "noSearchResults": "No results found",
+    "instead_events": "See this week's featured events instead",
     "map_notice": "There are 2 locations marked on the map. Tap to view more details."
 }

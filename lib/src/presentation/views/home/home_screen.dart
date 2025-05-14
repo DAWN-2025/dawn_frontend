@@ -13,6 +13,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../l10n/app_localizations.dart';
+import '../../../core/router/router.dart';
 import '../../../core/utils/date_utils.dart';
 import '../../../data/storage/secure_storage.dart';
 import '../../view_models/home/search_view_model.dart';
@@ -82,7 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       .searchEventByKeyword(keyword, token);
 
                   if (!mounted) return;
-                  context.push('/search-result');
+                  context.push(
+                    AppRoutes.search,
+                    extra: _searchController.text.trim(),
+                  );
                 },
               ),
             ),

@@ -99,5 +99,17 @@ class AppLocalizationsKo extends AppLocalizations {
   String get event => '이벤트';
 
   @override
+  String get events => '관련 이벤트';
+
+  @override
+  String get locations => '관련 장소';
+
+  @override
+  String get noSearchResults => '검색 결과가 없습니다';
+
+  @override
+  String get instead_events => '대신 이번 주와 관련된 이벤트를 확인해보세요';
+
+  @override
   String get map_notice => '현재 지도에는 총 2곳의 장소가 표시되어 있습니다. 눌러서 자세한 정보를 확인해보세요.';
 }
