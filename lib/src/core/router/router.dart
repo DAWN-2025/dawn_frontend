@@ -1,4 +1,5 @@
-import 'package:dawn_frontend/src/presentation/views/ai-tour/ai_test_screen.dart';
+import 'package:dawn_frontend/src/presentation/views/ai-tour/ai_test_screen.dart'; // Ensure this file contains the AiTestScreen class definition
+// If AiTestScreen is not defined, define it in the corresponding file or import the correct file.
 import 'package:dawn_frontend/src/presentation/views/auth/sign_up_screen.dart';
 import 'package:dawn_frontend/src/presentation/views/home/search_result_screen.dart';
 import 'package:go_router/go_router.dart';

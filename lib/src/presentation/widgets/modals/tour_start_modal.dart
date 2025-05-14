@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'reusable_modal.dart';
+import 'package:go_router/go_router.dart';
 
 void TourStartModal(BuildContext context) {
   showDialog(
@@ -12,7 +13,7 @@ void TourStartModal(BuildContext context) {
             primaryButtonText: 'Start the tour',
             secondaryButtonText: 'Cancel',
             onPrimaryPressed: () {
-              print('Tour started!');
+              context.go('/ai_test');
             },
             onSecondaryPressed: () => Navigator.of(context).pop(),
           );

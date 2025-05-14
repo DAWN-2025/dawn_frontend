@@ -51,10 +51,7 @@ class _LetterScreenState extends State<LetterScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween, // 위아래 공간 분리
               children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                ),
-                // 편지 카드 (중앙에 위치)
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                 Expanded(
                   child: Center(
                     child: Container(
@@ -84,56 +81,10 @@ class _LetterScreenState extends State<LetterScreen> {
                           ),
                           child: IntrinsicHeight(
                             // 자식 요소의 최소 높이를 계산하여 레이아웃 문제 방지
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // 상단과 중간 텍스트를 한 그룹으로 묶음
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Dear Traveler,',
-                                      textAlign: TextAlign.start,
-                                      style: typography.AppTextStyle.heading3
-                                          .copyWith(
-                                            fontStyle: FontStyle.italic,
-                                          ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      letter.content.isNotEmpty
-                                          ? letter.content
-                                          : '',
-                                      textAlign: TextAlign.start,
-                                      style: typography.AppTextStyle.bodyText,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 16), // 상단과 하단 사이 여백
-                                // 하단 텍스트
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Best wishes,',
-                                      textAlign: TextAlign.start,
-                                      style: typography.AppTextStyle.heading3
-                                          .copyWith(
-                                            fontStyle: FontStyle.italic,
-                                          ),
-                                    ),
-                                    Text(
-                                      'Your friend who remains in the past',
-                                      textAlign: TextAlign.center,
-                                      style: typography.AppTextStyle.bodyText
-                                          .copyWith(
-                                            fontSize: 18,
-                                            fontStyle: FontStyle.italic,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                            child: Text(
+                              letter.content.isNotEmpty ? letter.content : '',
+                              textAlign: TextAlign.start,
+                              style: typography.AppTextStyle.bodyText,
                             ),
                           ),
                         ),
