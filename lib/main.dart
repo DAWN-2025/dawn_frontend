@@ -29,12 +29,8 @@ import 'package:dawn_frontend/src/domain/repositories/details/comment_repository
 import 'package:dawn_frontend/src/presentation/view_models/ai-tour/explore_now_btn_view_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/modals/modal_view_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/stamp_card_view_model.dart';
-import 'package:dawn_frontend/src/presentation/view_models/stamp_card_list_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/ai-tour/ai_tour_view_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/ai-tour/letter_view_model.dart';
-import 'package:dawn_frontend/src/domain/repositories/letter_repository.dart';
-
-// import 'package:dawn_frontend/src/presentation/widgets/modals/tour_start_modal.dart';
-// import 'package:dawn_frontend/src/presentation/widgets/modals/delete_comment_modal.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -98,6 +94,7 @@ void main() async {
         ),
         ChangeNotifierProvider(create: (_) => LocationCardViewModel()),
         ChangeNotifierProvider(create: (_) => LetterViewModel()),
+        ChangeNotifierProvider(create: (_) => AiTourViewModel()),
       ],
       child: const MyApp(),
     ),

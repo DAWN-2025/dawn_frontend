@@ -8,18 +8,14 @@ class ReusableModal extends StatelessWidget {
   final String secondaryButtonText;
   final VoidCallback onPrimaryPressed;
   final VoidCallback onSecondaryPressed;
-  final String? bottomText;
-  final VoidCallback? onBottomTextPressed;
 
-  const  ReusableModal({
+  const ReusableModal({
     Key? key,
     required this.title,
     required this.primaryButtonText,
     required this.secondaryButtonText,
     required this.onPrimaryPressed,
     required this.onSecondaryPressed,
-    this.bottomText,
-    this.onBottomTextPressed,
   }) : super(key: key);
 
   @override
@@ -69,10 +65,13 @@ class ReusableModal extends StatelessWidget {
                   const SizedBox(height: 10),
 
                   ElevatedButton(
-                    onPressed: () => viewModel.closeModal(context),
+                    onPressed: () {
+                      onSecondaryPressed();
+                      viewModel.closeModal(context);
+                    },
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 45),
-                      backgroundColor: Color.fromRGBO(104, 84,104,1),
+                      backgroundColor: Color.fromRGBO(104, 84, 104, 1),
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -80,20 +79,6 @@ class ReusableModal extends StatelessWidget {
                     ),
                     child: Text(secondaryButtonText),
                   ),
-                  if (bottomText != null) ...[
-                    const SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: onBottomTextPressed,
-                      child: Text(
-                        bottomText!,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ],
                 ],
               ),
             ),
