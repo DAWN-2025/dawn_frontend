@@ -120,7 +120,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                                 .copyWith(fontSize: 16, color: Colors.white),
                           ),
                           const SizedBox(height: 24),
-                          Image.asset(event.image),
+                          Image.network(event.image),
                         ] else if (viewModel.selectedTabIndex == 1) ...[
                           LocationCardList(
                             locationCards: context
