@@ -34,5 +34,7 @@
     "locations": "Locations",
     "noSearchResults": "No results found",
     "instead_events": "See this week's featured events instead",
-    "map_notice": "There are 2 locations marked on the map. Tap to view more details."
+    "map_notice": "There are 2 locations marked on the map. Tap to view more details.",
+    "emailCopied": "Email address copied to clipboard!",
+    "settingsIntroMessage": "Thank you for using our app!\nWe are currently working hard to design and develop the service\nto create a better dark tourism culture.\n\nIf you have any recommendations, ideas, or improvements\nplease feel free to contact us.\nYour feedback is very helpful!"
 }

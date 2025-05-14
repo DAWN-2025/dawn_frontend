@@ -304,6 +304,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'There are 2 locations marked on the map. Tap to view more details.'**
   String get map_notice;
+
+  /// No description provided for @emailCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address copied to clipboard!'**
+  String get emailCopied;
+
+  /// No description provided for @settingsIntroMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for using our app!\nWe are currently working hard to design and develop the service\nto create a better dark tourism culture.\n\nIf you have any recommendations, ideas, or improvements\nplease feel free to contact us.\nYour feedback is very helpful!'**
+  String get settingsIntroMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
