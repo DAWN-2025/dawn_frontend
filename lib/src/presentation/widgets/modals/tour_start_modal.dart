@@ -13,7 +13,7 @@ void TourStartModal(BuildContext context) {
             primaryButtonText: 'Start the tour',
             secondaryButtonText: 'Cancel',
             onPrimaryPressed: () {
-              context.go('/ai-tour');
+              context.push('/ai-tour');
             },
             onSecondaryPressed: () => Navigator.of(context).pop(),
           );

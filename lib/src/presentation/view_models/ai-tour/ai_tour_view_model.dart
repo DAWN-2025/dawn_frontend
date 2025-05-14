@@ -110,16 +110,14 @@ class AiTourViewModel extends ChangeNotifier {
   void _showTourEndModal(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) {
+      builder: (dialogContext) {
         return TourEndModal(
           onCheckLetter: () {
-            Navigator.of(context).pop();
             context.go('/');
             context.push('/event-detail/1');
             context.push('/letter/$locationSeq');
           },
           onGoToHome: () {
-            Navigator.of(context).pop();
             context.go('/');
           },
         );
