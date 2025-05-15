@@ -94,7 +94,7 @@ void main() async {
         ),
         ChangeNotifierProvider(create: (_) => LocationCardViewModel()),
         ChangeNotifierProvider(create: (_) => LetterViewModel()),
-        ChangeNotifierProvider(create: (_) => AiTourViewModel()),
+        
       ],
       child: const MyApp(),
     ),

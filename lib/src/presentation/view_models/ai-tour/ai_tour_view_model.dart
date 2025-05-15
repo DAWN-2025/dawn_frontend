@@ -8,6 +8,7 @@ import 'package:dawn_frontend/src/presentation/widgets/modals/tour_end_modal.dar
 import 'package:go_router/go_router.dart';
 
 class AiTourViewModel extends ChangeNotifier {
+  int locationSeq;
   final AiTourRepository _repository = AiTourRepository();
   final TextEditingController inputController = TextEditingController();
 
@@ -15,9 +16,8 @@ class AiTourViewModel extends ChangeNotifier {
   int chatCount = 0;
   String? jwtToken;
   String? userUid;
-  int locationSeq = 1;
 
-  AiTourViewModel() {
+  AiTourViewModel({required this.locationSeq}) {
     _loadAuthInfo();
   }
 
@@ -29,11 +29,14 @@ class AiTourViewModel extends ChangeNotifier {
       userUid = user?.uid;
       notifyListeners();
     } catch (e) {
-      chatMessages.add(
-        ChatMessage(sender: 'System', message: '인증 정보 로드 실패: $e'),
-      );
-      notifyListeners();
+      _addMessage('System', '인증 정보 로드 실패: $e');
     }
+  }
+
+  // 메시지 추가 함수
+  void _addMessage(String sender, String message) {
+    chatMessages.add(ChatMessage(sender: sender, message: message));
+    notifyListeners();
   }
 
   // 전송 버튼 클릭 시 호출
@@ -43,15 +46,11 @@ class AiTourViewModel extends ChangeNotifier {
     if (message.isEmpty) return;
 
     // 사용자 메시지 추가
-    chatMessages.add(ChatMessage(sender: 'User', message: message));
+    _addMessage('User', message);
     inputController.clear();
-    notifyListeners();
 
     if (jwtToken == null || userUid == null) {
-      chatMessages.add(
-        ChatMessage(sender: 'System', message: '인증 정보를 불러오지 못했습니다.'),
-      );
-      notifyListeners();
+      _addMessage('System', '인증 정보를 불러오지 못했습니다.');
       return;
     }
 
@@ -65,8 +64,7 @@ class AiTourViewModel extends ChangeNotifier {
       );
 
       // AI 응답 화면에 추가
-      chatMessages.add(ChatMessage(sender: 'AI', message: model.chatAnswer));
-      notifyListeners();
+      _addMessage('AI', model.chatAnswer);
 
       // 대화 횟수 증가 후 조건 확인
       chatCount++;
@@ -74,35 +72,23 @@ class AiTourViewModel extends ChangeNotifier {
         await _createLetter(context);
       }
     } catch (e) {
-      chatMessages.add(ChatMessage(sender: 'System', message: 'Error: $e'));
-      notifyListeners();
+      _addMessage('System', 'Error: $e');
     }
   }
 
   // 📝 편지 생성 함수
   Future<void> _createLetter(BuildContext context) async {
     try {
-      final response = await _repository.createLetter(
-        jwtToken!,
-        userUid!,
-        locationSeq,
-      );
+      final response = await _repository.createLetter(jwtToken!, userUid!, locationSeq);
 
       if (response.containsKey('seq')) {
         locationSeq = response['locationSeq'];
         _showTourEndModal(context);
       } else {
-        chatMessages.add(
-          ChatMessage(
-            sender: 'System',
-            message: '편지 생성 실패: ${response['error']}',
-          ),
-        );
-        notifyListeners();
+        _addMessage('System', '편지 생성 실패: ${response['error']}');
       }
     } catch (e) {
-      chatMessages.add(ChatMessage(sender: 'System', message: '편지 생성 오류: $e'));
-      notifyListeners();
+      _addMessage('System', '편지 생성 오류: $e');
     }
   }
 
@@ -113,12 +99,17 @@ class AiTourViewModel extends ChangeNotifier {
       builder: (dialogContext) {
         return TourEndModal(
           onCheckLetter: () {
-            context.go('/');
-            context.push('/event-detail/1');
-            context.push('/letter/$locationSeq');
+            Navigator.of(dialogContext).pop();
+            Future.microtask(() {
+              context.go('/event-detail/1');
+              context.push('/letter/$locationSeq');
+            });
           },
           onGoToHome: () {
-            context.go('/');
+            Navigator.of(dialogContext).pop();
+            Future.microtask(() {
+              context.go('/');
+            });
           },
         );
       },

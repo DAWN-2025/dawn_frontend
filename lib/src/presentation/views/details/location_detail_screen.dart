@@ -135,7 +135,7 @@ class _LocationDetailScreenState extends State<LocationDetailScreen> {
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  child: ExploreNowBtn(),
+                  child: ExploreNowBtn(locationSeq: location.id),
                 ),
               ] else if (locationViewModel.selectedTabIndex == 1) ...[
                 Positioned(

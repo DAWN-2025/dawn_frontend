@@ -3,6 +3,7 @@ import 'package:dawn_frontend/src/presentation/views/ai-tour/ai_tour_screen.dart
 import 'package:dawn_frontend/src/presentation/views/auth/sign_up_screen.dart';
 import 'package:dawn_frontend/src/presentation/views/home/search_result_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../../presentation/views/auth/sign_in_screen.dart';
 import '../../presentation/views/home/home_screen.dart';
 import '../../presentation/views/map/map_screen.dart';
@@ -12,6 +13,7 @@ import '../../presentation/views/details/event_detail_screen.dart';
 import '../../presentation/views/details/location_detail_screen.dart';
 import '../../presentation/view_models/details/event_detail_view_model.dart';
 import '../../presentation/views/ai-tour/letter_screen.dart';
+import '../../presentation/view_models/ai-tour/ai_tour_view_model.dart'; // Ensure this file contains the AiTourViewModel class definition
 
 class AppRoutes {
   static const String signIn = '/signIn';
@@ -23,7 +25,7 @@ class AppRoutes {
   static const String album = '/album';
   static const String eventDetail = '/event-detail/:eventId';
   static const String locationDetail = '/location-detail/:locationId';
-  static const String aiTour = '/ai-tour';
+  static const String aiTour = '/ai-tour/:locationSeq';
   static const String letter = '/letter/:locationSeq';
 }
 
@@ -94,16 +96,24 @@ class AppRouter {
       // AI 테스트 화면
       GoRoute(
         path: AppRoutes.aiTour,
-        pageBuilder:
-            (context, state) => NoTransitionPage(child: AiTourScreen()),
+        builder: (context, state) {
+          final locationSeq = int.tryParse(
+            state.pathParameters['locationSeq'] ?? '',
+          );
+          return ChangeNotifierProvider(
+            create: (_) => AiTourViewModel(locationSeq: locationSeq ?? 0),
+            child: AiTourScreen(locationSeq: locationSeq ?? 0),
+          );
+        },
       ),
       // 편지 조회 화면
       GoRoute(
         path: AppRoutes.letter,
         builder: (context, state) {
-          final locationSeq =
-              int.tryParse(state.pathParameters['locationSeq'] ?? '') ?? 0;
-          return LetterScreen(locationSeq: locationSeq);
+          final locationSeq = int.tryParse(
+            state.pathParameters['locationSeq'] ?? '',
+          );
+          return LetterScreen(locationSeq: locationSeq ?? 0);
         },
       ),
     ],
