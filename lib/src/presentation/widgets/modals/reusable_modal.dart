@@ -67,7 +67,7 @@ class ReusableModal extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       onSecondaryPressed();
-                      viewModel.closeModal(context);
+                      //viewModel.closeModal(context);
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 45),
