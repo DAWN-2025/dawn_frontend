@@ -6,10 +6,12 @@ import 'package:dawn_frontend/src/data/storage/secure_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dawn_frontend/src/presentation/widgets/modals/tour_end_modal.dart';
 import 'package:go_router/go_router.dart';
+import 'package:dawn_frontend/src/data/services/stamp_service.dart';  // StampService 임포트
 
 class AiTourViewModel extends ChangeNotifier {
   int locationSeq;
   final AiTourRepository _repository = AiTourRepository();
+  final StampService _stampService = StampService();  // StampService 인스턴스
   final TextEditingController inputController = TextEditingController();
 
   List<ChatMessage> chatMessages = [];
@@ -76,13 +78,16 @@ class AiTourViewModel extends ChangeNotifier {
     }
   }
 
-  // 📝 편지 생성 함수
+  // 📝 편지 생성 함수 (스탬프 생성 추가)
   Future<void> _createLetter(BuildContext context) async {
     try {
       final response = await _repository.createLetter(jwtToken!, userUid!, locationSeq);
 
       if (response.containsKey('seq')) {
         locationSeq = response['locationSeq'];
+
+        await _stampService.createStamp(locationSeq, 1);  // 스탬프 생성 API 호출
+
         _showTourEndModal(context);
       } else {
         _addMessage('System', '편지 생성 실패: ${response['error']}');
