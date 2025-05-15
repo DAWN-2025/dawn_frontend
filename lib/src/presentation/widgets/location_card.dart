@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:dawn_frontend/src/presentation/widgets/common/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -45,21 +46,11 @@ class LocationCard extends StatelessWidget {
   Widget _buildImage() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(14),
-      child: Image.network(
-        locationCard.locationSimpleImage,
+      child: ImageLoader(
+        imageUrl: locationCard.locationSimpleImage,
         fit: BoxFit.cover,
         width: double.infinity,
         height: 100,
-        errorBuilder: (context, error, stackTrace) {
-          return Container(
-            color: Colors.grey,
-            child: const Icon(
-              Icons.broken_image,
-              size: 50,
-              color: Colors.white,
-            ),
-          );
-        },
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:dawn_frontend/src/presentation/widgets/auth/sign_up_card.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_top_app_bar.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_scaffold.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_top_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../core/theme/typography.dart';

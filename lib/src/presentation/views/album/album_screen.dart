@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_bottom_app_bar.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_scaffold.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_bottom_app_bar.dart';
 import '../../widgets/stamp_card.dart';
 import 'package:provider/provider.dart';
 import 'package:dawn_frontend/src/presentation/view_models/stamp_card_list_view_model.dart';

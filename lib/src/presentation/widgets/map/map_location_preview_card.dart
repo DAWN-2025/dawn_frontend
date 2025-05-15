@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:dawn_frontend/src/presentation/widgets/common/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,17 +27,11 @@ class MapLocationPreviewCard extends StatelessWidget {
         child: Stack(
           children: [
             // 배경 이미지
-            Image.network(
-              imageUrl,
+            ImageLoader(
+              imageUrl: imageUrl,
               width: double.infinity,
               height: 150,
               fit: BoxFit.cover,
-              errorBuilder:
-                  (_, __, ___) => Container(
-                    height: 150,
-                    color: Colors.grey,
-                    child: const Icon(Icons.broken_image, size: 40),
-                  ),
             ),
 
             // Blur + Gradient 효과

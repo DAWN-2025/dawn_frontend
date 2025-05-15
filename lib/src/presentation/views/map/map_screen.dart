@@ -3,8 +3,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../view_models/map/map_view_model.dart';
-import '../../widgets/custom_bottom_app_bar.dart';
-import '../../widgets/custom_scaffold.dart';
+import '../../widgets/common/custom_bottom_app_bar.dart';
+import '../../widgets/common/custom_scaffold.dart';
 import '../../widgets/map/map_notice.dart';
 
 class MapScreen extends StatefulWidget {

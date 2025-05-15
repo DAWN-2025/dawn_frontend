@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dawn_frontend/src/presentation/view_models/ai-tour/letter_view_model.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_top_app_bar.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_top_app_bar.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_scaffold.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/go_to_detail_btn.dart';
 import 'package:dawn_frontend/src/core/theme/typography.dart' as typography;
 

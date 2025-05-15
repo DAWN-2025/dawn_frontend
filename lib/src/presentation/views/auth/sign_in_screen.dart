@@ -4,7 +4,7 @@ import 'package:dawn_frontend/src/presentation/view_models/language_view_model.d
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/language_dropdown.dart';
-import '../../widgets/custom_scaffold.dart';
+import '../../widgets/common/custom_scaffold.dart';
 import '../../widgets/auth/sign_in_card.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

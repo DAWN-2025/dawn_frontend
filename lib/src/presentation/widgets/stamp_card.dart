@@ -1,3 +1,4 @@
+import 'package:dawn_frontend/src/presentation/widgets/common/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -49,38 +50,15 @@ class StampCard extends StatelessWidget {
                           height: size,
                           child:
                               imagePath != null
-                                  ? Image.network(
-                                    imagePath!,
+                                  ? ImageLoader(
+                                    imageUrl: imagePath!,
                                     fit: BoxFit.cover,
                                     color:
                                         isVisited
                                             ? null
-                                            : Colors.black.withOpacity(0.5),
+                                            : Colors.black.withOpacity(0.8),
                                     colorBlendMode:
                                         isVisited ? null : BlendMode.darken,
-                                    loadingBuilder: (
-                                      BuildContext context,
-                                      Widget child,
-                                      ImageChunkEvent? loadingProgress,
-                                    ) {
-                                      if (loadingProgress == null) {
-                                        return child;
-                                      }
-                                      return Center(
-                                        child: CircularProgressIndicator(
-                                          value:
-                                              loadingProgress
-                                                          .expectedTotalBytes !=
-                                                      null
-                                                  ? loadingProgress
-                                                          .cumulativeBytesLoaded /
-                                                      (loadingProgress
-                                                              .expectedTotalBytes ??
-                                                          1)
-                                                  : null,
-                                        ),
-                                      );
-                                    },
                                   )
                                   : const Center(child: Text('No Image')),
                         ),
