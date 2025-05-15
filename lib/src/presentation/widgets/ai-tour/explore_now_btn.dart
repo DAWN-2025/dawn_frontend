@@ -4,8 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:dawn_frontend/src/presentation/view_models/ai-tour/explore_now_btn_view_model.dart';
 
 class ExploreNowBtn extends StatelessWidget {
-  // 수정된 생성자: onTap을 필수 인자로 받음
-  const ExploreNowBtn({Key? key}) : super(key: key);
+  final int locationSeq; // 추가: locationSeq 매개변수
+  
+  // 생성자 수정
+  const ExploreNowBtn({Key? key, required this.locationSeq}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,8 @@ class ExploreNowBtn extends StatelessWidget {
             onTap: () {
               // Using Provider to call the view model method
               final viewModel = Provider.of<ExploreNowBtnViewModel>(context, listen: false);
+              // 중요: 먼저 locationSeq를 설정한 다음 onTap 호출
+              viewModel.setLocationSeq(locationSeq);
               viewModel.onTap(context);
             },
             child: Container(

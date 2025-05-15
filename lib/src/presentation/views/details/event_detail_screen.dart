@@ -1,10 +1,11 @@
+import 'package:dawn_frontend/src/presentation/widgets/common/image_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:dawn_frontend/src/presentation/view_models/details/event_detail_view_model.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_top_app_bar.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_bottom_app_bar.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_scaffold.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_top_app_bar.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_bottom_app_bar.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/header_card.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/section_header.dart';
 import 'package:dawn_frontend/src/presentation/widgets/details/image_header.dart';
@@ -118,7 +119,7 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                                 .copyWith(fontSize: 16, color: Colors.white),
                           ),
                           const SizedBox(height: 24),
-                          Image.network(event.image),
+                          ImageLoader(imageUrl:event.image),
                         ] else if (viewModel.selectedTabIndex == 1) ...[
                           LocationCardList(
                             locationCards: context.watch<LocationCardViewModel>().locationCards,

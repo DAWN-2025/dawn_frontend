@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'reusable_modal.dart';
 import 'package:go_router/go_router.dart';
 
-void TourStartModal(BuildContext context) {
+void TourStartModal(BuildContext context, {required int locationSeq}) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -13,9 +13,9 @@ void TourStartModal(BuildContext context) {
             primaryButtonText: 'Start the tour',
             secondaryButtonText: 'Cancel',
             onPrimaryPressed: () {
-              context.push('/ai-tour');
+              context.push('/ai-tour/$locationSeq');
             },
-            onSecondaryPressed: () => Navigator.of(context).pop(),
+            onSecondaryPressed: () => Navigator.of(context).pop()
           );
         },
       );

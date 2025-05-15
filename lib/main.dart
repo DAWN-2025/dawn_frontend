@@ -31,6 +31,7 @@ import 'package:dawn_frontend/src/presentation/view_models/modals/modal_view_mod
 import 'package:dawn_frontend/src/presentation/view_models/stamp_card_view_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/ai-tour/ai_tour_view_model.dart';
 import 'package:dawn_frontend/src/presentation/view_models/ai-tour/letter_view_model.dart';
+import 'package:dawn_frontend/src/presentation/view_models/stamp_card_list_view_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,7 +62,8 @@ void main() async {
               (_) => StampCardListViewModel(repository: StampCardRepository()),
         ),
         ChangeNotifierProvider(
-          create: (_) => EventDetailViewModel(repository: EventDetailRepository()),
+          create:
+              (_) => EventDetailViewModel(repository: EventDetailRepository()),
         ),
         ChangeNotifierProvider(create: (_) => DetailTabSelectorViewModel()),
         Provider<CommentRepository>(create: (_) => CommentRepository()),
@@ -84,17 +86,20 @@ void main() async {
         ChangeNotifierProvider(create: (_) => ExploreNowBtnViewModel()),
         ChangeNotifierProvider(create: (_) => ModalViewModel()),
         ChangeNotifierProvider(
-          create: (_) => StampCardListViewModel(
-            repository: StampCardRepository(),
-          ),
+          create:
+              (_) => StampCardListViewModel(repository: StampCardRepository()),
         ),
-        ChangeNotifierProvider(create: (_) => StampCardViewModel()),
         ChangeNotifierProvider(
-          create: (_) => EventDetailViewModel(repository: EventDetailRepository()),
+          create:
+              (context) =>
+                  StampCardViewModel(context.read<StampCardListViewModel>()),
+        ),
+        ChangeNotifierProvider(
+          create:
+              (_) => EventDetailViewModel(repository: EventDetailRepository()),
         ),
         ChangeNotifierProvider(create: (_) => LocationCardViewModel()),
         ChangeNotifierProvider(create: (_) => LetterViewModel()),
-        ChangeNotifierProvider(create: (_) => AiTourViewModel()),
       ],
       child: const MyApp(),
     ),

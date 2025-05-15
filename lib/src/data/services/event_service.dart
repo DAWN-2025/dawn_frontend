@@ -30,6 +30,7 @@ class EventService {
 
       debugLog('응답 상태 코드: ${response.statusCode}');
       debugLog('이벤트 상세 응답 데이터: ${response.data}');
+      debugLog('jwt token : ${headers['Authorization']}');
 
       if (response.statusCode == 200) {
         return EventDetail.fromJson(response.data);

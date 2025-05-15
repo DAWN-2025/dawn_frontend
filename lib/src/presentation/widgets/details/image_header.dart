@@ -1,3 +1,4 @@
+import 'package:dawn_frontend/src/presentation/widgets/common/image_loader.dart';
 import 'package:flutter/material.dart';
 
 class ImageHeader extends StatelessWidget {
@@ -40,19 +41,11 @@ class ImageHeader extends StatelessWidget {
     // 네트워크 이미지 처리
     if (adjustedPath.startsWith('http')) {
       print('Loading network image: $adjustedPath');
-      return Image.network(
-        adjustedPath,
+      return ImageLoader(
+        imageUrl: adjustedPath,
         fit: BoxFit.cover,
         headers: const {
           'Accept': 'image/*',  // 이미지 데이터로 인식하도록 설정
-        },
-        errorBuilder: (context, error, stackTrace) {
-          print('Error loading image: $adjustedPath');
-          return Image.asset(defaultImage, fit: BoxFit.cover);
-        },
-        loadingBuilder: (context, child, progress) {
-          if (progress == null) return child;
-          return const Center(child: CircularProgressIndicator());
         },
       );
     }

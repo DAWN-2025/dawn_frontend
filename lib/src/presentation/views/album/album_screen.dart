@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_bottom_app_bar.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_scaffold.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_bottom_app_bar.dart';
 import '../../widgets/stamp_card.dart';
 import 'package:provider/provider.dart';
 import 'package:dawn_frontend/src/presentation/view_models/stamp_card_list_view_model.dart';
@@ -14,17 +14,16 @@ class AlbumScreen extends StatefulWidget {
 }
 
 class _AlbumScreenState extends State<AlbumScreen> {
-  late Future<void> _loadFuture;
+  late Future<void> _loadDataFuture;
 
   @override
   void initState() {
     super.initState();
-    // Provider를 사용하여 StampCardListViewModel 초기화
-    final stampCardListViewModel = Provider.of<StampCardListViewModel>(
-      context,
-      listen: false,
-    );
-    _loadFuture = stampCardListViewModel.loadStampCards();
+    _loadDataFuture = _loadData();
+  }
+
+  Future<void> _loadData() async {
+    await Provider.of<StampCardListViewModel>(context, listen: false).loadStampCards();
   }
 
   @override
@@ -53,7 +52,7 @@ class _AlbumScreenState extends State<AlbumScreen> {
             const SizedBox(height: 30),
             Expanded(
               child: FutureBuilder(
-                future: _loadFuture,
+                future: _loadDataFuture,
                 builder: (context, snapshot) {
                   // 로딩 중일 때 표시
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -72,27 +71,27 @@ class _AlbumScreenState extends State<AlbumScreen> {
 
                   // 스탬프 카드 목록이 비었을 때 표시
                   if (stampCardListViewModel.stampCards.isEmpty) {
-                    return const Center(
-                      child: Text('No stamps available'),
-                    );
+                    return const Center(child: Text('No stamps available'));
                   }
 
                   // 스탬프 카드 목록이 있을 때 표시
                   return GridView.builder(
                     padding: const EdgeInsets.only(top: 10.0),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 20.0,
-                      mainAxisSpacing: 25.0,
-                      childAspectRatio: 0.9,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 20.0,
+                          mainAxisSpacing: 25.0,
+                          childAspectRatio: 0.9,
+                        ),
                     itemCount: stampCardListViewModel.stampCards.length,
                     itemBuilder: (context, index) {
                       final stamp = stampCardListViewModel.stampCards[index];
                       return StampCard(
-                        title: stamp.eventName, // 이벤트 이름
+                        title: stamp.eventNameEng, // 이벤트 이름
                         imagePath: stamp.eventStampImg, // 스탬프 이미지
-                        eventId:stamp.eventSeq,
+                        eventId: stamp.eventId,
+                        isVisited: stamp.isVisited ?? false, // 방문 여부
                       );
                     },
                   );

@@ -11,21 +11,31 @@ class StampCardListViewModel extends ChangeNotifier {
 
   // 수정: 기본 생성자에서 Repository를 명시적으로 받음
   StampCardListViewModel({required StampCardRepository repository})
-      : _repository = repository;
+    : _repository = repository;
 
+  // 비동기 데이터 로드 함수
   Future<void> loadStampCards() async {
-    isLoading = true;
-    errorMessage = '';
-    notifyListeners();
     try {
+      isLoading = true;
+      errorMessage = '';
+      notifyListeners();  // 데이터 로드 시작 알림
+
       stampCards = await _repository.fetchStampCards();
-      notifyListeners();  // 성공 시 UI 업데이트
+      isLoading = false;
+      notifyListeners();  // 데이터 로드 완료 알림
     } catch (e) {
       errorMessage = 'Failed to load stamps: ${e.toString()}';
-      notifyListeners();  // 오류 시 UI 업데이트
-    } finally {
       isLoading = false;
-      notifyListeners();
+      notifyListeners();  // 오류 발생 알림
     }
   }
+
+  // 특정 스탬프 방문 여부 확인
+bool isStampVisited(int eventId) {
+  final stamp = stampCards.firstWhere(
+    (card) => card.eventId == eventId,
+    orElse: () => StampCard(eventId: eventId, eventName: '', eventNameEng: '', eventStampImg: '', isVisited: false),
+  );
+  return stamp.isVisited ?? false;
+}
 }

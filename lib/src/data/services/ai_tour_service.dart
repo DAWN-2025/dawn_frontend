@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:dawn_frontend/src/data/clients/dio_client.dart';
+import 'package:dawn_frontend/src/data/storage/secure_storage.dart'; // Add this import
+import 'package:firebase_auth/firebase_auth.dart'; // Import FirebaseAuth
 
 class AiTourService {
   final Dio _dio = DioClient().dio;
@@ -11,9 +13,9 @@ class AiTourService {
     String question,
   ) async {
     final requestBody = {
-      "userUid": userUid.toString(),
+      "userUid": userUid,
       "locationSeq": locationSeq,
-      "question": question.toString(),
+      "question": question,
     };
     try {
       print('Request Body: $requestBody');
@@ -38,10 +40,7 @@ class AiTourService {
     String userUid,
     int locationSeq,
   ) async {
-    final requestBody = {
-      "userUid": userUid,
-      "locationSeq": locationSeq,
-    };
+    final requestBody = {"userUid": userUid, "locationSeq": locationSeq};
     try {
       print('Create Letter Request Body: $requestBody');
       final response = await _dio.post(

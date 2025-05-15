@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_scaffold.dart';
-import 'package:dawn_frontend/src/presentation/widgets/custom_bottom_app_bar.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_scaffold.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_bottom_app_bar.dart';
 
 import '../../../../l10n/app_localizations.dart';
 import '../../../core/theme/typography.dart';

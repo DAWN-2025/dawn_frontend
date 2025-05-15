@@ -1,4 +1,4 @@
-import 'package:dawn_frontend/src/presentation/widgets/custom_top_app_bar.dart';
+import 'package:dawn_frontend/src/presentation/widgets/common/custom_top_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +10,7 @@ import '../../../data/storage/secure_storage.dart';
 import '../../view_models/home/search_view_model.dart';
 import '../../view_models/home/weekly_featured_view_model.dart';
 import '../../view_models/language_view_model.dart';
-import '../../widgets/custom_scaffold.dart';
+import '../../widgets/common/custom_scaffold.dart';
 import '../../widgets/home/search_input_field.dart';
 import '../../widgets/home/event_card.dart';
 import '../../widgets/home/weekly_featured_card.dart';
