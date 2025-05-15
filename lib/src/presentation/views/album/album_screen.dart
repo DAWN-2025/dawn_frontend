@@ -90,7 +90,7 @@ class _AlbumScreenState extends State<AlbumScreen> {
                     itemBuilder: (context, index) {
                       final stamp = stampCardListViewModel.stampCards[index];
                       return StampCard(
-                        title: stamp.eventName, // 이벤트 이름
+                        title: stamp.eventNameEng, // 이벤트 이름
                         imagePath: stamp.eventStampImg, // 스탬프 이미지
                         eventId:stamp.eventSeq,
                       );

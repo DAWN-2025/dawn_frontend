@@ -38,19 +38,19 @@ class LocationDetail {
     if (json['keywords'] != null && json['keywords'] is List) {
       parsedKeywords =
           (json['keywords'] as List)
-              .map((item) => item['keyword']?.toString() ?? '')
+              .map((item) => item['keywordEng']?.toString() ?? '')
               .where((keyword) => keyword.isNotEmpty)
               .toList();
     }
     return LocationDetail(
       id: json['id'],
-      name: json['name'],
-      address: json['address'],
+      name: json['nameEng'],
+      address: json['addressEng'],
       eventId: json['eventId'],
       image: json['image'],
-      shortInfo: json['shortInfo'],
-      historicInfo: json['historicInfo'],
-      etiquette: _formatString(json['etiquette'], 'No etiquette info'),
+      shortInfo: json['shortInfoEng'],
+      historicInfo: json['historicInfoEng'],
+      etiquette: _formatString(json['etiquetteEng'], 'No etiquette info'),
       openTime: json['openTime'],
       closeTime: json['closeTime'],
       phoneNum: json['phoneNum'],

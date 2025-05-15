@@ -15,7 +15,7 @@ void TourStartModal(BuildContext context, {required int locationSeq}) {
             onPrimaryPressed: () {
               context.push('/ai-tour/$locationSeq');
             },
-            onSecondaryPressed: () => Navigator.of(context).pop(),
+            onSecondaryPressed: () => Navigator.of(context).pop()
           );
         },
       );

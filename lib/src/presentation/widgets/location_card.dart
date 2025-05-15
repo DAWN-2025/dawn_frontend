@@ -120,7 +120,7 @@ class LocationCard extends StatelessWidget {
       left: 16,
       right: 16,
       child: Text(
-        locationCard.name,
+        locationCard.nameEng,
         style: typography.AppTextStyle.bodyText.copyWith(
           color: Colors.white,
           fontWeight: FontWeight.bold,

@@ -8,7 +8,6 @@ class EventDetail {
   final String date;
   final String nation;
   final String category;
-  final String nameEng;
   final String nationEng;
   final String categoryEng;
   final String image;
@@ -24,7 +23,6 @@ class EventDetail {
     required this.date,
     required this.nation,
     required this.category,
-    required this.nameEng,
     required this.nationEng,
     required this.categoryEng,
     required this.image,
@@ -35,15 +33,14 @@ class EventDetail {
   factory EventDetail.fromJson(Map<String, dynamic> json) {
     return EventDetail(
       id: _parseInt(json['id']),
-      name: _formatString(json['name'], 'Unknown'),
-      shortInfo: _formatString(json['shortInfo'], 'No short info'),
-      background: _formatString(json['background'], 'No background info'),
-      progress: _formatString(json['progress'], 'No progress info'),
-      meaning: _formatString(json['meaning'], 'No meaning info'),
+      name: _formatString(json['nameEng'], 'Unknown'),
+      shortInfo: _formatString(json['shortInfoEng'], 'No short info'),
+      background: _formatString(json['backgroundEng'], 'No background info'),
+      progress: _formatString(json['progressEng'], 'No progress info'),
+      meaning: _formatString(json['meaningEng'], 'No meaning info'),
       date: _formatString(json['date'], 'No date'),
       nation: _formatString(json['nation'], 'No nation'),
       category: _formatString(json['category'], 'No category'),
-      nameEng: _formatString(json['nameEng'], 'No English name'),
       nationEng: _formatString(json['nationEng'], 'No English nation'),
       categoryEng: _formatString(json['categoryEng'], 'No English category'),
       image: _formatString(json['image'], 'assets/images/default.jpg'),
@@ -62,7 +59,7 @@ class EventDetail {
   static List<String> _parseKeywords(dynamic keywords) {
     if (keywords is List) {
       return keywords
-          .map((item) => (item is Map && item['keyword'] is String) ? item['keyword'] as String : 'Unknown')
+          .map((item) => (item is Map && item['keywordEng'] is String) ? item['keywordEng'] as String : 'Unknown')
           .toList();
     }
     return [];
